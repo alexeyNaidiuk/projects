@@ -64,7 +64,7 @@ def spam(target):
     while result is None:
         proxy = next(proxy_generator)
         result = try_to_post(proxy, result, target)
-    print(result.json(), result.status_code, target)
+    return result.json(), result.status_code, target
 
 
 def main():
@@ -78,7 +78,7 @@ def main():
 
 
 def test():
-    spam('softumwork@gmail.com')
+    print(spam('softumwork@gmail.com'))
     # for target in get_targets():
     #     spam(target)
 

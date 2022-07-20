@@ -2,26 +2,23 @@ import concurrent
 import json
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from random import choice
-from time import sleep
 
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
-from twocaptcha import TwoCaptcha
 
-from data import get_targets, get_proxies
+from data import get_targets, get_proxies, RuCaptchaSolver, text_body, generate_proxy
 
-text_body = '''🏆 50 фриспинов за регистрацию в клубе Slottica Переходи по ссылке ниже и забирай свой бонус! https://bit.ly/3c6QoSO'''
 url = 'https://www.e-business.sro.vic.gov.au/contactus/contact'
 sitekey = '6LeI2SYUAAAAAJc85fplLQOvbFL6RQ880oF364DR'
-captcha_solver = TwoCaptcha('2bc08ce6750eb3ff4b9a6615529e8213', server='rucaptcha.com')
+captcha_solver = RuCaptchaSolver('1b755845270ee8614f617701ef345132')
 print(captcha_solver.balance())
 
-proxies = get_proxies()
+all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
+proxy_generator = generate_proxy(all_proxies)
 
 
-def post(email, subject, text_body, captcha_token, proxy=None):
-    url = 'https://www.e-business.sro.vic.gov.au/contactusservice/submit/contact/215'
+def post(email, captcha_token, proxy: str = None):
+    url = 'https://www.e-business.sro.vic.gov.au/contactusservice/submit/contact/489'
 
     json_data = {
         'firstName': '---',
@@ -30,7 +27,7 @@ def post(email, subject, text_body, captcha_token, proxy=None):
         'email': email,
         'countryCode': 'Australia +61',
         'phoneNumber': '38099999999',
-        'subject': subject,
+        'subject': text_body,
         'recaptchaV2Token': captcha_token,
         'category': 'Other',
         'subCategory': '',
@@ -64,22 +61,28 @@ def post(email, subject, text_body, captcha_token, proxy=None):
     return response
 
 
+def try_to_post(result, proxy, target, captcha_token):
+    try:
+        result = post(email=target, proxy=proxy, captcha_token=captcha_token)
+    except Exception as e:
+        logging.exception(e)
+    finally:
+        return result
+
+
 def spam(target: str):
+    result = None
     if not target:
-        return None
+        return result, target
     answer = captcha_solver.recaptcha(sitekey=sitekey, url=url)
-    while True:
-        proxy = choice(proxies)
-        try:
-            r = post(target, text_body, text_body, answer['code'], proxy=proxy)
-            return r, target
-        except Exception as err:
-            logging.error(err)
-            sleep(10)
+    while result is None:
+        proxy = next(proxy_generator)
+        result = try_to_post(target=target, result=result, captcha_token=answer, proxy=proxy)
+    return result, target
 
 
 def main():
-    targets = get_targets(r'C:\Users\Admin\Desktop\projects\ems.txt')
+    targets = get_targets(r'C:\Users\Admin\Desktop\projects\all_turk.csv')
     with ThreadPoolExecutor(max_workers=10) as worker:
         futures = []
         for target in targets:

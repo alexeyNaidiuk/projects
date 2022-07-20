@@ -43,24 +43,20 @@ class RuCaptchaSolver(Solver):
     post_url = 'https://rucaptcha.com/in.php'
     get_url = 'https://rucaptcha.com/res.php'
 
-    @property
     def balance(self):
-        return self.get_balance()
-
-    def get_balance(self):
         params = {
             'key': self.api_key,
             'action': 'getbalance'
         }
         return float(requests.get(self.get_url, params=params).content)
 
-    def recaptcha(self, site_key, page_url, timeout=120) -> Optional[str]:
+    def recaptcha(self, sitekey, url, timeout=120) -> Optional[str]:
         result = None
         post_params = {
             'key': self.api_key,
             'method': 'userrecaptcha',
-            'googlekey': site_key,
-            'pageurl': page_url,
+            'googlekey': sitekey,
+            'pageurl': url,
             'json': '1'
 
         }
