@@ -24,7 +24,6 @@ def post(email, proxy: Optional[dict] = None):
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
-        # "cookie": "PHPSESSID=3123190a42be5c060a1c73793749cbe7",
         "Referer": "https://pointreturn.com/newsletter/",
         "Referrer-Policy": "strict-origin-when-cross-origin",
         'user-agent': Faker().chrome()
@@ -76,7 +75,7 @@ def spam(target: str):
         proxy = next(proxy_generator)
         proxy = {'http': proxy, 'https': proxy}
         result = post(target, proxy)
-    print(result, target)
+    return result, target
 
 
 def main():
@@ -86,12 +85,12 @@ def main():
             future = worker.submit(spam, target)
             futures.append(future)
         for future in as_completed(futures):
-            future.result()
+            print(future.result())
 
 
 def test():
-    spam('softumwork@gmail.com')
+    print(spam('softumwork@gmail.com'))
 
 
 if __name__ == '__main__':
-    main()
+    test()
