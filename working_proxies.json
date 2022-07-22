@@ -1,0 +1,2150 @@
+[
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.003",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Linyi",
+    "country_code": "CN",
+    "proxy": "221.2.139.220:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.144",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "147.139.138.14:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.231",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Washington",
+    "country_code": "US",
+    "proxy": "34.145.226.144:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.356",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Boydton",
+    "country_code": "US",
+    "proxy": "20.110.214.83:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.314",
+    "anonymity": "Transparent",
+    "country": "India",
+    "city": "Jaipur",
+    "country_code": "IN",
+    "proxy": "175.111.129.155:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.464",
+    "anonymity": "Transparent",
+    "country": "South Africa",
+    "city": "Johannesburg",
+    "country_code": "ZA",
+    "proxy": "102.134.127.15:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.916",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Klaten",
+    "country_code": "ID",
+    "proxy": "121.101.133.61:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.890",
+    "anonymity": "Anonymous",
+    "country": "United Kingdom",
+    "city": "London",
+    "country_code": "GB",
+    "proxy": "176.58.112.227:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "1.545",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Munich",
+    "country_code": "DE",
+    "proxy": "79.143.187.168:7497"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.497",
+    "anonymity": "Transparent",
+    "country": "Argentina",
+    "city": "Canning",
+    "country_code": "AR",
+    "proxy": "200.106.184.13:999"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.281",
+    "anonymity": "Transparent",
+    "country": "Ecuador",
+    "city": "Guayaquil",
+    "country_code": "EC",
+    "proxy": "181.198.194.23:3127"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.250",
+    "anonymity": "Transparent",
+    "country": "South Africa",
+    "city": "Centurion",
+    "country_code": "ZA",
+    "proxy": "41.57.37.12:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.719",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Surabaya",
+    "country_code": "ID",
+    "proxy": "182.253.217.38:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.207",
+    "anonymity": "Anonymous",
+    "country": "Hong Kong",
+    "city": "Central",
+    "country_code": "HK",
+    "proxy": "185.14.47.147:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "6.363",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Surabaya",
+    "country_code": "ID",
+    "proxy": "139.228.183.102:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "5.817",
+    "anonymity": "Anonymous",
+    "country": "Australia",
+    "city": "Yarraville",
+    "country_code": "AU",
+    "proxy": "103.108.228.185:7497"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.991",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Tangerang",
+    "country_code": "ID",
+    "proxy": "103.94.133.90:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.576",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Carenang",
+    "country_code": "ID",
+    "proxy": "36.67.52.35:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.445",
+    "anonymity": "Anonymous",
+    "country": "Ukraine",
+    "city": "Lviv",
+    "country_code": "UA",
+    "proxy": "93.178.201.231:52281"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.118",
+    "anonymity": "Anonymous",
+    "country": "Brazil",
+    "city": "Cruzeiro",
+    "country_code": "BR",
+    "proxy": "189.2.164.165:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.663",
+    "anonymity": "Transparent",
+    "country": "Turkey",
+    "city": "Kayseri",
+    "country_code": "TR",
+    "proxy": "88.255.65.118:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.363",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Bangkok",
+    "country_code": "TH",
+    "proxy": "58.11.55.7:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.040",
+    "anonymity": "Anonymous",
+    "country": "Malaysia",
+    "city": "Petaling Jaya",
+    "country_code": "MY",
+    "proxy": "1.9.167.35:60489"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.541",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Santa Rosa",
+    "country_code": "US",
+    "proxy": "216.218.240.46:48324"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.161",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Zhengzhou",
+    "country_code": "CN",
+    "proxy": "222.138.67.205:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.059",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Nong Ya Plong",
+    "country_code": "TH",
+    "proxy": "1.20.137.82:32241"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.076",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "103.140.35.11:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.554",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Beijing",
+    "country_code": "CN",
+    "proxy": "219.234.82.82:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.177",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Beijing",
+    "country_code": "CN",
+    "proxy": "222.179.155.90:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.344",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "203.153.113.238:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.252",
+    "anonymity": "Transparent",
+    "country": "Pakistan",
+    "city": "Sialkot",
+    "country_code": "PK",
+    "proxy": "203.124.60.109:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "5.706",
+    "anonymity": "Anonymous",
+    "country": "Colombia",
+    "city": "Manizales",
+    "country_code": "CO",
+    "proxy": "200.116.198.160:58927"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.518",
+    "anonymity": "Transparent",
+    "country": "France",
+    "city": "Ch\u00e2lons-en-Champagne",
+    "country_code": "FR",
+    "proxy": "93.158.35.200:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.564",
+    "anonymity": "Transparent",
+    "country": "Hong Kong",
+    "city": "Hong Kong",
+    "country_code": "HK",
+    "proxy": "47.242.84.173:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.534",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Jamalpur",
+    "country_code": "BD",
+    "proxy": "103.121.38.138:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.966",
+    "anonymity": "Anonymous",
+    "country": "Bolivia",
+    "city": "La Paz",
+    "country_code": "BO",
+    "proxy": "200.105.215.18:33630"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.179",
+    "anonymity": "Transparent",
+    "country": "Brazil",
+    "city": "Umuarama",
+    "country_code": "BR",
+    "proxy": "45.186.60.10:8085"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "9.440",
+    "anonymity": "Anonymous",
+    "country": "Nigeria",
+    "city": "Lagos",
+    "country_code": "NG",
+    "proxy": "102.67.3.195:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.978",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Guangzhou",
+    "country_code": "CN",
+    "proxy": "139.9.64.238:443"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.237",
+    "anonymity": "Transparent",
+    "country": "Ecuador",
+    "city": "Machala",
+    "country_code": "EC",
+    "proxy": "157.100.53.100:999"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.208",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Shenzhen",
+    "country_code": "CN",
+    "proxy": "120.196.179.185:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.167",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Zhejiang",
+    "country_code": "CN",
+    "proxy": "124.90.231.237:808"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "8.240",
+    "anonymity": "Transparent",
+    "country": "Ecuador",
+    "city": "Puebloviejo",
+    "country_code": "EC",
+    "proxy": "45.70.236.123:999"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.135",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "202.40.181.132:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.209",
+    "anonymity": "Anonymous",
+    "country": "Cambodia",
+    "city": "Phnom Penh",
+    "country_code": "KH",
+    "proxy": "49.156.38.126:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.544",
+    "anonymity": "Anonymous",
+    "country": "Republic of Korea",
+    "city": "Paju-si",
+    "country_code": "KR",
+    "proxy": "221.155.163.113:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.097",
+    "anonymity": "Anonymous",
+    "country": "South Korea",
+    "city": "Jongno-gu",
+    "country_code": "KR",
+    "proxy": "121.65.173.82:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.065",
+    "anonymity": "Anonymous",
+    "country": "Vietnam",
+    "city": "Hanoi",
+    "country_code": "VN",
+    "proxy": "103.238.68.113:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "2.883",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "103.76.15.202:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.436",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "203.89.126.250:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.788",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Frankfurt am Main",
+    "country_code": "DE",
+    "proxy": "165.225.24.55:9401"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.091",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Chengdu",
+    "country_code": "CN",
+    "proxy": "60.255.139.170:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.108",
+    "anonymity": "Transparent",
+    "country": "Thailand",
+    "city": "Su-ngai Kolok",
+    "country_code": "TH",
+    "proxy": "203.150.128.148:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "1.491",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Shenzhen",
+    "country_code": "CN",
+    "proxy": "202.46.36.32:21071"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.435",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "103.117.192.14:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.692",
+    "anonymity": "Transparent",
+    "country": "Egypt",
+    "city": "Cairo",
+    "country_code": "EG",
+    "proxy": "62.193.108.140:1981"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "2.291",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "Kolkata",
+    "country_code": "IN",
+    "proxy": "203.153.36.37:7497"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "7.199",
+    "anonymity": "Anonymous",
+    "country": "Cambodia",
+    "city": "Phnom Penh",
+    "country_code": "KH",
+    "proxy": "43.255.113.232:8084"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.225",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "Noida",
+    "country_code": "IN",
+    "proxy": "101.53.154.137:2011"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.202",
+    "anonymity": "Anonymous",
+    "country": "Iran",
+    "city": "Tehran",
+    "country_code": "IR",
+    "proxy": "94.101.185.67:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.729",
+    "anonymity": "Transparent",
+    "country": "Philippines",
+    "city": "Pasig",
+    "country_code": "PH",
+    "proxy": "124.83.74.218:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.663",
+    "anonymity": "Anonymous",
+    "country": "Iraq",
+    "city": "Erbil",
+    "country_code": "IQ",
+    "proxy": "213.32.252.134:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "1.217",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Jinan",
+    "country_code": "CN",
+    "proxy": "123.129.219.11:50004"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.484",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Watthana",
+    "country_code": "TH",
+    "proxy": "203.154.232.25:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.654",
+    "anonymity": "Transparent",
+    "country": "Egypt",
+    "city": "Cairo",
+    "country_code": "EG",
+    "proxy": "41.128.148.88:1976"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.227",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "New Delhi",
+    "country_code": "IN",
+    "proxy": "45.122.44.17:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.493",
+    "anonymity": "Anonymous",
+    "country": "Poland",
+    "city": "Grodzisk Wielkopolski",
+    "country_code": "PL",
+    "proxy": "88.199.82.68:54194"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.487",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Boydton",
+    "country_code": "US",
+    "proxy": "52.188.106.163:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.546",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Barishal",
+    "country_code": "BD",
+    "proxy": "103.197.251.202:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.489",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Yueyang",
+    "country_code": "CN",
+    "proxy": "183.215.172.2:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.093",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Fuzhou",
+    "country_code": "CN",
+    "proxy": "59.56.142.185:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.237",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "117.102.72.114:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.663",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Pasuruan",
+    "country_code": "ID",
+    "proxy": "103.106.219.135:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.406",
+    "anonymity": "Transparent",
+    "country": "Cambodia",
+    "city": "Phnom Penh",
+    "country_code": "KH",
+    "proxy": "103.17.213.98:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.288",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "27.147.174.107:4673"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.727",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Limburg an der Lahn",
+    "country_code": "DE",
+    "proxy": "51.195.81.233:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.507",
+    "anonymity": "Anonymous",
+    "country": "Hong Kong",
+    "city": "Hong Kong",
+    "country_code": "HK",
+    "proxy": "202.85.197.139:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.011",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Yueyang",
+    "country_code": "CN",
+    "proxy": "58.20.235.180:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.439",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Beijing",
+    "country_code": "CN",
+    "proxy": "124.167.248.230:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.121",
+    "anonymity": "Anonymous",
+    "country": "Vietnam",
+    "city": "Hanoi",
+    "country_code": "VN",
+    "proxy": "113.161.248.10:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.116",
+    "anonymity": "Anonymous",
+    "country": "Mozambique",
+    "city": "Maputo",
+    "country_code": "MZ",
+    "proxy": "197.235.12.130:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "3.059",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Banzhu",
+    "country_code": "CN",
+    "proxy": "222.185.82.102:7302"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.042",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Hefei",
+    "country_code": "CN",
+    "proxy": "61.190.123.9:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.893",
+    "anonymity": "Transparent",
+    "country": "Egypt",
+    "city": "Cairo",
+    "country_code": "EG",
+    "proxy": "154.236.168.169:1976"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.044",
+    "anonymity": "Transparent",
+    "country": "Czechia",
+    "city": "Strakonice",
+    "country_code": "CZ",
+    "proxy": "79.110.40.129:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.208",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "103.62.144.152:30590"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.399",
+    "anonymity": "Anonymous",
+    "country": "Argentina",
+    "city": "R\u00edo Gallegos",
+    "country_code": "AR",
+    "proxy": "170.233.30.6:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.987",
+    "anonymity": "Anonymous",
+    "country": "Egypt",
+    "city": "Cairo",
+    "country_code": "EG",
+    "proxy": "41.128.72.62:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.193",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Bangkok",
+    "country_code": "TH",
+    "proxy": "182.52.51.10:35719"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.391",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Tempe",
+    "country_code": "US",
+    "proxy": "174.138.174.214:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.928",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Nanchong",
+    "country_code": "CN",
+    "proxy": "222.208.55.242:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.238",
+    "anonymity": "Anonymous",
+    "country": "Kenya",
+    "city": "Nairobi",
+    "country_code": "KE",
+    "proxy": "197.232.253.210:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.659",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Bibo",
+    "country_code": "CN",
+    "proxy": "222.85.194.30:9002"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.171",
+    "anonymity": "Anonymous",
+    "country": "Russia",
+    "city": "Sochi",
+    "country_code": "RU",
+    "proxy": "109.235.188.191:58294"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.013",
+    "anonymity": "Anonymous",
+    "country": "Brazil",
+    "city": "Salto",
+    "country_code": "BR",
+    "proxy": "187.45.49.48:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.898",
+    "anonymity": "Transparent",
+    "country": "Albania",
+    "city": "Tirana",
+    "country_code": "AL",
+    "proxy": "185.190.38.154:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.124",
+    "anonymity": "Anonymous",
+    "country": "Uzbekistan",
+    "city": "Tashkent",
+    "country_code": "UZ",
+    "proxy": "45.9.231.150:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.985",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Dongguan",
+    "country_code": "CN",
+    "proxy": "58.252.57.97:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "7.860",
+    "anonymity": "Transparent",
+    "country": "Pakistan",
+    "city": "Islamabad",
+    "country_code": "PK",
+    "proxy": "103.174.4.107:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.527",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "36.93.75.154:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.537",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "San Jose",
+    "country_code": "US",
+    "proxy": "52.9.167.91:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.049",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "Ahmedabad",
+    "country_code": "IN",
+    "proxy": "103.38.205.69:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.334",
+    "anonymity": "Anonymous",
+    "country": "Argentina",
+    "city": "Retiro",
+    "country_code": "AR",
+    "proxy": "200.0.247.242:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "5.730",
+    "anonymity": "Anonymous",
+    "country": "Russia",
+    "city": "Cherepovets",
+    "country_code": "RU",
+    "proxy": "178.57.100.133:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.533",
+    "anonymity": "Anonymous",
+    "country": "Ukraine",
+    "city": "Luhansk",
+    "country_code": "UA",
+    "proxy": "195.158.223.133:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.359",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Kingsville",
+    "country_code": "US",
+    "proxy": "199.58.128.75:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.405",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "West Jakarta City",
+    "country_code": "ID",
+    "proxy": "36.91.17.17:41890"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.257",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Tangerang",
+    "country_code": "ID",
+    "proxy": "222.124.34.196:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.610",
+    "anonymity": "Anonymous",
+    "country": "Georgia",
+    "city": "Tbilisi",
+    "country_code": "GE",
+    "proxy": "95.104.54.227:58476"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.380",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Suzhou",
+    "country_code": "CN",
+    "proxy": "112.25.185.171:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.867",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "36.93.138.186:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.555",
+    "anonymity": "Transparent",
+    "country": "India",
+    "city": "Mumbai",
+    "country_code": "IN",
+    "proxy": "202.91.80.246:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.043",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Xiantao",
+    "country_code": "CN",
+    "proxy": "111.72.218.180:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.591",
+    "anonymity": "Anonymous",
+    "country": "Poland",
+    "city": "Tarn\u00f3w",
+    "country_code": "PL",
+    "proxy": "217.117.142.18:3629"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.126",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "103.144.161.104:8291"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "0.920",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Portland",
+    "country_code": "US",
+    "proxy": "162.210.249.142:9300"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.539",
+    "anonymity": "Anonymous",
+    "country": "Russia",
+    "city": "Moscow",
+    "country_code": "RU",
+    "proxy": "31.173.185.231:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.079",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Guangzhou",
+    "country_code": "CN",
+    "proxy": "183.239.62.59:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.999",
+    "anonymity": "Anonymous",
+    "country": "Costa Rica",
+    "city": "San Jos\u00e9",
+    "country_code": "CR",
+    "proxy": "201.206.141.102:6969"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.066",
+    "anonymity": "Anonymous",
+    "country": "Colombia",
+    "city": "Bogot\u00e1",
+    "country_code": "CO",
+    "proxy": "186.87.179.54:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.137",
+    "anonymity": "Transparent",
+    "country": "Hong Kong",
+    "city": "Hong Kong",
+    "country_code": "HK",
+    "proxy": "47.57.188.208:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "5.260",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Weihai",
+    "country_code": "CN",
+    "proxy": "60.174.107.73:7302"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.833",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Nanchang",
+    "country_code": "CN",
+    "proxy": "58.17.24.162:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.983",
+    "anonymity": "Anonymous",
+    "country": "United Kingdom",
+    "city": "City of London",
+    "country_code": "GB",
+    "proxy": "154.62.132.163:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.144",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Pandaan",
+    "country_code": "ID",
+    "proxy": "103.169.130.27:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.082",
+    "anonymity": "Anonymous",
+    "country": "Cambodia",
+    "city": "Phnom Penh",
+    "country_code": "KH",
+    "proxy": "103.130.141.98:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.399",
+    "anonymity": "Transparent",
+    "country": "United States",
+    "city": "Irving",
+    "country_code": "US",
+    "proxy": "169.46.126.192:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.841",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Darlington",
+    "country_code": "US",
+    "proxy": "24.172.34.114:49920"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "2.935",
+    "anonymity": "Transparent",
+    "country": "Norway",
+    "city": "Vestby",
+    "country_code": "NO",
+    "proxy": "84.247.130.114:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.164",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Khilgaon",
+    "country_code": "BD",
+    "proxy": "103.140.83.117:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.038",
+    "anonymity": "Anonymous",
+    "country": "Rwanda",
+    "city": "Kigali",
+    "country_code": "RW",
+    "proxy": "197.243.14.90:8888"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.212",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Changsha",
+    "country_code": "CN",
+    "proxy": "183.215.23.242:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.313",
+    "anonymity": "Anonymous",
+    "country": "Argentina",
+    "city": "La Paz",
+    "country_code": "AR",
+    "proxy": "45.187.76.2:3629"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.816",
+    "anonymity": "Anonymous",
+    "country": "Mexico",
+    "city": "Ciudad Obreg\u00f3n",
+    "country_code": "MX",
+    "proxy": "187.243.253.182:43015"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.164",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Kansas City",
+    "country_code": "US",
+    "proxy": "34.110.251.255:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.138",
+    "anonymity": "Transparent",
+    "country": "Nigeria",
+    "city": "Lagos",
+    "country_code": "NG",
+    "proxy": "105.112.191.250:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.653",
+    "anonymity": "Anonymous",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "country_code": "BD",
+    "proxy": "103.145.76.44:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.940",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Nanchang",
+    "country_code": "CN",
+    "proxy": "117.40.176.42:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "0.570",
+    "anonymity": "Anonymous",
+    "country": "Italy",
+    "city": "Montoro",
+    "country_code": "IT",
+    "proxy": "37.99.224.225:7497"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.442",
+    "anonymity": "Anonymous",
+    "country": "Hong Kong",
+    "city": "Kowloon Bay",
+    "country_code": "HK",
+    "proxy": "103.149.162.195:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.570",
+    "anonymity": "Anonymous",
+    "country": "Russia",
+    "city": "Vostochnaya",
+    "country_code": "RU",
+    "proxy": "188.191.19.7:3629"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.862",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "San Jose",
+    "country_code": "US",
+    "proxy": "182.61.201.201:80"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.210",
+    "anonymity": "Anonymous",
+    "country": "Argentina",
+    "city": "Carcara\u00f1\u00e1",
+    "country_code": "AR",
+    "proxy": "45.172.176.1:59341"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.148",
+    "anonymity": "Transparent",
+    "country": "Brazil",
+    "city": "Imperatriz",
+    "country_code": "BR",
+    "proxy": "138.36.23.229:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.645",
+    "anonymity": "Anonymous",
+    "country": "Poland",
+    "city": "Choszczno",
+    "country_code": "PL",
+    "proxy": "176.58.20.54:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.060",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Tangerang",
+    "country_code": "ID",
+    "proxy": "139.255.97.156:14888"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.971",
+    "anonymity": "Anonymous",
+    "country": "Ecuador",
+    "city": "Guayaquil",
+    "country_code": "EC",
+    "proxy": "45.170.46.49:3629"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.277",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Boydton",
+    "country_code": "US",
+    "proxy": "20.47.108.204:8888"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "7.092",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Batam",
+    "country_code": "ID",
+    "proxy": "103.156.57.98:3127"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.019",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Kunming",
+    "country_code": "CN",
+    "proxy": "119.62.70.40:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.682",
+    "anonymity": "Anonymous",
+    "country": "Bulgaria",
+    "city": "Sofia",
+    "country_code": "BG",
+    "proxy": "92.247.2.26:21231"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks5"
+    ],
+    "time_response": "9.640",
+    "anonymity": "Anonymous",
+    "country": "Hong Kong",
+    "city": "Mong Kok",
+    "country_code": "HK",
+    "proxy": "210.16.73.80:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.471",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Bangkok",
+    "country_code": "TH",
+    "proxy": "110.78.208.148:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.841",
+    "anonymity": "Transparent",
+    "country": "South Africa",
+    "city": "Cape Town",
+    "country_code": "ZA",
+    "proxy": "102.222.136.56:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.269",
+    "anonymity": "Anonymous",
+    "country": "United Kingdom",
+    "city": "London",
+    "country_code": "GB",
+    "proxy": "5.252.161.48:3128"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.165",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "Delhi",
+    "country_code": "IN",
+    "proxy": "1.186.85.74:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.163",
+    "anonymity": "Transparent",
+    "country": "Chile",
+    "city": "La Pintana",
+    "country_code": "CL",
+    "proxy": "201.222.45.64:999"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.055",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Jinan",
+    "country_code": "CN",
+    "proxy": "120.220.220.95:8085"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "3.893",
+    "anonymity": "Transparent",
+    "country": "Nepal",
+    "city": "Kathmandu",
+    "country_code": "NP",
+    "proxy": "103.1.95.47:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.896",
+    "anonymity": "Anonymous",
+    "country": "Cyprus",
+    "city": "Nicosia",
+    "country_code": "CY",
+    "proxy": "31.209.104.231:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "0.875",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Yuzhong Chengguanzhen",
+    "country_code": "CN",
+    "proxy": "115.236.166.106:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.589",
+    "anonymity": "Transparent",
+    "country": "Philippines",
+    "city": "Bato",
+    "country_code": "PH",
+    "proxy": "202.137.121.109:8080"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.142",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Nantong",
+    "country_code": "CN",
+    "proxy": "58.221.154.46:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.199",
+    "anonymity": "Anonymous",
+    "country": "Argentina",
+    "city": "Merlo",
+    "country_code": "AR",
+    "proxy": "186.22.7.159:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.987",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Nuremberg",
+    "country_code": "DE",
+    "proxy": "159.69.153.169:5566"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "5.381",
+    "anonymity": "Transparent",
+    "country": "Dominican Republic",
+    "city": "Santiago de los Caballeros",
+    "country_code": "DO",
+    "proxy": "200.125.171.202:9991"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.221",
+    "anonymity": "Anonymous",
+    "country": "China",
+    "city": "Nanchang",
+    "country_code": "CN",
+    "proxy": "113.194.103.179:9091"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.673",
+    "anonymity": "Anonymous",
+    "country": "Hungary",
+    "city": "Gy\u0151r",
+    "country_code": "HU",
+    "proxy": "185.5.229.221:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "1.013",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Falkenstein",
+    "country_code": "DE",
+    "proxy": "144.76.241.45:7890"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.136",
+    "anonymity": "Anonymous",
+    "country": "Thailand",
+    "city": "Lopburi",
+    "country_code": "TH",
+    "proxy": "1.20.96.30:4153"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.686",
+    "anonymity": "Anonymous",
+    "country": "United States",
+    "city": "Bellefonte",
+    "country_code": "US",
+    "proxy": "24.75.156.114:3366"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "4.873",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Jakarta",
+    "country_code": "ID",
+    "proxy": "36.94.142.163:8000"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "1.050",
+    "anonymity": "Anonymous",
+    "country": "Indonesia",
+    "city": "Bandar Lampung",
+    "country_code": "ID",
+    "proxy": "103.81.64.74:1080"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.004",
+    "anonymity": "Anonymous",
+    "country": "Germany",
+    "city": "Frankfurt am Main",
+    "country_code": "DE",
+    "proxy": "139.162.168.104:35645"
+  },
+  {
+    "status": true,
+    "type": [
+      "http"
+    ],
+    "time_response": "8.054",
+    "anonymity": "Transparent",
+    "country": "Indonesia",
+    "city": "Jayapura",
+    "country_code": "ID",
+    "proxy": "36.95.84.151:41890"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "0.965",
+    "anonymity": "Anonymous",
+    "country": "Brazil",
+    "city": "Porto Alegre",
+    "country_code": "BR",
+    "proxy": "45.162.44.10:51776"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "4.493",
+    "anonymity": "Anonymous",
+    "country": "Ecuador",
+    "city": "Velasco Ibarra",
+    "country_code": "EC",
+    "proxy": "181.198.111.123:5678"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.571",
+    "anonymity": "Anonymous",
+    "country": "Russia",
+    "city": "Ivanteyevka",
+    "country_code": "RU",
+    "proxy": "91.247.250.215:4145"
+  },
+  {
+    "status": true,
+    "type": [
+      "socks4"
+    ],
+    "time_response": "3.972",
+    "anonymity": "Anonymous",
+    "country": "India",
+    "city": "Pune",
+    "country_code": "IN",
+    "proxy": "43.241.30.222:4145"
+  }
+]
