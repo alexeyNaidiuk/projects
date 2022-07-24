@@ -11,8 +11,8 @@ from requests.models import Response
 from data import get_targets, get_proxies, generate_proxy, text_body, logger, get_proxies_from_json, target_generator
 
 URL = 'https://aromakava.ua/api/form/2'
-# all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
-proxy_generator = generate_proxy(get_proxies_from_json())
+all_proxies = get_proxies('west_proxy.txt')
+proxy_generator = generate_proxy(all_proxies)
 
 
 def post(email: str, proxy: Optional[str] = None) -> Response:
@@ -60,7 +60,7 @@ def spam(target):
     while result is None:
         proxy = next(proxy_generator)
         result = try_to_post(proxy, result, target)
-    return result, result.status_code, target
+    return result, target
 
 
 def main():
@@ -75,9 +75,7 @@ def main():
 
 def test():
     print(spam('softumwork@gmail.com'))
-    for target in target_generator():
-        print(spam(target))
 
 
 if __name__ == '__main__':
-    main()
+    test()
