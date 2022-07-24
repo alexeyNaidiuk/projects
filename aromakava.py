@@ -66,7 +66,7 @@ def spam(target):
 def main():
     with ThreadPoolExecutor(max_workers=100) as worker:
         futures = []
-        for target in target_generator(r'C:\Users\Admin\Desktop\projects\all_turk.csv'):
+        for target in target_generator('all_turk.csv'):
             future = worker.submit(spam, target)
             futures.append(future)
         for future in as_completed(futures):
