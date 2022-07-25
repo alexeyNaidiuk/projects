@@ -1,7 +1,6 @@
 import requests
-from bs4 import BeautifulSoup
 
-from module.data import get_proxies, generate_proxy, test_main, try_to, main
+from projects_folder.module.data import get_proxies, generate_proxy, test_main, try_to, main
 
 proxy_generator = generate_proxy(set(get_proxies(r'../proxies_folder/bad_proxies.txt')))
 

@@ -6,7 +6,7 @@ from faker import Faker
 from requests.exceptions import ProxyError
 from requests.models import Response
 
-from module.data import generate_proxy, text_body, get_proxies_from_json, main
+from projects_folder.module.data import generate_proxy, text_body, get_proxies_from_json, main
 
 # all_proxies = get_proxies('west_proxy.txt')
 proxy_generator = generate_proxy(get_proxies_from_json(r'../proxies_folder/working_proxies.json'))

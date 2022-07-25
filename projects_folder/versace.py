@@ -6,7 +6,7 @@ import requests
 from requests.exceptions import ConnectTimeout, ProxyError, ReadTimeout
 from requests_toolbelt import MultipartEncoder
 
-from module.data import get_proxies, generate_proxy, get_targets, RuCaptchaSolver
+from projects_folder.module.data import get_proxies, generate_proxy, get_targets, RuCaptchaSolver
 
 targets: set = get_targets(r'C:\Users\Admin\Desktop\projects\all_turk.csv')
 all_proxies: list = get_proxies()

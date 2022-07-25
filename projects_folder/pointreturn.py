@@ -7,7 +7,7 @@ from faker import Faker
 from requests import ConnectTimeout
 from requests.exceptions import ProxyError
 
-from module.data import get_targets, get_proxies, generate_proxy, text_body, logger
+from projects_folder.module.data import get_targets, get_proxies, generate_proxy, text_body, logger
 
 all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
 proxy_generator = generate_proxy(all_proxies)

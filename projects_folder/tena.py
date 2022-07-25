@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from requests.adapters import ConnectTimeout, ProxyError
 
-from module.data import get_targets, get_proxies
+from projects_folder.module.data import get_targets, get_proxies
 
 proxies = get_proxies()
 targets = get_targets()
