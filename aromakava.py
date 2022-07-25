@@ -11,7 +11,7 @@ from requests.models import Response
 from data import generate_proxy, text_body, get_proxies_from_json, target_generator
 
 # all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(get_proxies_from_json(r'C:\Users\Admin\Desktop\projects\working_proxies.json'))
+proxy_generator = generate_proxy(get_proxies_from_json(r'working_proxies.json'))
 
 
 def post(email: str, proxy: Optional[str] = None) -> Response:
