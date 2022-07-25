@@ -4,7 +4,7 @@ from requests_toolbelt import MultipartEncoder
 from module.data import generate_proxy, get_proxies, try_to, main
 
 text_body = '''🔥 Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
-proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder/proxies.txt')))
+proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder/west_proxy.txt')))
 
 
 @try_to
