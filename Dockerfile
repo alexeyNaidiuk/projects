@@ -9,4 +9,4 @@ COPY ./targets ./targets
 
 RUN pip install -r requirements.txt
 
-CMD ["python"]
+ENTRYPOINT ["python", "./project_folder/bacb.py"]

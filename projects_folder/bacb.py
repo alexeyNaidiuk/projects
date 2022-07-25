@@ -64,4 +64,4 @@ def spam(target: str):
 
 if __name__ == '__main__':
     # test_main(spam)
-    main(spam, 25)
+    main(spam, 5)
