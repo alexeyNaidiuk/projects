@@ -1,7 +1,7 @@
 import requests
-
-from module.data import generate_proxy, test_main, get_proxies, try_to, main, get_proxies_from_json
 from requests_toolbelt import MultipartEncoder
+
+from module.data import generate_proxy, get_proxies, try_to, main
 
 text_body = '''🔥 Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
 proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\proxies.txt')))
@@ -9,7 +9,6 @@ proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projec
 
 @try_to
 def post(target: str, proxy: str = None):
-
     fields = {
         'input_1': 'A Question',
         'input_2': 'RBT',
@@ -35,7 +34,6 @@ def post(target: str, proxy: str = None):
         'gform_field_values': '',
         'gform_uploaded_files': '',
     }
-
     data = MultipartEncoder(fields=fields)
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -66,4 +64,4 @@ def spam(target: str):
 
 if __name__ == '__main__':
     # test_main(spam)
-    main(spam, 20)
+    main(spam, 50)

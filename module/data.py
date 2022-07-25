@@ -177,7 +177,7 @@ def try_to(func):
             logging.error(error)
         except ProxyError as error:
             logging.error(error)
-            sleep(10)
+            sleep(20)
         except Exception as error:
             logging.error(error)
             # sleep(20)
