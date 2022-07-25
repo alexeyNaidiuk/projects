@@ -2,11 +2,11 @@ FROM mirekphd/python3.10-ubuntu20.04
 
 WORKDIR /app
 
-COPY ./projects_folder ./project_folder
+COPY ./projects_folder ./projects_folder
 COPY requirements.txt requirements.txt
 COPY ./proxies_folder ./proxies_folder
 COPY ./targets ./targets
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "./project_folder/bacb.py"]
+ENTRYPOINT ["python", "./projects_folder/bacb.py"]
