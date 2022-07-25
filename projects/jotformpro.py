@@ -8,7 +8,7 @@ from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.chrome.webdriver import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from data import get_targets, get_proxies, generate_proxy, text_body, get_proxy_file_extension
+from module.data import get_targets, get_proxies, generate_proxy, text_body, get_proxy_file_extension
 
 all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
 

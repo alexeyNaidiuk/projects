@@ -1,5 +1,3 @@
-from concurrent.futures import as_completed
-from concurrent.futures.thread import ThreadPoolExecutor
 from time import sleep
 from typing import Optional
 
@@ -8,10 +6,10 @@ from faker import Faker
 from requests.exceptions import ProxyError
 from requests.models import Response
 
-from data import generate_proxy, text_body, get_proxies_from_json, target_generator
+from module.data import generate_proxy, text_body, get_proxies_from_json, main
 
 # all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(get_proxies_from_json(r'working_proxies.json'))
+proxy_generator = generate_proxy(get_proxies_from_json(r'../proxies_folder/working_proxies.json'))
 
 
 def post(email: str, proxy: Optional[str] = None) -> Response:
@@ -64,19 +62,5 @@ def spam(target):
     return result, target
 
 
-def main():
-    with ThreadPoolExecutor(max_workers=100) as worker:
-        futures = []
-        for target in target_generator('all_turk.csv'):
-            future = worker.submit(spam, target)
-            futures.append(future)
-        for future in as_completed(futures):
-            print(future.result())
-
-
-def test():
-    print(spam('softumwork@gmail.com'))
-
-
 if __name__ == '__main__':
-    main()
+    main(spam)

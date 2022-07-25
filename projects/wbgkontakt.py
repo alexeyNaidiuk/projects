@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from requests import ConnectTimeout
 from requests.exceptions import ProxyError
 
-from data import get_proxies, get_targets, text_body
+from module.data import get_proxies, get_targets, text_body
 
 proxies = get_proxies()
 targets = get_targets(r'C:\Users\Admin\Desktop\projects\ems.txt')

@@ -1,11 +1,13 @@
 import json
 import logging
 from abc import abstractproperty, ABC
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from time import sleep
 from typing import Optional
 from zipfile import ZipFile
 
 import requests
+from requests.exceptions import ProxyError, ConnectTimeout
 
 text_body = '''Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
 logger = logging.getLogger('logger')
@@ -15,12 +17,12 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def get_proxies_from_json(path: str) -> set:
+def get_proxies_from_json(path: str) -> list:
     with open(path) as f:
         proxies = json.load(f)
 
     list_proxy = [''.join([proxy['type'][0] + '://', proxy['proxy']]) for proxy in proxies]
-    return set(list_proxy)
+    return list_proxy
 
 
 def get_proxy_file_extension(proxy: str):
@@ -75,7 +77,7 @@ def get_proxy_file_extension(proxy: str):
                 ['blocking']
     );
     """ % (host, port, user, password)
-    plugin_filename = 'proxy_auth_plugin.zip'
+    plugin_filename = '../proxy_auth_plugin.zip'
 
     with ZipFile(plugin_filename, 'w') as zp:
         zp.writestr("manifest.json", manifest_json)
@@ -88,12 +90,12 @@ def get_targets(path: str = r'C:\Users\Admin\Desktop\projects\emails.txt') -> se
         return set(f.read().split('\n'))
 
 
-def target_generator(path: str = r'C:\Users\Admin\Desktop\projects\emails.txt') -> str:
+def target_generator(path: str = r'emails.txt') -> str:
     for target in get_targets(path):
         yield target
 
 
-def get_proxies(proxies_path_to_file: str = r'C:\Users\Admin\Desktop\projects\proxies.txt') -> list:
+def get_proxies(proxies_path_to_file: str = r'proxies.txt') -> list:
     with open(proxies_path_to_file, encoding='utf-8') as f:
         return f.read().split('\n')
 
@@ -150,3 +152,35 @@ class RuCaptchaSolver(Solver):
                     result = get_response.json()['request']
                 sleep(.5)
         return result
+
+
+def main(spam_func, threads_limit=5):
+    with ThreadPoolExecutor(max_workers=threads_limit) as worker:
+        futures = []
+        for target in target_generator(r'C:\Users\Admin\Desktop\projects\targets\all_turk.csv'):
+            future = worker.submit(spam_func, target)
+            futures.append(future)
+        for future in as_completed(futures):
+            print(future.result())
+
+
+def test_main(spam_func):
+    print(spam_func('softumwork@gmail.com'))
+
+
+def try_to(func):
+    def decorator(*args, **kwargs):
+        result = None
+        try:
+            result = func(*args, **kwargs)
+        except ConnectTimeout as error:
+            logging.error(error)
+        except ProxyError as error:
+            logging.error(error)
+            sleep(10)
+        except Exception as error:
+            logging.error(error)
+            # sleep(20)
+        finally:
+            return result
+    return decorator

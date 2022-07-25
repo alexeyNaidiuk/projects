@@ -1,14 +1,12 @@
 import logging
-from io import StringIO, BytesIO
 
 from bs4 import BeautifulSoup
 import requests
 from selenium.webdriver import ChromeOptions, Chrome
 from selenium.webdriver.chrome.webdriver import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from lxml import etree
 
-from data import get_proxies, generate_proxy, get_proxy_file_extension
+from module.data import get_proxies, generate_proxy, get_proxy_file_extension
 
 
 all_proxies = get_proxies()
