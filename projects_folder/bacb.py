@@ -51,7 +51,7 @@ def post(target: str, proxy: str = None):
     }
     url = 'https://www.bacb.com/contact-us/'
     proxies = {'http': proxy, 'https': proxy}
-    return requests.post(url, headers=headers, data=data, proxies=proxies, verify=False, timeout=10)
+    return requests.post(url, headers=headers, data=data, proxies=proxies, timeout=10)
 
 
 def spam(target: str):
