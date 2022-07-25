@@ -9,4 +9,4 @@ COPY ./targets ./targets
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python"]
+CMD ["python"]
