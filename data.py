@@ -15,12 +15,12 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def get_proxies_from_json():
-    with open('working_proxies.json') as f:
+def get_proxies_from_json(path: str) -> set:
+    with open(path) as f:
         proxies = json.load(f)
 
     list_proxy = [''.join([proxy['type'][0] + '://', proxy['proxy']]) for proxy in proxies]
-    return list_proxy
+    return set(list_proxy)
 
 
 def get_proxy_file_extension(proxy: str):
@@ -98,7 +98,7 @@ def get_proxies(proxies_path_to_file: str = r'C:\Users\Admin\Desktop\projects\pr
         return f.read().split('\n')
 
 
-def generate_proxy(iterable: list):
+def generate_proxy(iterable: set):
     while True:
         for proxy in iterable:
             yield proxy

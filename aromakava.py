@@ -5,14 +5,13 @@ from typing import Optional
 
 import requests
 from faker import Faker
-from requests.exceptions import ConnectTimeout, ProxyError
+from requests.exceptions import ProxyError
 from requests.models import Response
 
-from data import get_targets, get_proxies, generate_proxy, text_body, logger, get_proxies_from_json, target_generator
+from data import generate_proxy, text_body, get_proxies_from_json, target_generator
 
-URL = 'https://aromakava.ua/api/form/2'
-all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(all_proxies)
+# all_proxies = get_proxies('west_proxy.txt')
+proxy_generator = generate_proxy(get_proxies_from_json(r'C:\Users\Admin\Desktop\projects\working_proxies.json'))
 
 
 def post(email: str, proxy: Optional[str] = None) -> Response:
@@ -38,19 +37,21 @@ def post(email: str, proxy: Optional[str] = None) -> Response:
         'bazhaniy-format': text_body,
         'vashe-povidomlennya': text_body
     }
-    resp = requests.post(URL, headers=headers, data=body, proxies={'http': proxy, 'https': proxy},
+    resp = requests.post('https://aromakava.ua/api/form/2', headers=headers, data=body,
+                         proxies={'http': proxy, 'https': proxy},
                          verify=False, timeout=5)
     return resp
 
 
-def try_to_post(proxy, result, target):
+def try_to_post(proxy, result: None, target):
     try:
         result = post(email=target, proxy=proxy)
     except ProxyError:
         sleep(20)
     except Exception:
         pass
-    return result
+    finally:
+        return result
 
 
 def spam(target):
@@ -78,4 +79,4 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    main()
