@@ -155,7 +155,7 @@ class RuCaptchaSolver(Solver):
 
 
 def main(spam_func, threads_limit=None):
-    with ThreadPoolExecutor(max_workers=threads_limit) as worker:
+    with ThreadPoolExecutor(threads_limit) as worker:
         futures = []
         for target in target_generator(r'targets/all_turk.csv'):
             future = worker.submit(spam_func, target)
