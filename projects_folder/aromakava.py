@@ -1,18 +1,17 @@
-from time import sleep
 from typing import Optional
 
 import requests
 from faker import Faker
-from requests.exceptions import ProxyError
 from requests.models import Response
 
-from projects_folder.module.data import generate_proxy, text_body, get_proxies_from_json, main
+from module.data import generate_proxy, text_body, get_proxies_from_json, main, try_to
 
 # all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(get_proxies_from_json(r'../proxies_folder/working_proxies.json'))
+proxy_generator = generate_proxy(set(get_proxies_from_json(r'proxies_folder/working_proxies.json')))
 
 
-def post(email: str, proxy: Optional[str] = None) -> Response:
+@try_to
+def post(target: str, proxy: Optional[str] = None) -> Response:
     headers = {
         'user-agent': Faker().chrome(),
         'accept': 'application/json, text/plain, */*',
@@ -30,7 +29,7 @@ def post(email: str, proxy: Optional[str] = None) -> Response:
         'prizvishche': text_body,
         'imya': text_body,
         'kontaktniy-telefon': text_body,
-        'e-mail': email,
+        'e-mail': target,
         'misto-dlya-vidkrittya-kavyarni': text_body,
         'bazhaniy-format': text_body,
         'vashe-povidomlennya': text_body
@@ -41,24 +40,11 @@ def post(email: str, proxy: Optional[str] = None) -> Response:
     return resp
 
 
-def try_to_post(proxy, result: None, target):
-    try:
-        result = post(email=target, proxy=proxy)
-    except ProxyError:
-        sleep(20)
-    except Exception:
-        pass
-    finally:
-        return result
-
-
 def spam(target):
     result = None
-    if not target:
-        return result, target
     while result is None:
         proxy = next(proxy_generator)
-        result = try_to_post(proxy, result, target)
+        result = post(proxy, target)
     return result, target
 
 
