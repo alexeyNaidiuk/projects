@@ -126,7 +126,7 @@ class RuCaptchaSolver(Solver):
         }
         return float(requests.get(self.get_url, params=params).content)
 
-    def recaptcha(self, sitekey, url, timeout=120) -> Optional[str]:
+    def solve(self, sitekey, url, timeout=120) -> Optional[str]:
         result = None
         post_params = {
             'key': self.api_key,
@@ -157,7 +157,7 @@ class RuCaptchaSolver(Solver):
 def main(spam_func, threads_limit=None):
     with ThreadPoolExecutor(threads_limit) as worker:
         futures = []
-        for target in target_generator(r'targets/all_turk.csv'):
+        for target in target_generator(r'targets\emails.txt'):
             future = worker.submit(spam_func, target)
             futures.append(future)
         for future in as_completed(futures):
@@ -177,7 +177,7 @@ def try_to(func):
             logging.error(error)
         except ProxyError as error:
             logging.error(error)
-            sleep(20)
+            sleep(0)
         except Exception as error:
             logging.error(error)
             # sleep(20)

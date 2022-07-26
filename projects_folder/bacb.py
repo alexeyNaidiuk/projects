@@ -1,14 +1,17 @@
 import requests
 from requests_toolbelt import MultipartEncoder
 
-from module.data import generate_proxy, get_proxies, try_to, main, test_main
+from module.data import generate_proxy, get_proxies, try_to, main, test_main, RuCaptchaSolver
 
 text_body = '''🔥 Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
-proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder/west_proxy.txt')))
+proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\bad_proxies.txt')))
+SITEKEY = '6Le4taQUAAAAAKKOa8LORM5g0nO4QZnIZmlJWtUW'
+captcha_solver = RuCaptchaSolver('270c882e4e24949cbc91bc6d4f5f86a1')
+URL = 'https://www.bacb.com/contact-us/'
 
 
 @try_to
-def post(target: str, proxy: str = None):
+def post(target: str, captcha_response: str, proxy: str = None):
     fields = {
         'input_1': 'A Question',
         'input_2': 'RBT',
@@ -24,6 +27,7 @@ def post(target: str, proxy: str = None):
         'input_43.1': '1',
         'input_43.2': 'I agree to allow the BACB to contact me with the information provided to help with my inquiry.',
         'input_43.3': '20',
+        'g-recaptcha-response': captcha_response,
         'gform_ajax': 'form_id=75&title=&description=1&tabindex=0',
         'is_submit_75': '1',
         'gform_submit': '75',
@@ -49,19 +53,22 @@ def post(target: str, proxy: str = None):
         "sec-fetch-user": "?1",
         "upgrade-insecure-requests": "1"
     }
-    url = 'https://www.bacb.com/contact-us/'
     proxies = {'http': proxy, 'https': proxy}
-    return requests.post(url, headers=headers, data=data, proxies=proxies, timeout=10)
+    return requests.post(URL, headers=headers, data=data, proxies=proxies, timeout=10)
 
 
 def spam(target: str):
     result = None
+    if not target:
+        return result
+    captcha_response = captcha_solver.solve(SITEKEY, URL)
     while result is None:
         proxy = next(proxy_generator)
-        result = post(target, proxy)
+        result = post(target, captcha_response, proxy)
     return result, target
 
 
 if __name__ == '__main__':
-    test_main(spam)
-    main(spam)
+    test_result = spam('softumwork@gmail.com')
+    print(test_result)
+    main(spam, 2)

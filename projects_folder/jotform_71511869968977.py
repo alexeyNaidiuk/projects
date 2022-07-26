@@ -3,7 +3,7 @@ from requests_toolbelt import MultipartEncoder
 
 from projects_folder.module.data import generate_proxy, main, try_to, get_proxies, test_main, text_body
 
-proxy_generator = generate_proxy(set(get_proxies(r'/proxies_folder/bad_proxies.txt')))
+proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\proxies.txt')))
 
 
 @try_to
@@ -59,4 +59,4 @@ def spam(target: str):
 
 if __name__ == '__main__':
     test_main(spam)
-    main(spam, 20)
+    main(spam, 5)

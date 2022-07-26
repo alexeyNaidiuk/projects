@@ -4,10 +4,10 @@ import requests
 from faker import Faker
 from requests.models import Response
 
-from module.data import generate_proxy, text_body, get_proxies_from_json, main, try_to
+from module.data import generate_proxy, text_body, get_proxies_from_json, main, try_to, get_proxies
 
 # all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(set(get_proxies_from_json(r'proxies_folder/working_proxies.json')))
+proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\west_proxy.txt')))
 
 
 @try_to
@@ -44,9 +44,11 @@ def spam(target):
     result = None
     while result is None:
         proxy = next(proxy_generator)
-        result = post(proxy, target)
+        result = post(target, proxy)
     return result, target
 
 
 if __name__ == '__main__':
+    test_result = spam('softumwork@gmail.com')
+    print(test_result)
     main(spam)
