@@ -4,10 +4,10 @@ import requests
 from faker import Faker
 from requests.models import Response
 
-from module.data import generate_proxy, text_body, get_proxies_from_json, main, try_to, get_proxies
+from module.data import generate_proxy, main, try_to, get_proxies
 
-# all_proxies = get_proxies('west_proxy.txt')
 proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder/west_proxy.txt')))
+text_body = '''50 фриспинов за регистрацию в клубе Slottica Переходи по ссылке ниже и забирай свой бонус! https://bit.ly/3c6QoSO'''
 
 
 @try_to
