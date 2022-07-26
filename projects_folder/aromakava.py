@@ -7,7 +7,7 @@ from requests.models import Response
 from module.data import generate_proxy, text_body, get_proxies_from_json, main, try_to, get_proxies
 
 # all_proxies = get_proxies('west_proxy.txt')
-proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder\west_proxy.txt')))
+proxy_generator = generate_proxy(set(get_proxies(r'proxies_folder/west_proxy.txt')))
 
 
 @try_to
