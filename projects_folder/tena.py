@@ -1,20 +1,16 @@
-import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from itertools import cycle
-from time import sleep
 from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import ConnectTimeout, ProxyError
 
-from projects_folder.module.data import get_targets, get_proxies
+from module.data import get_proxies, try_to, generate_proxy, main
 
-proxies = get_proxies()
-targets = get_targets()
-text_body = '''50 фриспинов за регистрацию в клубе Slottica Переходи по ссылке ниже и забирай свой бонус! https://bit.ly/3c6QoSO'''
+proxies = get_proxies(r'proxies_folder/west_proxy.txt')
+proxy_generator = generate_proxy(proxies)
+text_body = '''Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
 
 
+@try_to
 def get(proxy: Optional[str] = None):
     headers = {
         'authority': 'www.tena.ua',
@@ -35,6 +31,7 @@ def get(proxy: Optional[str] = None):
                         proxies={'http': proxy, 'https': proxy}, timeout=5, verify=False)
 
 
+@try_to
 def post(request_token: str, email: str, proxy: str = Optional[str]):
     headers = {
         'authority': 'www.tena.ua',
@@ -56,8 +53,8 @@ def post(request_token: str, email: str, proxy: str = Optional[str]):
         'formId': '57016-106617',
         'formParentId': '24884-106605',
         'Message': text_body,
-        'FirstName': '---',
-        'LastName': '---',
+        'FirstName': '>>>',
+        'LastName': '>>>',
         'Email': email,
         'email_check': email,
         'PhoneNumber': '380999999999',
@@ -82,61 +79,18 @@ def find_request_token(content) -> str:
     return BeautifulSoup(content, 'lxml').find('input', {'name': '__RequestVerificationToken'}).get('value')
 
 
-def try_to_get(**kwargs):
-    response = None
-    try:
-        response = get(**kwargs)
-    except ConnectTimeout as error:
-        logging.error(error)
-        sleep(30)
-    except ProxyError as error:
-        logging.error(error)
-    except Exception as error:
-        logging.exception(error)
-    finally:
-        return response
-
-
-def try_to_post(**kwargs):
-    post_result = None
-    try:
-        post_result = post(**kwargs)
-    except Exception as error:
-        logging.error(error)
-    finally:
-        return post_result
-
-
-def try_to_spam(target: str, proxy: str):
-    get_response = try_to_get(proxy=proxy)
-    if get_response:
-        request_token = find_request_token(get_response.text)
-        post_response = try_to_post(request_token=request_token, proxy=proxy, email=target)
-        return post_response, target
-    else:
-        proxies.remove(proxy)
-
-
 def spam(target: str):
-    proxies_cycle = cycle(proxies)
-    while True:
-        proxy = next(proxies_cycle)
-        return try_to_spam(target, proxy)
-
-
-def main():
-    with ThreadPoolExecutor(max_workers=75) as worker:
-        futures = []
-        for target in targets:
-            future = worker.submit(spam, target)
-            futures.append(future)
-        for future in as_completed(futures):
-            print(future.result())
-
-
-def test():
-    print(spam('softumwork@gmail.com'))
+    result = None
+    while result is None:
+        proxy = next(proxy_generator)
+        get_result = get(proxy)
+        if get_result:
+            request_token = find_request_token(get_result.text)
+            result = post(request_token, target, proxy)
+    return result, target
 
 
 if __name__ == '__main__':
-    main()
+    test_result = spam('softumwork@gmail.com')
+    print(test_result)
+    main(spam, targets_file_path=r'targets/all_turk.csv')
