@@ -100,9 +100,9 @@ def get_proxies(proxies_path_to_file: str = r'proxies.txt') -> list:
         return f.read().split('\n')
 
 
-def generate_proxy(iterable: set):
+def generate_proxy(iterable: list):
     while True:
-        for proxy in iterable:
+        for proxy in set(iterable):
             yield proxy
 
 

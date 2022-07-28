@@ -2,7 +2,7 @@ import requests
 
 from projects_folder.module.data import get_proxies, generate_proxy, test_main, try_to, main, get_proxies_from_json
 
-proxy_generator = generate_proxy(set(get_proxies_from_json(r'C:\Users\Admin\Desktop\projects\proxies_folder\working_proxies.json')))
+proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\bad_proxies.txt')))
 
 
 @try_to
@@ -47,11 +47,12 @@ def spam(target: str):
     while result is None:
         proxy = next(proxy_generator)
         post_resp = post(target, proxy)
-        if 'captcha' not in post_resp.text:
+        if post_resp and 'captcha' not in post_resp.text:
             result = post_resp
     return result, target
 
 
 if __name__ == '__main__':
-    test_main(spam)
+    test_result = spam('softumwork@gmail.com')
+    print(test_result)
     main(spam, 10)

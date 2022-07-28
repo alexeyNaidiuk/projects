@@ -56,5 +56,6 @@ def spam(target):
 
 
 if __name__ == '__main__':
-    test_main(spam)
+    test_result = spam('softumwork@gmail.com')
+    print(test_result)
     main(spam, 5)
