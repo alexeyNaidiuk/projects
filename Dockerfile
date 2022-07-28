@@ -10,4 +10,4 @@ COPY ./proxies_folder ./proxies_folder
 COPY ./targets ./targets
 
 
-ENTRYPOINT ["python", "projects_folder\"]
+ENTRYPOINT ["python", "./projects_folder/"]
