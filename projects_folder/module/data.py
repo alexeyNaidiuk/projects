@@ -154,10 +154,10 @@ class RuCaptchaSolver(Solver):
         return result
 
 
-def main(spam_func, threads_limit=None):
+def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt'):
     with ThreadPoolExecutor(threads_limit) as worker:
         futures = []
-        for target in target_generator(r'targets/emails.txt'):
+        for target in target_generator(targets_file_path):
             future = worker.submit(spam_func, target)
             futures.append(future)
         for future in as_completed(futures):
