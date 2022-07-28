@@ -82,7 +82,7 @@ def post(s, email, subject, text_body, proxy=None):
     return response
 
 def get_proxies() -> list:
-    with open(r'../proxies_folder/proxies.txt', encoding='utf-8') as f:
+    with open(r'proxies_folder/proxies.txt', encoding='utf-8') as f:
         return f.read().splitlines()
 
 

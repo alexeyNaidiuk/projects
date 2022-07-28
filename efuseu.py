@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from requests import Session
 from spintax import spintax
-from projects_folder.module.data import SOLVER, subject, text_body, get_targets
+from module.data import SOLVER, subject, text_body, get_targets
 
 sitekey = '6LdNeDUUAAAAABpwRBYbCMJvQoxLi4d31Oho0EBw'
 

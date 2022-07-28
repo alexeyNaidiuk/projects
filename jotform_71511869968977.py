@@ -1,7 +1,7 @@
 import requests
 from requests_toolbelt import MultipartEncoder
 
-from projects_folder.module.data import generate_proxy, main, try_to, get_proxies, test_main, text_body
+from module.data import generate_proxy, main, try_to, get_proxies, text_body
 
 proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\proxies.txt')))
 

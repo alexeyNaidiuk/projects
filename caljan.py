@@ -6,7 +6,7 @@ from selenium.webdriver import ChromeOptions, Chrome
 from selenium.webdriver.chrome.webdriver import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from projects_folder.module.data import get_proxies, generate_proxy, get_proxy_file_extension
+from module.data import get_proxies, generate_proxy, get_proxy_file_extension
 
 
 all_proxies = get_proxies()

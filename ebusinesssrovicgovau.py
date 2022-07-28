@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-from projects_folder.module.data import get_targets, get_proxies, RuCaptchaSolver, text_body, generate_proxy
+from module.data import get_targets, get_proxies, RuCaptchaSolver, text_body, generate_proxy
 
 url = 'https://www.e-business.sro.vic.gov.au/contactus/contact'
 sitekey = '6LeI2SYUAAAAAJc85fplLQOvbFL6RQ880oF364DR'

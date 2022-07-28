@@ -2,7 +2,7 @@ from faker import Faker
 from seleniumwire.webdriver import Chrome, ChromeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 
-from projects_folder.module.data import get_proxies, generate_proxy, get_proxy_file_extension
+from module.data import get_proxies, generate_proxy, get_proxy_file_extension
 
 all_proxies = get_proxies(r'C:\Users\Admin\Desktop\projects\west_proxy.txt')
 proxy_generator = generate_proxy(all_proxies)

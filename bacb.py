@@ -4,7 +4,7 @@ from requests_toolbelt import MultipartEncoder
 from module.data import generate_proxy, get_proxies, try_to, main, test_main, RuCaptchaSolver
 
 text_body = '''🔥 Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
-proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\bad_proxies.txt')))
+proxy_generator = generate_proxy(set(get_proxies(r'/proxies_folder/bad_proxies.txt')))
 SITEKEY = '6Le4taQUAAAAAKKOa8LORM5g0nO4QZnIZmlJWtUW'
 captcha_solver = RuCaptchaSolver('270c882e4e24949cbc91bc6d4f5f86a1')
 URL = 'https://www.bacb.com/contact-us/'

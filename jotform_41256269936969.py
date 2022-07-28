@@ -1,6 +1,6 @@
 import requests
 
-from projects_folder.module.data import generate_proxy, get_proxies, try_to, test_main, main
+from module.data import generate_proxy, get_proxies, try_to, main
 
 proxy_generator = generate_proxy(set(get_proxies(r'C:\Users\Admin\Desktop\projects\proxies_folder\proxies.txt')))
 

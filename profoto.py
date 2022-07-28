@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from requests.adapters import ConnectTimeout, ProxyError
 
-from projects_folder.module.data import get_targets, get_proxies
+from module.data import get_targets, get_proxies
 
 text_body = '''50 фриспинов за регистрацию в клубе Slottica Переходи по ссылке ниже и забирай свой бонус! https://bit.ly/3c6QoSO'''
 proxies = get_proxies()
