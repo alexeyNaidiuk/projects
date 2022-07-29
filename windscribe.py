@@ -1,4 +1,5 @@
 import requests
+
 from module.data import generate_proxy, get_proxies, try_to, main
 
 proxy_pool = get_proxies(r'proxies_folder/west_proxy.txt')
