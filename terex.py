@@ -49,4 +49,4 @@ def spam(target):
 if __name__ == '__main__':
     test = spam('softumwork@gmail.com')
     print(test)
-    main(spam, 'targets/emails.txt')
+    main(spam, targets_file_path='targets/emails.txt')
