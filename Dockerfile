@@ -11,4 +11,4 @@ COPY ./proxies_folder ./proxies_folder
 COPY ./module ./module
 
 
-ENTRYPOINT ["python"]
+ENTRYPOINT ["bash"]
