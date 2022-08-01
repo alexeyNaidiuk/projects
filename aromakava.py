@@ -6,7 +6,12 @@ from requests.models import Response
 
 from module.data import generate_proxy, main, try_to, get_proxies
 
-proxy_generator = generate_proxy(get_proxies(r'proxies_folder/west_proxy.txt'))
+TARGETS_FOLDER = r'targets/all_turk.csv'
+PROXY_FOLDER = r'proxies_folder/working_proxies.txt'
+
+print(TARGETS_FOLDER)
+print(PROXY_FOLDER)
+proxy_generator = generate_proxy(get_proxies(PROXY_FOLDER))
 text_body = '🔥 Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://cutt.ly/SZnNqlC'
 
 
@@ -51,4 +56,4 @@ def spam(target):
 if __name__ == '__main__':
     test_result = spam('softumwork@gmail.com')
     print(test_result)
-    main(spam, targets_file_path=r'targets/all_turk.csv')
+    main(spam, targets_file_path=TARGETS_FOLDER)
