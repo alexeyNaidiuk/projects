@@ -1,6 +1,6 @@
 import json
 import logging
-from abc import abstractproperty, ABC
+from abc import abstractproperty, ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from time import sleep
 from typing import Optional
@@ -111,7 +111,12 @@ class Solver(ABC):
         self.api_key = api_key
 
     @property
+    @abstractmethod
     def balance(self) -> int:
+        ...
+
+    @abstractmethod
+    def solve(self, *args, **kwargs) -> str:
         ...
 
 
@@ -119,12 +124,16 @@ class RuCaptchaSolver(Solver):
     post_url = 'https://rucaptcha.com/in.php'
     get_url = 'https://rucaptcha.com/res.php'
 
+    @property
     def balance(self):
         params = {
             'key': self.api_key,
             'action': 'getbalance'
         }
         return float(requests.get(self.get_url, params=params).content)
+
+
+class RecaptchaSolver(RuCaptchaSolver):
 
     def solve(self, sitekey, url, timeout=120) -> Optional[str]:
         result = None
@@ -137,25 +146,39 @@ class RuCaptchaSolver(Solver):
 
         }
         post_response: requests.Response = requests.post(self.post_url, params=post_params)
+        if not post_response.ok:
+            return result
         c = 0
-        if post_response.ok:
-            while result is None or c > timeout*2:
-                c += 1
-                get_params = {
-                    'key': self.api_key,
-                    'action': 'get',
-                    'id': post_response.json().get('request'),
-                    'json': '1'
-                }
-                get_response = requests.get(self.get_url, params=get_params)
-                if get_response.json()['status']:
-                    result = get_response.json()['request']
-                sleep(.5)
+        while result is None or c > timeout * 2:
+            c += 1
+            get_params = {
+                'key': self.api_key,
+                'action': 'get',
+                'id': post_response.json().get('request'),
+                'json': '1'
+            }
+            get_response = requests.get(self.get_url, params=get_params)
+            if get_response.json()['status']:
+                result = get_response.json()['request']
+            sleep(.5)
         return result
 
 
-def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt'):
-    with ThreadPoolExecutor(threads_limit) as worker:
+class RegularCaptchaSolver(RuCaptchaSolver):
+
+    def solve(self, image_source_url: str) -> Optional[str]:
+        result = None
+        post_params = {
+            'key': self.api_key,
+            'method': 'post',
+            'file': image_source_url,
+
+        }
+        return result
+
+
+def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt', executor=ThreadPoolExecutor):
+    with executor(threads_limit) as worker:
         futures = []
         for target in target_generator(targets_file_path):
             future = worker.submit(spam_func, target)
@@ -165,7 +188,8 @@ def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt')
 
 
 def test_main(spam_func):
-    print(spam_func('softumwork@gmail.com'))
+    test_result = spam_func('softumwork@gmail.com')
+    print(test_result)
 
 
 def try_to(func):
@@ -174,12 +198,12 @@ def try_to(func):
         try:
             result = func(*args, **kwargs)
         except ConnectTimeout as error:
-            logging.error(error)
+            logger.error(error)
         except ProxyError as error:
-            logging.error(error)
+            logger.error(error)
             sleep(0)
         except Exception as error:
-            logging.error(error)
+            logger.error(error)
             # sleep(20)
         finally:
             return result
