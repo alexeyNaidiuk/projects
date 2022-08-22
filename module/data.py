@@ -1,6 +1,6 @@
 import json
 import logging
-from abc import abstractproperty, ABC, abstractmethod
+from abc import ABC
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from time import sleep
 from typing import Optional
@@ -17,10 +17,25 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
+def update_target_site(db_name, target, site):
+    return requests.put(f'http://localhost:8000/dbs/targets/{db_name}', json={'email': target, 'site': site})
+
+
+def get_target_from_database(db_name, site: Optional[str] = None):
+    return requests.get(f'http://localhost:8000/dbs/targets/{db_name}', params={'site': site})
+
+
+def get_text_from_database() -> str:
+    return requests.get('http://localhost:8000/dbs').json().get('databases').get('texts').get('turk_text')
+
+
+def get_proxy_from_database(db_name) -> str:
+    return requests.get('http://localhost:8000/dbs/proxies/west_proxy').text
+
+
 def get_proxies_from_json(path: str) -> list:
     with open(path) as f:
         proxies = json.load(f)
-
     list_proxy = [''.join([proxy['type'][0] + '://', proxy['proxy']]) for proxy in proxies]
     return list_proxy
 
@@ -111,12 +126,7 @@ class Solver(ABC):
         self.api_key = api_key
 
     @property
-    @abstractmethod
     def balance(self) -> int:
-        ...
-
-    @abstractmethod
-    def solve(self, *args, **kwargs) -> str:
         ...
 
 
@@ -124,16 +134,12 @@ class RuCaptchaSolver(Solver):
     post_url = 'https://rucaptcha.com/in.php'
     get_url = 'https://rucaptcha.com/res.php'
 
-    @property
     def balance(self):
         params = {
             'key': self.api_key,
             'action': 'getbalance'
         }
         return float(requests.get(self.get_url, params=params).content)
-
-
-class RecaptchaSolver(RuCaptchaSolver):
 
     def solve(self, sitekey, url, timeout=120) -> Optional[str]:
         result = None
@@ -146,39 +152,25 @@ class RecaptchaSolver(RuCaptchaSolver):
 
         }
         post_response: requests.Response = requests.post(self.post_url, params=post_params)
-        if not post_response.ok:
-            return result
         c = 0
-        while result is None or c > timeout * 2:
-            c += 1
-            get_params = {
-                'key': self.api_key,
-                'action': 'get',
-                'id': post_response.json().get('request'),
-                'json': '1'
-            }
-            get_response = requests.get(self.get_url, params=get_params)
-            if get_response.json()['status']:
-                result = get_response.json()['request']
-            sleep(.5)
+        if post_response.ok:
+            while result is None or c > timeout * 2:
+                c += 1
+                get_params = {
+                    'key': self.api_key,
+                    'action': 'get',
+                    'id': post_response.json().get('request'),
+                    'json': '1'
+                }
+                get_response = requests.get(self.get_url, params=get_params)
+                if get_response.json()['status']:
+                    result = get_response.json()['request']
+                sleep(.5)
         return result
 
 
-class RegularCaptchaSolver(RuCaptchaSolver):
-
-    def solve(self, image_source_url: str) -> Optional[str]:
-        result = None
-        post_params = {
-            'key': self.api_key,
-            'method': 'post',
-            'file': image_source_url,
-
-        }
-        return result
-
-
-def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt', executor=ThreadPoolExecutor):
-    with executor(threads_limit) as worker:
+def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt'):
+    with ThreadPoolExecutor(threads_limit) as worker:
         futures = []
         for target in target_generator(targets_file_path):
             future = worker.submit(spam_func, target)
@@ -188,8 +180,7 @@ def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt',
 
 
 def test_main(spam_func):
-    test_result = spam_func('softumwork@gmail.com')
-    print(test_result)
+    print(spam_func('softumwork@gmail.com'))
 
 
 def try_to(func):
@@ -198,13 +189,14 @@ def try_to(func):
         try:
             result = func(*args, **kwargs)
         except ConnectTimeout as error:
-            logger.error(error)
+            logging.error(error)
         except ProxyError as error:
-            logger.error(error)
+            logging.error(error)
             sleep(0)
         except Exception as error:
-            logger.error(error)
+            logging.error(error)
             # sleep(20)
         finally:
             return result
+
     return decorator
