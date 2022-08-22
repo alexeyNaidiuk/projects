@@ -1,6 +1,6 @@
 import json
 import logging
-from abc import abstractproperty, ABC
+from abc import ABC
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from time import sleep
 from typing import Optional
@@ -17,10 +17,25 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
+def update_target_site(db_name, target, site):
+    return requests.put(f'http://localhost:8000/dbs/targets/{db_name}', json={'email': target, 'site': site})
+
+
+def get_target_from_database(db_name, site: Optional[str] = None):
+    return requests.get(f'http://localhost:8000/dbs/targets/{db_name}', params={'site': site})
+
+
+def get_text_from_database() -> str:
+    return requests.get('http://localhost:8000/dbs').json().get('databases').get('texts').get('turk_text')
+
+
+def get_proxy_from_database(db_name) -> str:
+    return requests.get('http://localhost:8000/dbs/proxies/west_proxy').text
+
+
 def get_proxies_from_json(path: str) -> list:
     with open(path) as f:
         proxies = json.load(f)
-
     list_proxy = [''.join([proxy['type'][0] + '://', proxy['proxy']]) for proxy in proxies]
     return list_proxy
 
@@ -139,7 +154,7 @@ class RuCaptchaSolver(Solver):
         post_response: requests.Response = requests.post(self.post_url, params=post_params)
         c = 0
         if post_response.ok:
-            while result is None or c > timeout*2:
+            while result is None or c > timeout * 2:
                 c += 1
                 get_params = {
                     'key': self.api_key,
@@ -183,4 +198,5 @@ def try_to(func):
             # sleep(20)
         finally:
             return result
+
     return decorator
