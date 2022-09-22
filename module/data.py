@@ -1,124 +1,122 @@
-import json
 import logging
-from abc import ABC
+from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from itertools import cycle
+from random import choice
+from string import Template
 from time import sleep
-from typing import Optional
-from zipfile import ZipFile
+from typing import Optional, NoReturn
 
 import requests
-from requests.exceptions import ProxyError, ConnectTimeout
-
-text_body = '''Herkese verdik! Sana da verelim! 50 TL Casino Bonusu!  https://bit.ly/3aM5iOf'''
-logger = logging.getLogger('logger')
-logger.setLevel(logging.INFO)
-handler = logging.StreamHandler()
-handler.setLevel(logging.INFO)
-logger.addHandler(handler)
+from spintax import spintax
 
 
-def update_target_site(db_name, target, site):
-    return requests.put(f'http://localhost:8000/dbs/targets/{db_name}', json={'email': target, 'site': site})
+class ProjectController:
+    __url = 'https://zennotasks.com/automation/api.php'
+    __key = 'softumXasHq1!'
+
+    def __init__(self, project_name, prom_link):
+        self.project_name = project_name
+        self.prom_link = prom_link
+        self.__params = {'key': self.__key, 'project': self.project_name}
+        self.send_good_status()
+
+    def send_count(self, count) -> int:
+        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&count={-Variable.Counter0-}'''
+
+        self.__params['count'] = count
+        response = requests.get(self.__url, params=self.__params)
+        return response.status_code
+
+    def send_good_status(self) -> int:
+        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=0'''
+        self.__params['status'] = 0
+        resp = requests.get(self.__url, params=self.__params)
+        return resp.status_code
+
+    def send_bad_status(self) -> int:
+        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=1'''
+
+        self.__params['status'] = 1
+        resp = requests.get(self.__url, params=self.__params)
+        return resp.status_code
+
+    def status(self) -> bool:  # fixme
+        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&iswork=1&prom_link={-Variable.prom_link-}'''
+
+        self.__params['iswork'] = '1'
+        self.__params['prom_link'] = self.prom_link
+        resp = requests.get(self.__url, params=self.__params)
+        cont = resp.content.decode()
+
+        if cont in ['', 'successful']:
+            return True
+        else:
+            return False
 
 
-def get_target_from_database(db_name, site: Optional[str] = None):
-    return requests.get(f'http://localhost:8000/dbs/targets/{db_name}', params={'site': site})
+def get_turk_spinned_text(link: str | None = '', with_stickers: bool = True, decoded: bool = True) -> str:
+    text = "🔥 {Get|Take|Kullan} 50 {ücretsiz dönüş|FS|freespins|ücretsiz dönüş|ücretsiz dönüş}" \
+           " {Kulübe kaydolmak|Kulübe girmek|Projeye girmek|katılmak|oynamak} Slottica'yı takip " \
+           "{etmek|bu} bağlantı {aşağıda |} {-|:|} 👉 $link 👈 {Acele|Acele|Acele|Gecikme}," \
+           " {bonus|ödül|hediye} süresi {sınırlı|sınırlı}! 🔥"
+    spinned_text = spintax.spin(text)
+    template = Template(spinned_text)
+    message = template.substitute(link=link)
+    if not with_stickers:
+        message = message.replace('🔥', '')
+        message = message.replace('👉', '')
+        message = message.replace('👈', '')
+    if decoded:
+        message = message.encode().decode('latin-1')
+    return message
 
 
-def get_text_from_database() -> str:
-    return requests.get('http://localhost:8000/dbs').json().get('databases').get('texts').get('turk_text')
-
-
-def get_proxy_from_database(db_name) -> str:
-    return requests.get('http://localhost:8000/dbs/proxies/west_proxy').text
-
-
-def get_proxies_from_json(path: str) -> list:
-    with open(path) as f:
-        proxies = json.load(f)
-    list_proxy = [''.join([proxy['type'][0] + '://', proxy['proxy']]) for proxy in proxies]
-    return list_proxy
-
-
-def get_proxy_file_extension(proxy: str):
-    user, password, host, port = [b for a in proxy.split('@') for b in a.split(':')]
-    manifest_json = """
-    {
-        "version": "1.0.0",
-        "manifest_version": 2,
-        "name": "Chrome Proxy",
-        "permissions": [
-            "proxy",
-            "tabs",
-            "unlimitedStorage",
-            "storage",
-            "<all_urls>",
-            "webRequest",
-            "webRequestBlocking"
-        ],
-        "background": {
-            "scripts": ["background.js"]
-        },
-        "minimum_chrome_version":"22.0.0"
-    }
-    """
-    background_js = """
-    var config = {
-            mode: "fixed_servers",
-            rules: {
-            singleProxy: {
-                scheme: "http",
-                host: "%s",
-                port: parseInt(%s)
-            },
-            bypassList: ["localhost"]
-            }
-        };
-
-    chrome.proxy.settings.set({value: config, scope: "regular"}, function() {});
-
-    function callbackFn(details) {
-        return {
-            authCredentials: {
-                username: "%s",
-                password: "%s"
-            }
-        };
-    }
-
-    chrome.webRequest.onAuthRequired.addListener(
-                callbackFn,
-                {urls: ["<all_urls>"]},
-                ['blocking']
-    );
-    """ % (host, port, user, password)
-    plugin_filename = '../proxy_auth_plugin.zip'
-
-    with ZipFile(plugin_filename, 'w') as zp:
-        zp.writestr("manifest.json", manifest_json)
-        zp.writestr("background.js", background_js)
-    return plugin_filename
-
-
-def get_targets(path: str = r'C:\Users\Admin\Desktop\projects\emails.txt') -> set:
+def get_set(path: str) -> set:
     with open(path, encoding='utf-8') as f:
         return set(f.read().split('\n'))
 
 
-def target_generator(path: str = r'emails.txt') -> str:
-    for target in get_targets(path):
-        yield target
+class Pool:
+    _pool: list = []
+    path = None
+
+    def __init__(self) -> NoReturn:
+        self._update_pool()
+
+    def _update_pool(self) -> NoReturn:
+        with open(self.path) as file:
+            self._pool = list(set(file.read().split('\n')))
+
+    def get_unique(self) -> str:
+        if len(self) == 0:
+            self._update_pool()
+        value = choice(self._pool)
+        self._pool.remove(value)
+        return value
+
+    @property
+    def pool(self):
+        return self._pool
+
+    def __len__(self):
+        return len(self._pool)
 
 
-def get_proxies(proxies_path_to_file: str = r'proxies.txt') -> list:
-    with open(proxies_path_to_file, encoding='utf-8') as f:
-        return f.read().split('\n')
+class ProxyPool(Pool):
+    ...
 
 
-def generate_proxy(iterable: list):
-    while True:
-        for proxy in set(iterable):
-            yield proxy
+class TargetPool(Pool):
+    ...
+
+
+class TurkeyTargetPool(TargetPool):
+    path = r'C:\Users\Admin\Desktop\projects\all_turk.csv'
+
+
+class WwmixProxyPool(ProxyPool):
+    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\wwmix.txt'
 
 
 class Solver(ABC):
@@ -126,7 +124,12 @@ class Solver(ABC):
         self.api_key = api_key
 
     @property
-    def balance(self) -> int:
+    @abstractmethod
+    def balance(self) -> float:
+        ...
+
+    @abstractmethod
+    def solve(self, *args, **kwargs) -> str:
         ...
 
 
@@ -134,6 +137,7 @@ class RuCaptchaSolver(Solver):
     post_url = 'https://rucaptcha.com/in.php'
     get_url = 'https://rucaptcha.com/res.php'
 
+    @property
     def balance(self):
         params = {
             'key': self.api_key,
@@ -152,51 +156,57 @@ class RuCaptchaSolver(Solver):
 
         }
         post_response: requests.Response = requests.post(self.post_url, params=post_params)
+        if not post_response.ok:
+            return result
         c = 0
-        if post_response.ok:
-            while result is None or c > timeout * 2:
-                c += 1
-                get_params = {
-                    'key': self.api_key,
-                    'action': 'get',
-                    'id': post_response.json().get('request'),
-                    'json': '1'
-                }
-                get_response = requests.get(self.get_url, params=get_params)
-                if get_response.json()['status']:
-                    result = get_response.json()['request']
-                sleep(.5)
+        while result is None or c > timeout * 2:
+            c += 1
+            get_params = {
+                'key': self.api_key,
+                'action': 'get',
+                'id': post_response.json().get('request'),
+                'json': '1'
+            }
+            get_response = requests.get(self.get_url, params=get_params)
+            if get_response.json()['status']:
+                result = get_response.json()['request']
+            sleep(.5)
         return result
 
 
-def main(spam_func, threads_limit=None, targets_file_path=r'targets/emails.txt'):
-    with ThreadPoolExecutor(threads_limit) as worker:
-        futures = []
-        for target in target_generator(targets_file_path):
-            future = worker.submit(spam_func, target)
-            futures.append(future)
-        for future in as_completed(futures):
-            print(future.result())
-
-
-def test_main(spam_func):
-    print(spam_func('softumwork@gmail.com'))
-
-
 def try_to(func):
-    def decorator(*args, **kwargs):
+    def decorator(*args, **kwargs) -> requests.Response | None:
         result = None
         try:
             result = func(*args, **kwargs)
-        except ConnectTimeout as error:
-            logging.error(error)
-        except ProxyError as error:
-            logging.error(error)
-            sleep(0)
         except Exception as error:
             logging.error(error)
-            # sleep(20)
         finally:
             return result
 
     return decorator
+
+
+class SpamInterface:  # todo test
+    proxies: dict | None = None
+    session: requests.Session | None = None
+
+    def __init__(self, use_session: bool = False, proxy_pool: ProxyPool = None):
+        if proxy_pool:
+            proxy = proxy_pool.get_unique()
+            self.proxies = {'http': proxy, 'https': proxy}
+        if use_session:
+            self.session = requests.Session()
+
+    @abstractmethod
+    def get(self, *args, **kwargs) -> requests.Response:
+        ...
+
+    @abstractmethod
+    def post(self, *args, target, text) -> requests.Response:
+        ...
+
+
+def func_mapped_to_pool_concurrently(func, pool: Pool, threads_amount: int | None = None):  # todo test
+    with ThreadPoolExecutor(threads_amount) as executor:
+        executor.map(func, pool.pool)
