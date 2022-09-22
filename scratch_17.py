@@ -5,7 +5,7 @@ import requests
 
 import module.data as md
 
-PROMO_LINK = 'bit.ly/3du0tKR'
+PROMO_LINK = 'bit.ly/3SrUvcb'
 
 proxy_pool = md.WwmixProxyPool()
 target_pool = md.TurkeyTargetPool()

@@ -6,7 +6,7 @@ import module.data as md
 
 proxy_pool = md.WwmixProxyPool()
 target_pool = md.TurkeyTargetPool()
-PROMO_LINK = 'bit.ly/3du0tKR'
+PROMO_LINK = 'bit.ly/3dzxKnL'
 
 
 def post(proxy, target, text):
