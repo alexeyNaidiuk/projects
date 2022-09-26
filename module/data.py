@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from itertools import cycle
 from random import choice
 from string import Template
+from threading import Thread
 from time import sleep
 from typing import Optional, NoReturn
 
@@ -19,37 +20,41 @@ class ProjectController:
         self.project_name = project_name
         self.prom_link = prom_link
         self.__params = {'key': self.__key, 'project': self.project_name}
-        self.send_good_status()
 
     def send_count(self, count) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&count={-Variable.Counter0-}'''
 
-        self.__params['count'] = count
-        response = requests.get(self.__url, params=self.__params)
+        response = requests.get(self.__url, params={'key': self.__key, 'project': self.project_name, 'count': count})
         return response.status_code
 
     def send_good_status(self) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=0'''
-        self.__params['status'] = 0
-        resp = requests.get(self.__url, params=self.__params)
+
+        resp = requests.get(self.__url, params={'key': self.__key, 'status': 0, 'project': self.project_name})
         return resp.status_code
 
     def send_bad_status(self) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=1'''
 
-        self.__params['status'] = 1
-        resp = requests.get(self.__url, params=self.__params)
+        resp = requests.get(self.__url, params={'key': self.__key, 'status': 1, 'project': self.project_name})
         return resp.status_code
 
-    def status(self) -> bool:  # fixme
+    def retrieve_attached_link(self):  # todo test
+        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project=80ac3afga1amc&getlink=1'''
+
+        resp = requests.get(self.__url,
+                            params={'key': self.__key, 'getlink': '1', 'project': self.project_name}).content.decode()
+        return resp
+
+    def status(self) -> bool:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&iswork=1&prom_link={-Variable.prom_link-}'''
 
-        self.__params['iswork'] = '1'
-        self.__params['prom_link'] = self.prom_link
-        resp = requests.get(self.__url, params=self.__params)
+        resp = requests.get(self.__url,
+                            params={'key': self.__key, 'iswork': '1', 'project': self.project_name,
+                                    'prom_link': self.prom_link})
         cont = resp.content.decode()
 
-        if cont in ['', 'successful']:
+        if cont == '1':
             return True
         else:
             return False
@@ -119,6 +124,14 @@ class WwmixProxyPool(ProxyPool):
     path = r'C:\Users\Admin\Desktop\projects\proxies_folder\wwmix.txt'
 
 
+class WebShareProxyPool(ProxyPool):
+    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\webshare socks5.txt'
+
+
+class DeutcheProxyPool(ProxyPool):
+    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\500 DEe.txt'
+
+
 class Solver(ABC):
     def __init__(self, api_key: str):
         self.api_key = api_key
@@ -131,60 +144,6 @@ class Solver(ABC):
     @abstractmethod
     def solve(self, *args, **kwargs) -> str:
         ...
-
-
-class RuCaptchaSolver(Solver):
-    post_url = 'https://rucaptcha.com/in.php'
-    get_url = 'https://rucaptcha.com/res.php'
-
-    @property
-    def balance(self):
-        params = {
-            'key': self.api_key,
-            'action': 'getbalance'
-        }
-        return float(requests.get(self.get_url, params=params).content)
-
-    def solve(self, sitekey, url, timeout=120) -> Optional[str]:
-        result = None
-        post_params = {
-            'key': self.api_key,
-            'method': 'userrecaptcha',
-            'googlekey': sitekey,
-            'pageurl': url,
-            'json': '1'
-
-        }
-        post_response: requests.Response = requests.post(self.post_url, params=post_params)
-        if not post_response.ok:
-            return result
-        c = 0
-        while result is None or c > timeout * 2:
-            c += 1
-            get_params = {
-                'key': self.api_key,
-                'action': 'get',
-                'id': post_response.json().get('request'),
-                'json': '1'
-            }
-            get_response = requests.get(self.get_url, params=get_params)
-            if get_response.json()['status']:
-                result = get_response.json()['request']
-            sleep(.5)
-        return result
-
-
-def try_to(func):
-    def decorator(*args, **kwargs) -> requests.Response | None:
-        result = None
-        try:
-            result = func(*args, **kwargs)
-        except Exception as error:
-            logging.error(error)
-        finally:
-            return result
-
-    return decorator
 
 
 class SpamInterface:  # todo test
@@ -208,5 +167,11 @@ class SpamInterface:  # todo test
 
 
 def func_mapped_to_pool_concurrently(func, pool: Pool, threads_amount: int | None = None):  # todo test
-    with ThreadPoolExecutor(threads_amount) as executor:
-        executor.map(func, pool.pool)
+    while True:
+        threads = []
+        for _ in range(threads_amount):
+            t = Thread(target=func, args=(pool.get_unique(),))
+            t.start()
+            threads.append(t)
+        for thread in threads:
+            thread.join()

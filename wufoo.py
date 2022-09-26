@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 import bs4
 import requests
@@ -9,6 +10,8 @@ PROMO_LINK = 'bit.ly/3SrUvcb'
 
 proxy_pool = md.WwmixProxyPool()
 target_pool = md.TurkeyTargetPool()
+
+project_controller = md.ProjectController('wufoo', PROMO_LINK)
 
 
 def get(proxy):
@@ -70,12 +73,25 @@ def try_to_post(target, text):
     return content
 
 
-def spam(target='softumwork@gmail.com'):
+def spam(target='softumwork1@gmail.com'):
+    if not project_controller.status():
+        sleep(120)
+        print('sleeping')
+        return False
+
     text = md.get_turk_spinned_text(link=PROMO_LINK, with_stickers=False, decoded=True)
-    content = try_to_post(target=target, text=text)
-    print('thanks' in content, target)
+    content = try_to_post(target=target.encode().decode('latin-1'), text=text)
+    result = 'thanks' in content
+
+    print(result, target)
+
+    if result:
+        project_controller.send_good_status()
+        project_controller.send_count(1)
+    else:
+        project_controller.send_bad_status()
 
 
 if __name__ == '__main__':
-    md.func_mapped_to_pool_concurrently(spam, target_pool, 30)
-    # spam()
+    spam()
+    md.func_mapped_to_pool_concurrently(spam, target_pool, 50)
