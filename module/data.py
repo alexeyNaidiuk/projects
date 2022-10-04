@@ -1,15 +1,26 @@
+import abc
 import logging
-from abc import ABC, abstractmethod
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from itertools import cycle
-from random import choice
+import os
 from string import Template
 from threading import Thread
 from time import sleep
-from typing import Optional, NoReturn
+from typing import NoReturn
 
 import requests
+from dotenv import load_dotenv
 from spintax import spintax
+
+load_dotenv()
+
+
+class RetrieveFromServer:
+    host = '10.107.4.13'
+
+    def get_target(self, data_base: str = 'turkey'):
+        return requests.get(f'http://{self.host}/targets/{data_base}/random').content.decode()
+
+    def append_target(self, target: str, data_base: str = 'turkey'):
+        requests.post(f'http://{self.host}/targets/{data_base}/append', json={'email': target})
 
 
 class ProjectController:
@@ -60,7 +71,7 @@ class ProjectController:
             return False
 
 
-def get_turk_spinned_text(link: str | None = '', with_stickers: bool = True, decoded: bool = True) -> str:
+def get_turk_spinned_text(link: str | None = '', with_stickers: bool = True, encoding: str = 'utf-8') -> str:
     text = "🔥 {Get|Take|Kullan} 50 {ücretsiz dönüş|FS|freespins|ücretsiz dönüş|ücretsiz dönüş}" \
            " {Kulübe kaydolmak|Kulübe girmek|Projeye girmek|katılmak|oynamak} Slottica'yı takip " \
            "{etmek|bu} bağlantı {aşağıda |} {-|:|} 👉 $link 👈 {Acele|Acele|Acele|Gecikme}," \
@@ -72,8 +83,7 @@ def get_turk_spinned_text(link: str | None = '', with_stickers: bool = True, dec
         message = message.replace('🔥', '')
         message = message.replace('👉', '')
         message = message.replace('👈', '')
-    if decoded:
-        message = message.encode().decode('latin-1')
+    message = message.encode().decode(encoding)
     return message
 
 
@@ -94,10 +104,9 @@ class Pool:
             self._pool = list(set(file.read().split('\n')))
 
     def get_unique(self) -> str:
-        if len(self) == 0:
+        if len(self._pool) == 0:
             self._update_pool()
-        value = choice(self._pool)
-        self._pool.remove(value)
+        value = self._pool.pop()
         return value
 
     @property
@@ -117,61 +126,95 @@ class TargetPool(Pool):
 
 
 class TurkeyTargetPool(TargetPool):
-    path = r'C:\Users\Admin\Desktop\projects\all_turk.csv'
+    path = f'{os.environ["TARGETS_FOLDER"]}/all_turk.csv'
 
 
 class WwmixProxyPool(ProxyPool):
-    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\wwmix.txt'
+    path = f'{os.environ["PROXIES_FOLDER"]}/wwmix.txt'
 
 
-class WebShareProxyPool(ProxyPool):
-    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\webshare socks5.txt'
+class ProxyFactory:
+    pools = {
+        'wwmix': WwmixProxyPool
+    }
+
+    def get_pool(self, proxy_name) -> ProxyPool:
+        return self.pools[proxy_name]()
 
 
-class DeutcheProxyPool(ProxyPool):
-    path = r'C:\Users\Admin\Desktop\projects\proxies_folder\500 DEe.txt'
-
-
-class Solver(ABC):
-    def __init__(self, api_key: str):
-        self.api_key = api_key
-
-    @property
-    @abstractmethod
-    def balance(self) -> float:
-        ...
-
-    @abstractmethod
-    def solve(self, *args, **kwargs) -> str:
-        ...
-
-
-class SpamInterface:  # todo test
-    proxies: dict | None = None
-    session: requests.Session | None = None
-
-    def __init__(self, use_session: bool = False, proxy_pool: ProxyPool = None):
-        if proxy_pool:
-            proxy = proxy_pool.get_unique()
-            self.proxies = {'http': proxy, 'https': proxy}
-        if use_session:
-            self.session = requests.Session()
-
-    @abstractmethod
-    def get(self, *args, **kwargs) -> requests.Response:
-        ...
-
-    @abstractmethod
-    def post(self, *args, target, text) -> requests.Response:
-        ...
-
-
-def func_mapped_to_pool_concurrently(func, pool: Pool, threads_amount: int | None = None):  # todo test
+def func_concurrently(func, threads_amount: int | None = None):
     while True:
         threads = []
         for _ in range(threads_amount):
-            t = Thread(target=func, args=(pool.get_unique(),))
+            t = Thread(target=func)
             t.start()
             threads.append(t)
         for thread in threads:
             thread.join()
+
+
+class Spam:
+    _serv_controller = RetrieveFromServer()
+
+    def __init__(self,
+                 promo_link: str,
+                 project_name: str,
+                 logging_level: int = logging.DEBUG,
+                 proxy_pool: str = 'wwmix',
+                 success_message: str = '', with_stickers=True, text_encoding: str = 'utf-8'):
+        self.text_with_stickers = with_stickers
+        self.text_encoding = text_encoding
+        self.promo_link = promo_link
+        self.project_name = project_name
+        self.project_controller = ProjectController(project_name, project_name)
+        self.project_controller.status()
+        self.success_message = success_message
+        self.proxy_pool: ProxyPool = ProxyFactory().get_pool(proxy_pool)
+        self.logger = logging.getLogger(project_name)
+        logging.basicConfig(format=f'%(name)s {promo_link} %(asctime)s: %(message)s')
+        self.logger.setLevel(logging_level)
+
+    @abc.abstractmethod
+    def post(self, text, target, proxies) -> requests.Response:
+        ...
+
+    def try_to_post(self, target, text) -> requests.Response:
+        response = None
+        while response is None:
+            proxy = self.proxy_pool.get_unique()
+            try:
+                response = self.post(proxies={'http': proxy, 'https': proxy}, target=target, text=text)
+                self.logger.debug(response)
+            except Exception as e:
+                self.logger.error(e)
+        return response
+
+    def send_post(self, target='softumwork@gmail.com', text: str | None = None):
+        if not text:
+            text = get_turk_spinned_text(link=self.promo_link, with_stickers=self.text_with_stickers,
+                                         encoding=self.text_encoding)
+        response = self.try_to_post(target=target, text=text)
+        content = response.content.decode()
+        self.logger.debug(content)
+        result = self.success_message in content
+        self.logger.debug('%s %s' % (target, result))
+        return result
+
+    def main(self):
+        if not self.project_controller.status():
+            self.logger.info('sleeping')
+            sleep(120)
+            return False
+
+        target = self._serv_controller.get_target('turkey').encode().decode('latin-1')
+        result = self.send_post(target)
+
+        self.logger.info(f'{result} {target}')
+        if result:
+            self.project_controller.send_good_status()
+            self.project_controller.send_count(1)
+            return True
+        else:
+            self.project_controller.send_bad_status()
+            # self._serv_controller.append_target(target)
+            return False

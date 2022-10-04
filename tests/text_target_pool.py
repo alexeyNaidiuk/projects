@@ -1,16 +1,21 @@
 import os
+
 import unittest
 
+from dotenv import load_dotenv
+
 from module.data import TurkeyTargetPool
+
+TARGETS_FOLDER = os.environ['TARGETS_FOLDER']
+load_dotenv()
 
 
 class TestFiles(unittest.TestCase):
 
     def test_file_is_in_folder(self):
-        path_folder = r'C:\Users\Admin\Desktop\projects'
         file_name = 'all_turk.csv'
-        files = os.listdir(path_folder)
-        self.assertTrue(file_name, files)
+        files = os.listdir(TARGETS_FOLDER)
+        self.assertIn(file_name, files)
 
 
 class TestTurkeyTargetPool(unittest.TestCase):
@@ -27,7 +32,7 @@ class TestTurkeyTargetPool(unittest.TestCase):
         self.assertNotEqual(len(self.pool), 0)
 
     def test_gets_random(self):
-        with open(r'C:\Users\Admin\Desktop\projects\all_turk.csv') as f:
+        with open(f'{TARGETS_FOLDER}/all_turk.csv') as f:
             self.targets_from_file = f.read().split('\n')
         target_pool = TurkeyTargetPool()
         target = self.pool.get_unique()

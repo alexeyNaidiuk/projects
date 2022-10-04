@@ -4,16 +4,19 @@ import unittest
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
+from dotenv import load_dotenv
 
 from module.data import WwmixProxyPool
+
+load_dotenv()
+PROXIES_FOLDER = os.environ['PROXIES_FOLDER']
 
 
 class TestWwmixProxyPool(unittest.TestCase):
 
     def test_proxyfile_is_in_folder(self):
-        path_folder = r'C:\Users\Admin\Desktop\projects\proxies_folder'
         file_name = 'wwmix.txt'
-        files = os.listdir(path_folder)
+        files = os.listdir(PROXIES_FOLDER)
         self.assertTrue(file_name, files)
 
     def test_pool_is_not_empty(self):
@@ -28,7 +31,7 @@ class TestWwmixProxyPool(unittest.TestCase):
         self.assertNotEqual(len(pool), 0)
 
     def test_gets_random_proxy(self):
-        with open(r'C:\Users\Admin\Desktop\projects\proxies_folder\wwmix.txt') as f:
+        with open(f'{PROXIES_FOLDER}/wwmix.txt') as f:
             self.proxies_from_file = f.read().split('\n')
         proxy_pool = WwmixProxyPool()
         proxy = proxy_pool.get_unique()
@@ -44,25 +47,26 @@ class TestWwmixProxyPool(unittest.TestCase):
 class TestWwmixProxies(unittest.TestCase):
 
     def test_at_least_10_percent_of_proxy_is_working(self):
+        must_to_work_percents = 10
         pool = WwmixProxyPool()
-
-        result = []
+        working_proxies = []
 
         def _check_proxy(proxy):
             try:
                 res = requests.get('https://api.ipify.org/', proxies={'http': proxy, 'https': proxy})
                 if res.ok:
-                    result.append(proxy)
-            except Exception as e:
-                print(e)
+                    working_proxies.append(proxy)
+            except Exception:
+                pass
 
-        amount = 100
-        random_start = random.randint(0, len(pool._pool) - amount)
-        proxies_slice = pool._pool[random_start:random_start + 500]
+        amount = len(pool)
+        random_start = random.randint(0, len(pool) - amount)
+        proxies_slice = pool._pool[random_start:random_start + amount]
 
         with ThreadPoolExecutor(amount) as worker:
             worker.map(_check_proxy, proxies_slice)
 
-        working_proxies_amount = len(result)
-        total_result = working_proxies_amount > amount / 10
+        working_proxies_amount = len(working_proxies)
+        print(f'{amount} / {working_proxies_amount}')
+        total_result = working_proxies_amount > amount / must_to_work_percents
         self.assertTrue(total_result, working_proxies_amount)
