@@ -13,8 +13,8 @@ class TestProjectController(unittest.TestCase):
         self.assertEqual(project.prom_link, prom_link)
 
     def test_statusIsTrue(self):
-        prom_link = 'bit.ly/3qXjAzN'
-        project_name = 'test'
+        prom_link = 'bit.ly/3yi2UXW'
+        project_name = 'teststatus'
         project = ProjectController(project_name=project_name, prom_link=prom_link)
         status = project.status()
 

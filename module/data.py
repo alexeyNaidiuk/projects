@@ -14,57 +14,59 @@ load_dotenv()
 
 
 class RetrieveFromServer:
-    host = '10.107.4.13'
+    __host = os.environ.get('SERV_HOST')
+    __url = f'http://{__host}'
 
     def get_target(self, data_base: str = 'turkey'):
-        return requests.get(f'http://{self.host}/targets/{data_base}/random').content.decode()
+        return requests.get(f'{self.__url}/targets/{data_base}/random').content.decode()
 
     def append_target(self, target: str, data_base: str = 'turkey'):
-        requests.post(f'http://{self.host}/targets/{data_base}/append', json={'email': target})
+        requests.post(f'{self.__url}/targets/{data_base}/append', json={'email': target})
 
 
 class ProjectController:
     __url = 'https://zennotasks.com/automation/api.php'
-    __key = 'softumXasHq1!'
+    __key = os.environ.get('ZENNO_KEY')
 
     def __init__(self, project_name, prom_link):
         self.project_name = project_name
         self.prom_link = prom_link
-        self.__params = {'key': self.__key, 'project': self.project_name}
 
     def send_count(self, count) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&count={-Variable.Counter0-}'''
 
-        response = requests.get(self.__url, params={'key': self.__key, 'project': self.project_name, 'count': count})
+        params = {'key': self.__key, 'project': self.project_name, 'count': count}
+        response = requests.get(self.__url, params=params)
         return response.status_code
 
     def send_good_status(self) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=0'''
 
-        resp = requests.get(self.__url, params={'key': self.__key, 'status': 0, 'project': self.project_name})
+        params = {'key': self.__key, 'status': 0, 'project': self.project_name}
+        resp = requests.get(self.__url, params=params)
         return resp.status_code
 
     def send_bad_status(self) -> int:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&status=1'''
 
-        resp = requests.get(self.__url, params={'key': self.__key, 'status': 1, 'project': self.project_name})
+        params = {'key': self.__key, 'status': 1, 'project': self.project_name}
+        resp = requests.get(self.__url, params=params)
         return resp.status_code
 
-    def retrieve_attached_link(self):  # todo test
+    def retrieve_attached_link(self):
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project=80ac3afga1amc&getlink=1'''
 
-        resp = requests.get(self.__url,
-                            params={'key': self.__key, 'getlink': '1', 'project': self.project_name}).content.decode()
-        return resp
+        params = {'key': self.__key, 'getlink': '1', 'project': self.project_name}
+        resp = requests.get(self.__url, params=params)
+        content = resp.content.decode()
+        return content
 
     def status(self) -> bool:
         '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&project={-Variable.project_name-}&iswork=1&prom_link={-Variable.prom_link-}'''
 
-        resp = requests.get(self.__url,
-                            params={'key': self.__key, 'iswork': '1', 'project': self.project_name,
-                                    'prom_link': self.prom_link})
+        params = {'key': self.__key, 'iswork': '1', 'project': self.project_name, 'prom_link': self.prom_link}
+        resp = requests.get(self.__url, params=params)
         cont = resp.content.decode()
-
         if cont == '1':
             return True
         else:
@@ -85,11 +87,6 @@ def get_turk_spinned_text(link: str | None = '', with_stickers: bool = True, enc
         message = message.replace('👈', '')
     message = message.encode().decode(encoding)
     return message
-
-
-def get_set(path: str) -> set:
-    with open(path, encoding='utf-8') as f:
-        return set(f.read().split('\n'))
 
 
 class Pool:
@@ -142,7 +139,7 @@ class ProxyFactory:
         return self.pools[proxy_name]()
 
 
-def func_concurrently(func, threads_amount: int | None = None):
+def func_concurrently(func, threads_amount: int = 30):
     while True:
         threads = []
         for _ in range(threads_amount):
@@ -159,14 +156,20 @@ class Spam:
     def __init__(self,
                  promo_link: str,
                  project_name: str,
-                 logging_level: int = logging.DEBUG,
+                 success_message: str,
+                 logging_level: int = 'info',
                  proxy_pool: str = 'wwmix',
-                 success_message: str = '', with_stickers=True, text_encoding: str = 'utf-8'):
+                 with_stickers=True, text_encoding: str = 'utf-8'):
+        match logging_level:
+            case 'debug':
+                logging_level = logging.DEBUG
+            case 'info':
+                logging_level = logging.INFO
         self.text_with_stickers = with_stickers
         self.text_encoding = text_encoding
         self.promo_link = promo_link
         self.project_name = project_name
-        self.project_controller = ProjectController(project_name, project_name)
+        self.project_controller = ProjectController(project_name=project_name, prom_link=promo_link)
         self.project_controller.status()
         self.success_message = success_message
         self.proxy_pool: ProxyPool = ProxyFactory().get_pool(proxy_pool)
@@ -197,7 +200,7 @@ class Spam:
         content = response.content.decode()
         self.logger.debug(content)
         result = self.success_message in content
-        self.logger.debug('%s %s' % (target, result))
+        self.logger.info(f'{result} {target}')
         return result
 
     def main(self):
@@ -205,11 +208,8 @@ class Spam:
             self.logger.info('sleeping')
             sleep(120)
             return False
-
         target = self._serv_controller.get_target('turkey').encode().decode('latin-1')
         result = self.send_post(target)
-
-        self.logger.info(f'{result} {target}')
         if result:
             self.project_controller.send_good_status()
             self.project_controller.send_count(1)
@@ -218,3 +218,13 @@ class Spam:
             self.project_controller.send_bad_status()
             # self._serv_controller.append_target(target)
             return False
+
+    def run_concurrently(self, threads_amount: int = 30):
+        while True:
+            threads = []
+            for _ in range(threads_amount):
+                t = Thread(target=self.main)
+                t.start()
+                threads.append(t)
+            for thread in threads:
+                thread.join()

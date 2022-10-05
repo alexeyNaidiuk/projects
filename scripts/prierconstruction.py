@@ -40,4 +40,4 @@ if __name__ == '__main__':
     spam = ConcreteSpam('bit.ly/3CjqJB2', 'prierconstruction',
                         success_message='Thank You', logging_level=logging.INFO)
     result = spam.send_post()
-    data.func_concurrently(spam.main, 15)
+    # data.func_concurrently(spam.main, 15)
