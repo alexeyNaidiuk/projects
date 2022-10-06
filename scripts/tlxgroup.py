@@ -1,13 +1,11 @@
-import logging
-
 import requests
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text: str, target: str, proxies: dict) -> requests.Response:
         cookies = {
             '_ga': 'GA1.2.979444820.1664892536',
             '_gid': 'GA1.2.1945924821.1664892536',
@@ -47,5 +45,6 @@ if __name__ == '__main__':
     project_name = 'tlxgroup'
     promo_link = 'bit.ly/3e5xE7u'
     spam = ConcreteSpam(promo_link, project_name, success_message)
-    result = spam.send_post()
-    # spam.run_concurrently()
+    result = spam.send_post()  # True no email
+    # if result:
+    #     spam.run_concurrently()

@@ -1,11 +1,9 @@
-import logging
-
 import requests
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         cookies = {
@@ -37,7 +35,7 @@ class ConcreteSpam(data.Spam):
 
 
 if __name__ == '__main__':
-    spam = ConcreteSpam('bit.ly/3CjqJB2', 'prierconstruction',
-                        success_message='Thank You', logging_level=logging.INFO)
-    result = spam.send_post()
-    # data.func_concurrently(spam.main, 15)
+    spam = ConcreteSpam(promo_link='bit.ly/3CjqJB2', project_name='prierconstruction', success_message='Thank You')
+    res = spam.send_post()  # False3
+    # if res:
+    #     spam.run_concurrently()

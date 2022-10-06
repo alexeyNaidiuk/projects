@@ -1,12 +1,10 @@
-import logging
-
 import requests
 from faker import Faker
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         headers = {
@@ -43,7 +41,7 @@ class ConcreteSpam(data.Spam):
 
 
 if __name__ == '__main__':
-    spam = ConcreteSpam('bit.ly/3RyZp6f', 'lenzoapartments', success_message='Thank You!',
-                        logging_level=logging.INFO, text_encoding='utf-8')
-    result = spam.send_post()
-    spam.run_concurrently()
+    spam = ConcreteSpam('bit.ly/3RyZp6f', 'lenzoapartments', success_message='Thank You!')
+    res = spam.send_post()
+    if res:
+        spam.run_concurrently(10)

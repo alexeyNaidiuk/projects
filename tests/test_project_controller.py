@@ -1,5 +1,5 @@
 import random
-from module.data import ProjectController
+from module import ProjectController
 import unittest
 
 

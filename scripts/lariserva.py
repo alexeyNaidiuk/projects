@@ -1,6 +1,6 @@
 import requests
 
-from module.data import Spam
+from module import Spam
 
 
 class ConcreteSpam(Spam):
@@ -41,15 +41,16 @@ class ConcreteSpam(Spam):
         }
 
         response = requests.post('https://www.lariserva.it/en/facilities/',
-                                 cookies=cookies, headers=headers, data=data, proxies=proxies)
+                                 cookies=cookies, headers=headers, data=data, proxies=proxies, verify=False)
         return response
 
 
 if __name__ == '__main__':
+    # not working
     success_message = 'Your email was sent successfully. Thank you!'
     project_name = 'lariserva'
     promo_link = 'bit.ly/3RxKclL'
-    spam = ConcreteSpam(promo_link, project_name, success_message, logging_level='debug')
+    spam = ConcreteSpam(promo_link, project_name, success_message)
     result = spam.send_post()
-    if result:
-        spam.run_concurrently()
+    # if result:
+    #     spam.run_concurrently()

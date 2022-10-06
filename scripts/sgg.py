@@ -1,13 +1,11 @@
-import logging
-
 import requests
-from requests_toolbelt import MultipartEncoder
 from faker import Faker
+from requests_toolbelt import MultipartEncoder
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         request = {
@@ -152,6 +150,7 @@ if __name__ == '__main__':
     success_message = 'successfully'
     project_name = 'sgg'
     promo_link = 'bit.ly/3ruPXpU'
-    spam = ConcreteSpam(promo_link, project_name, success_message=success_message)
-    result = spam.send_post()
-    # data.func_concurrently(spam.main)
+    spam = ConcreteSpam(promo_link, project_name, success_message)
+    res = spam.send_post()  # True no email
+    # if res:
+    #     spam.run_concurrently()

@@ -1,9 +1,6 @@
-import logging
-
 import requests
-from requests_toolbelt import MultipartEncoder
 
-from module.data import Spam
+from module import Spam
 
 
 class ConcreteSpam(Spam):
@@ -42,10 +39,11 @@ class ConcreteSpam(Spam):
 
 
 if __name__ == '__main__':
+    # not working
     success_message = 'Thank you for your email.'
     project_name = 'gelateriabajabeach'
     promo_link = 'bit.ly/3SyPkHG'
-    spam = ConcreteSpam(promo_link, project_name, success_message=success_message, logging_level=logging.INFO)
+    spam = ConcreteSpam(promo_link, project_name, success_message=success_message)
     result = spam.send_post()
-    if result:
-        spam.run_concurrently()
+    # if result:
+    #     spam.run_concurrently()

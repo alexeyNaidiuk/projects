@@ -1,6 +1,6 @@
 import requests
 
-from module.data import Spam
+from module import Spam
 
 
 class ConcreteSpam(Spam):
@@ -45,6 +45,6 @@ if __name__ == '__main__':
     project_name = 'oultonbroadhandcarwash'
     promo_link = 'bit.ly/3rtn4ui'
     spam = ConcreteSpam(promo_link, project_name, success_message, text_encoding='latin-1')
-    result = spam.send_post()
-    # if result:
+    res = spam.send_post()  # False
+    # if res:
     #     spam.run_concurrently()

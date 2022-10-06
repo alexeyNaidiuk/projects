@@ -1,12 +1,10 @@
-from requests_toolbelt import MultipartEncoder
-import logging
-
 import requests
+from requests_toolbelt import MultipartEncoder
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         cookies = {
@@ -84,8 +82,10 @@ class ConcreteSpam(data.Spam):
 
 
 if __name__ == '__main__':
-    spam = ConcreteSpam(
-        'bit.ly/3BXywmu', 'kiddosride', success_message='Thank you for your message', logging_level=logging.INFO,
-        with_stickers=True, text_encoding='utf-8'
-    )
-    data.func_concurrently(spam.main, 15)
+    success_message = 'Thank you for your message'
+    project_name = 'kiddosride'
+    promo_link = 'bit.ly/3BXywmu'
+    spam = ConcreteSpam(promo_link, project_name, success_message=success_message)
+    res = spam.send_post()
+    if res:
+        spam.run_concurrently(10)

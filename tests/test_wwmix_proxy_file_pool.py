@@ -4,12 +4,8 @@ import unittest
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
-from dotenv import load_dotenv
 
-from module.data import WwmixProxyPool
-
-load_dotenv()
-PROXIES_FOLDER = os.environ['PROXIES_FOLDER']
+from module import WwmixProxyFilePool, PROXIES_FOLDER
 
 
 class TestWwmixProxyPool(unittest.TestCase):
@@ -20,26 +16,26 @@ class TestWwmixProxyPool(unittest.TestCase):
         self.assertTrue(file_name, files)
 
     def test_pool_is_not_empty(self):
-        pool = WwmixProxyPool()
+        pool = WwmixProxyFilePool()
 
         self.assertTrue(len(pool) != 0)
 
     def test_pool_updates(self):
-        pool = WwmixProxyPool()
+        pool = WwmixProxyFilePool()
         for _ in range(12000):
-            pool.get_unique()
+            pool.pop()
         self.assertNotEqual(len(pool), 0)
 
     def test_gets_random_proxy(self):
         with open(f'{PROXIES_FOLDER}/wwmix.txt') as f:
             self.proxies_from_file = f.read().split('\n')
-        proxy_pool = WwmixProxyPool()
-        proxy = proxy_pool.get_unique()
+        proxy_pool = WwmixProxyFilePool()
+        proxy = proxy_pool.pop()
         self.assertTrue(proxy in self.proxies_from_file)
 
         result = []
         for _ in range(1500):
-            proxy = proxy_pool.get_unique()
+            proxy = proxy_pool.pop()
             result.append(proxy)
         self.assertTrue(len(result) == len(set(result)))
 
@@ -48,7 +44,7 @@ class TestWwmixProxies(unittest.TestCase):
 
     def test_at_least_10_percent_of_proxy_is_working(self):
         must_to_work_percents = 10
-        pool = WwmixProxyPool()
+        pool = WwmixProxyFilePool()
         working_proxies = []
 
         def _check_proxy(proxy):
@@ -59,11 +55,11 @@ class TestWwmixProxies(unittest.TestCase):
             except Exception:
                 pass
 
-        amount = len(pool)
+        amount = 200
         random_start = random.randint(0, len(pool) - amount)
-        proxies_slice = pool._pool[random_start:random_start + amount]
+        proxies_slice = pool.pool[random_start:random_start + amount]
 
-        with ThreadPoolExecutor(amount) as worker:
+        with ThreadPoolExecutor(50) as worker:
             worker.map(_check_proxy, proxies_slice)
 
         working_proxies_amount = len(working_proxies)

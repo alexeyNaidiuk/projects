@@ -1,8 +1,6 @@
-import logging
-
 import requests
 
-from module.data import Spam
+from module import Spam
 
 
 class ConcreteSpam(Spam):
@@ -16,7 +14,6 @@ class ConcreteSpam(Spam):
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'Connection': 'keep-alive',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            # 'Cookie': 'b8c7dae526cae6e18a37a7ef82d6f5be=07194b9ba5c5e32ccd68662e3548281b',
             'Origin': 'http://hemahospital.co.ke',
             'Referer': 'http://hemahospital.co.ke/index.php/appointment',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
@@ -43,4 +40,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3ygGXIR'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     result = spam.send_post()
-    # spam.run_concurrently()
+    if result:
+        spam.run_concurrently(15)

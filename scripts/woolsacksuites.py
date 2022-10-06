@@ -1,12 +1,9 @@
-import logging
-
 import requests
-from requests_toolbelt import MultipartEncoder
 
-from module import data
+from module import Spam
 
 
-class ConcreteSpam(data.Spam):
+class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         cookies = {
@@ -47,7 +44,7 @@ if __name__ == '__main__':
     success_message = '{"status":1,"message":"Your email has been sent."}'
     project_name = 'woolsacksuites'
     promo_link = 'bit.ly/3C5zahV'
-    spam = ConcreteSpam(promo_link, project_name, success_message=success_message, logging_level=logging.INFO)
+    spam = ConcreteSpam(promo_link, project_name, success_message=success_message)
     result = spam.send_post()
     if result:
         spam.run_concurrently()
