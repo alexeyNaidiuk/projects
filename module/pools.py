@@ -13,37 +13,37 @@ SERV_HOST = os.environ.get('SERV_HOST')
 
 
 class Pool:
+    pool: list = []
 
-    def pop(self):
+    def pop(self) -> str:
         ...
 
-    def append(self, value):
+    def append(self, value) -> None:
         ...
 
-    def clear(self):
+    def clear(self) -> None:
         ...
 
-    def reload(self):
+    def get_pool(self) -> None:
         ...
 
-    def __len__(self):
+    def __len__(self) -> int:
         ...
 
 
 class FilePool(Pool):
-    pool: list = []
     path = None
 
     def __init__(self) -> NoReturn:
-        self.reload()
+        self.get_pool()
 
-    def reload(self) -> NoReturn:
+    def get_pool(self) -> NoReturn:
         with open(self.path) as file:
             self.pool = file.read().split('\n')
 
     def pop(self) -> str:
         if len(self.pool) == 0:
-            self.reload()
+            self.get_pool()
         value = self.pool.pop()
         return value
 
@@ -70,27 +70,37 @@ class TurkeyTargetServerPool(ServerPool):
     def pop(self):
         return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
 
-
-class Factory:
-
-    @abc.abstractmethod
-    def get_pool(self) -> Pool:
+    def append(self, value) -> None:
         ...
 
 
-class ProxyFileFactory:
+class WwmixProxyServerPool(ServerPool):  # todo implement server endpoint for this
+    __database = 'wwmix'
+
+    def __init__(self):
+        self.get_pool()
+
+    def get_pool(self) -> None:
+        response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
+        content = response.content.decode()  # text lines
+        self.pool = content.split('\n')
+
+
+class Factory:
+    pools = {}
+
+    @classmethod
+    def get_pool(cls, factory_name) -> Pool:
+        return cls.pools[factory_name]()
+
+
+class ProxyFileFactory(Factory):
     pools = {
         'wwmix': WwmixProxyFilePool
     }
 
-    def get_pool(self, factory_name) -> FilePool:
-        return self.pools[factory_name]()
 
-
-class TargetServerFactory:
+class TargetServerFactory(Factory):
     pools = {
         'turkey': TurkeyTargetServerPool
     }
-
-    def get_pool(self, factory_name) -> ServerPool:
-        return self.pools[factory_name]()

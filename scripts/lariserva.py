@@ -46,11 +46,10 @@ class ConcreteSpam(Spam):
 
 
 if __name__ == '__main__':
-    # not working
     success_message = 'Your email was sent successfully. Thank you!'
     project_name = 'lariserva'
     promo_link = 'bit.ly/3RxKclL'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     result = spam.send_post()
-    # if result:
-    #     spam.run_concurrently()
+    if result:
+        spam.run_concurrently(10)

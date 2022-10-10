@@ -12,8 +12,8 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = ''
     project_name = 'test'
-    promo_link = 'bit.ly/3RxKclL'
+    promo_link = 'bit.ly/3CEv81r'
     spam = ConcreteSpam(promo_link, project_name, success_message, logging_level='debug')
     res = spam.send_post()
-    if res:
-        spam.run_concurrently()
+    # if res:
+    #     spam.run_concurrently()

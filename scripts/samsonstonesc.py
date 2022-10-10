@@ -29,7 +29,7 @@ class ConcreteSpam(Spam):
         data = Template(data).substitute({'target': target, 'text': text})
 
         response = requests.post('http://samsonstonesc.com/ContactUs/tabid/54/Default.aspx', cookies=cookies,
-                                 headers=headers, data=data, verify=False)
+                                 headers=headers, data=data, verify=False, proxies=proxies)
         return response
 
 
@@ -39,5 +39,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3McQq9z'
     spam = ConcreteSpam(promo_link, project_name, success_message, text_encoding='latin-1')
     res = spam.send_post()
-    if res:
-        spam.run_concurrently()
+    # if res:
+    #     spam.run_concurrently(10)
