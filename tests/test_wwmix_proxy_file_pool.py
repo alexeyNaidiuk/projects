@@ -59,7 +59,7 @@ class TestWwmixProxies(unittest.TestCase):
         random_start = random.randint(0, len(pool) - amount)
         proxies_slice = pool.pool[random_start:random_start + amount]
 
-        with ThreadPoolExecutor(50) as worker:
+        with ThreadPoolExecutor() as worker:
             worker.map(_check_proxy, proxies_slice)
 
         working_proxies_amount = len(working_proxies)

@@ -76,14 +76,15 @@ class TurkeyTargetServerPool(ServerPool):
 
 class WwmixProxyServerPool(ServerPool):  # todo implement server endpoint for this
     __database = 'wwmix'
+    raise NotImplementedError
 
-    def __init__(self):
-        self.get_pool()
-
-    def get_pool(self) -> None:
-        response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
-        content = response.content.decode()  # text lines
-        self.pool = content.split('\n')
+    # def __init__(self):
+    #     self.get_pool()
+    #
+    # def get_pool(self) -> None:
+    #     response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
+    #     content = response.content.decode()  # text lines
+    #     self.pool = content.split('\n')
 
 
 class Factory:
