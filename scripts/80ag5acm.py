@@ -7,14 +7,14 @@ class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         cookies = {
-            '_ga': 'GA1.2.985887142.1664976153',
-            '_ym_uid': '1664976153846129477',
-            '_ym_d': '1664976153',
-            '492b99ac380a23b7c4cb70f29c1107da': '4ca27b52a23a7028c75091051a1ff5bb',
-            '_gid': 'GA1.2.40531276.1665501480',
-            '_ym_isad': '2',
-            '_ym_visorc': 'w',
-            '_gat': '1',
+            # '_ga': 'GA1.2.985887142.1664976153',
+            # '_ym_uid': '1664976153846129477',
+            # '_ym_d': '1664976153',
+            # '492b99ac380a23b7c4cb70f29c1107da': '4ca27b52a23a7028c75091051a1ff5bb',
+            # '_gid': 'GA1.2.40531276.1665501480',
+            # '_ym_isad': '2',
+            # '_ym_visorc': 'w',
+            # '_gat': '1',
         }
 
         headers = {
@@ -49,7 +49,7 @@ class ConcreteSpam(Spam):
         }
 
         response = requests.post('https://xn--80ag5acm.xn--80asehdb/%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C',
-                                 cookies=cookies, headers=headers, data=data, proxies=proxies)
+                                 cookies=cookies, headers=headers, data=data, proxies=proxies, timeout=10)
         return response
 
 
@@ -60,4 +60,4 @@ if __name__ == '__main__':
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
     if res:
-        spam.run_concurrently()
+        spam.run_concurrently(5)

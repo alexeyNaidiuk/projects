@@ -77,7 +77,7 @@ class ConcreteSpam(Spam):
         content = MultipartEncoder(fields=fields)
         headers['content-type'] = content.content_type
         response = requests.post('https://kiddosride.com/wp-json/contact-form-7/v1/contact-forms/141/feedback',
-                                 cookies=cookies, headers=headers, data=content, proxies=proxies, timeout=10)
+                                 cookies=cookies, headers=headers, data=content, proxies=proxies)
         return response
 
 
@@ -87,5 +87,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3BXywmu'
     spam = ConcreteSpam(promo_link, project_name, success_message=success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently()
+    if res:
+        spam.run_concurrently(5)
