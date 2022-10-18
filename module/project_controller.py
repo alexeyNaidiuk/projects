@@ -9,6 +9,7 @@ KEY = os.environ.get('ZENNO_KEY')
 
 
 class ProjectController:
+    __slots__ = ['project_name', 'prom_link']
     __url = 'https://zennotasks.com/automation/api.php'
     __key = KEY
 
