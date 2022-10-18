@@ -5,7 +5,7 @@ from time import sleep
 from typing import NoReturn
 
 import requests
-from requests.exceptions import ProxyError, ReadTimeout, ConnectTimeout, SSLError
+from requests.exceptions import ProxyError, ConnectTimeout, SSLError
 from urllib3.exceptions import ReadTimeoutError
 
 from module import FilePool, ProxyFileFactory, ProjectController, ServerPool, TargetServerFactory
@@ -16,13 +16,10 @@ SLEEP_AMOUNT_IN_MINUTES = 60 * 5
 
 class Spam:
 
-    def __init__(self,
-                 promo_link: str,
-                 project_name: str,
-                 success_message: str,
-                 logging_level: int = 'info',
-                 proxy_pool: str = 'wwmix', target_pool: str = 'turkey',
+    def __init__(self, promo_link: str, project_name: str, success_message: str,
+                 logging_level: int = 'info', proxy_pool: str = 'wwmix', target_pool: str = 'turkey',
                  with_stickers=True, text_encoding: str = 'utf-8'):
+
         match logging_level:
             case 'debug':
                 logging_level = logging.DEBUG
@@ -51,8 +48,9 @@ class Spam:
         response = None
         while response is None:
             proxy = self.proxy_pool.pop()
+            proxies = {'http': proxy, 'https': proxy}
             try:
-                response = self.post(proxies={'http': proxy, 'https': proxy}, target=target, text=text)
+                response = self.post(proxies=proxies, target=target, text=text)
                 self.logger.debug(response)
             except (ProxyError, ReadTimeoutError, SSLError, ConnectTimeout, TimeoutError) as e:
                 self.logger.debug(e)
@@ -77,7 +75,7 @@ class Spam:
         if not controller_status:
             self.logger.info(f'controller status is %s' % controller_status)
             sleep(SLEEP_AMOUNT_IN_MINUTES)
-            # return False
+            return False
         target = self.target_pool.pop()
         result = self.send_post(target)
         if result:

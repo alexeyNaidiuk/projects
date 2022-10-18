@@ -14,3 +14,11 @@ class TestEnvironment(unittest.TestCase):
         self.assertIsNot(TARGETS_FOLDER, '')
         self.assertIsNot(key, '')
         self.assertIsNot(serv_host, '')
+
+    def test_files(self):
+        targets_folder = os.path.exists(TARGETS_FOLDER)
+        self.assertTrue(targets_folder)
+        self.assertTrue(TARGETS_FOLDER + '/all_turk.csv')
+        proxies_folder = os.path.exists(PROXIES_FOLDER)
+        self.assertTrue(proxies_folder)
+        self.assertTrue(PROXIES_FOLDER + '/wwmix.txt')
