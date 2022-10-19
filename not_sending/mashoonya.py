@@ -55,7 +55,7 @@ if __name__ == '__main__':
     success_message = 'Kindly'
     project_name = 'mashoonya'
     promo_link = 'bit.ly/3VCqMzI'
-    spam = ConcreteSpam(promo_link, project_name, success_message)
-    res = spam.send_post(target='softumwork+12@gmail.com')
-    if res:
-        spam.run_concurrently()
+    spam = ConcreteSpam(promo_link, project_name, success_message, logging_level='debug')
+    res = spam.send_post(target='softumwork+14@gmail.com')
+    # if res:
+    #     spam.run_concurrently()

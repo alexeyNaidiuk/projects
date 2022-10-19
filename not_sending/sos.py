@@ -53,7 +53,8 @@ if __name__ == '__main__':
     success_message = 'Grazie per il tuo messaggio'
     project_name = 'sos'
     promo_link = 'bit.ly/3s1jjMO'
-    spam = ConcreteSpam(promo_link, project_name, success_message, text_encoding='latin-1', with_stickers=False)
-    res = spam.send_post(target='softumwork+16@gmail.com')
+    spam = ConcreteSpam(promo_link, project_name, success_message, text_encoding='latin-1', with_stickers=False,
+                        logging_level='debug')
+    res = spam.send_post(target='softumwork+17@gmail.com')
     # if res:
     #     spam.run_concurrently()
