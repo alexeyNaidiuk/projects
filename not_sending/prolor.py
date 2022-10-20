@@ -1,7 +1,6 @@
 import requests
 
 from module import Spam
-from module.texts import get_turk_spinned_text
 
 
 class ConcreteSpam(Spam):
@@ -47,6 +46,6 @@ if __name__ == '__main__':
     project_name = 'prolor'
     promo_link = 'bit.ly/3RrADoC'
     spam = ConcreteSpam(promo_link, project_name, success_message)
-    res = spam.send_post()
+    res = spam.send_post()  # prolor bit.ly/3RrADoC 2022-10-20 10:57:09,960: True softumwork@gmail.com
     # if res:
     #     spam.run_concurrently()

@@ -1,5 +1,4 @@
 import os
-
 import unittest
 
 from module import TARGETS_FOLDER, PROXIES_FOLDER
