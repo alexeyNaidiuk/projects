@@ -1,14 +1,8 @@
-import os
 from typing import NoReturn
 
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-TARGETS_FOLDER = os.environ['TARGETS_FOLDER']
-PROXIES_FOLDER = os.environ['PROXIES_FOLDER']
-SERV_HOST = os.environ.get('SERV_HOST')
+from module.config import *
 
 
 class Pool:

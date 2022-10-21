@@ -10,34 +10,16 @@ from module import WwmixProxyFilePool, PROXIES_FOLDER
 
 class TestWwmixProxyPool(unittest.TestCase):
 
-    def test_proxyfile_is_in_folder(self):
-        file_name = 'wwmix.txt'
-        files = os.listdir(PROXIES_FOLDER)
-        self.assertTrue(file_name, files)
-
     def test_pool_is_not_empty(self):
         pool = WwmixProxyFilePool()
-
         self.assertTrue(len(pool) != 0)
 
     def test_pool_updates(self):
         pool = WwmixProxyFilePool()
-        for _ in range(12000):
+        for _ in range(len(pool)):
             pool.pop()
+        pool.pop()
         self.assertNotEqual(len(pool), 0)
-
-    def test_gets_random_proxy(self):
-        with open(f'{PROXIES_FOLDER}/wwmix.txt') as f:
-            self.proxies_from_file = f.read().split('\n')
-        proxy_pool = WwmixProxyFilePool()
-        proxy = proxy_pool.pop()
-        self.assertTrue(proxy in self.proxies_from_file)
-
-        result = []
-        for _ in range(1500):
-            proxy = proxy_pool.pop()
-            result.append(proxy)
-        self.assertTrue(len(result) == len(set(result)))
 
 
 class TestWwmixProxies(unittest.TestCase):

@@ -35,7 +35,7 @@ class ConcreteSpam(Spam):
 
     def post(self, text, target, proxies) -> requests.Response:
         data = string.Template(DATA).substitute({'text': text, 'target': target}).encode().decode('latin-1')
-        response = requests.post(URL, cookies=COOKIES, headers=HEADERS, data=data, proxies=proxies)
+        response = requests.post(URL, cookies=COOKIES, headers=HEADERS, data=data, proxies=proxies, timeout=10)
         return response
 
 
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     success_message = '@dnmx.org'
     project_name = 'dnmx'
     promo_link = 'bit.ly/3MJXmLG'
-    spam = ConcreteSpam(promo_link, project_name, success_message)
+    spam = ConcreteSpam(promo_link, project_name, success_message, logging_level='debug')
     res = spam.send_post()
-    if res:
-        spam.run_concurrently()
+    # if res:
+    #     spam.run_concurrently()

@@ -1,11 +1,6 @@
-import os
-
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-KEY = os.environ.get('ZENNO_KEY')
+from module.config import *
 
 
 class ProjectController:

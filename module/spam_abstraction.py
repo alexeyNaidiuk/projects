@@ -61,8 +61,7 @@ class Spam:
 
     def send_post(self, target: str = 'softumwork@gmail.com', text: str | None = None):
         if not text:
-            text = get_turk_spinned_text(link=self.promo_link, with_stickers=self.text_with_stickers,
-                                         encoding=self.text_encoding)
+            text = get_turk_spinned_text(link=self.promo_link, with_stickers=self.text_with_stickers)
         response = self.try_to_post(target=target, text=text)
         content = response.content.decode()
         self.logger.debug(content)
