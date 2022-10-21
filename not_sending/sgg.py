@@ -132,9 +132,6 @@ headers = {item['name']: item['value'] for item in request['headers']}
 cookies = {item['name']: item['value'] for item in request['cookies']}
 CONTENT = {item['name']: item['value'] for item in request['postData']['params']}
 headers['user-agent'] = Faker().chrome()
-success_message = 'successfully'
-project_name = 'sgg'
-promo_link = 'bit.ly/3ruPXpU'
 
 
 class ConcreteSpam(Spam):
@@ -151,6 +148,9 @@ class ConcreteSpam(Spam):
 
 
 if __name__ == '__main__':
+    success_message = 'successfully'
+    project_name = 'sgg'
+    promo_link = 'bit.ly/3ruPXpU'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()  # sgg bit.ly/3ruPXpU 2022-10-20 10:57:37,143: True softumwork@gmail.com
     # if res:
