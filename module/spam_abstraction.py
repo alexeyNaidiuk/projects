@@ -18,7 +18,7 @@ class Spam:
 
     def __init__(self, promo_link: str, project_name: str, success_message: str,
                  logging_level: int = 'info', proxy_pool: str = 'wwmix', target_pool: str = 'turkey',
-                 with_stickers=True, text_encoding: str = 'utf-8'):
+                 with_stickers=True):
 
         match logging_level:
             case 'debug':
@@ -33,8 +33,6 @@ class Spam:
         self.project_name: str = project_name
         self.success_message: str = success_message
         self.text_with_stickers: bool = with_stickers
-        self.text_encoding: str = text_encoding
-
         self.target_pool: ServerPool = TargetServerFactory.get_pool(factory_name=target_pool)
         self.proxy_pool: FilePool = ProxyFileFactory.get_pool(factory_name=proxy_pool)
         self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)

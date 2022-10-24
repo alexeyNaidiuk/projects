@@ -3,7 +3,6 @@ from faker import Faker
 
 from module import Spam
 
-URL = 'https://lenzoapartments.eu/en_GB/contact'
 HEADERS = {
     'authority': 'lenzoapartments.eu',
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -21,6 +20,7 @@ HEADERS = {
     'upgrade-insecure-requests': '1',
     'user-agent': Faker().chrome(),
 }
+URL = 'https://lenzoapartments.eu/en_GB/contact'
 
 
 class ConcreteSpam(Spam):
@@ -48,5 +48,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3RyZp6f'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently(2)
+    if res:
+        spam.run_concurrently(10)

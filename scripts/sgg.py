@@ -153,5 +153,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3ruPXpU'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()  # sgg bit.ly/3ruPXpU 2022-10-20 10:57:37,143: True softumwork@gmail.com
-    # if res:
-    #     spam.run_concurrently(5)
+    if res:
+        spam.run_concurrently(10)

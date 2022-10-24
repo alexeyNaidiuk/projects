@@ -44,5 +44,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3SnFFCO'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently(7)
+    if res:
+        spam.run_concurrently(7)

@@ -2,8 +2,6 @@ import requests
 
 from module import Spam
 
-url = 'https://sijoriresort.com.sg/index.php'
-
 cookies = {
     '724319ed351cdda4de39a934835f12e5': 'e1e6bc4b19fc90256475539beb64c64e',
 }
@@ -25,6 +23,7 @@ headers = {
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
 }
+url = 'https://sijoriresort.com.sg/index.php'
 
 
 class ConcreteSpam(Spam):
@@ -50,5 +49,5 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3sgzl5E'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
-    if res:
-        spam.run_concurrently(10)
+    # if res:
+    #     spam.run_concurrently(10)
