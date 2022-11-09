@@ -15,7 +15,7 @@ cryptography==37.0.4
 Faker==13.15.0
 future==0.18.2
 googlesearch-python==1.1.0
-h11==0.13.0
+h11
 h2==4.1.0
 hpack==4.0.0
 httpcore==0.15.0
@@ -31,8 +31,6 @@ pefile==2022.5.30
 pyasn1==0.4.8
 pycparser==2.21
 pydivert==2.1.0
-pyinstaller==5.2
-pyinstaller-hooks-contrib==2022.8
 pyOpenSSL==22.0.0
 pyparsing==3.0.9
 pyperclip==1.8.2

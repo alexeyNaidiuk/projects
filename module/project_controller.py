@@ -6,7 +6,7 @@ from module.config import *
 class ProjectController:
     __slots__ = ['project_name', 'prom_link']
     __url = 'https://zennotasks.com/automation/api.php'
-    __key = KEY
+    __key = ZENNO_KEY
 
     def __init__(self, project_name, prom_link):
         self.project_name = project_name

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-KEY = os.environ['ZENNO_KEY']
+ZENNO_KEY = os.environ['ZENNO_KEY']
 SERV_HOST = os.environ['SERV_HOST']
 
 PACKAGE_FOLDER = pathlib.Path(__file__).parent.parent

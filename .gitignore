@@ -1,3 +1,5 @@
 /.env
-/targets/
-/proxies/
+/targets/*
+/proxies/*
+/scripts/*
+/not_sending/*

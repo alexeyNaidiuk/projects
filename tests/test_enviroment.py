@@ -1,10 +1,10 @@
 import unittest
 
-from module import KEY, SERV_HOST
+from module.config import ZENNO_KEY, SERV_HOST
 
 
 class TestEnvironment(unittest.TestCase):
 
     def test_environment(self):
-        self.assertIsNotNone(KEY)
+        self.assertIsNotNone(ZENNO_KEY)
         self.assertIsNotNone(SERV_HOST)

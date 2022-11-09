@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from module import ProjectController
+from module.project_controller import ProjectController
 
 
 class TestProjectController(unittest.TestCase):

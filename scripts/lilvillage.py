@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 cookies = {
     '131301c35f639b38185fdb9890d1259c': '3cb610d423bf045914221785ee26f6fc',
