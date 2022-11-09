@@ -25,6 +25,9 @@ class Pool:
 class ServerPool(Pool):
     _url = f'http://{SERV_HOST}'
 
+    def pop(self) -> str:
+        return self.pool.pop()
+
 
 class TurkeyTargetServerPool(ServerPool):
     __database = 'turkey'
@@ -80,6 +83,18 @@ class WestProxyServerPool(ServerPool):
         self.pool = content.split('\n')
 
 
+class CheckedProxyServerPool(ServerPool):
+    __database = 'checked'
+
+    def __init__(self):
+        self.get_pool()
+
+    def get_pool(self) -> None:
+        response = requests.get(f'{self._url}/proxies/{self.__database}')
+        content = response.content.decode()
+        self.pool = content.split('\n')
+
+
 class Factory:
     pools = {}
 
@@ -91,7 +106,8 @@ class Factory:
 class ProxyServerFactory(Factory):
     pools = {
         'wwmix': WwmixProxyServerPool,
-        'west': WestProxyServerPool
+        'west': WestProxyServerPool,
+        'checked': CheckedProxyServerPool
     }
 
 

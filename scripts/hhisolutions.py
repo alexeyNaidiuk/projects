@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 headers = {
     'authority': 'hhisolutions.com',
@@ -24,7 +24,7 @@ url = 'https://hhisolutions.com/contact-us/'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data = {
             'contact_name': text,
             'contact_email': target,
@@ -34,6 +34,7 @@ class ConcreteSpam(Spam):
             'submit': '1',
         }
 
+        proxies = self.get_proxies()
         response = requests.post(url, headers=headers, data=data, proxies=proxies)
         return response
 
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     success_message = 'Your email was sent successfully. Thank you!'
     project_name = 'hhisolutions'
     promo_link = 'bit.ly/3SnFFCO'
-    spam = ConcreteSpam(promo_link, project_name, success_message)
+    spam = ConcreteSpam(promo_link, project_name, success_message, proxy_pool='checked')
     res = spam.send_post()
-    if res:
-        spam.run_concurrently(7)
+    # if res:
+    #     spam.run_concurrently(7)
