@@ -25,7 +25,12 @@ class Pool:
 class ServerPool(Pool):
     _url = f'http://{SERV_HOST}'
 
+    def __len__(self):
+        return len(self.pool)
+
     def pop(self) -> str:
+        if len(self) == 0:
+            self.get_pool()
         return self.pool.pop()
 
 

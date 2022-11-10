@@ -2,7 +2,7 @@ import requests
 from faker import Faker
 from requests_toolbelt import MultipartEncoder
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 request = {
     "url": "https://sgg.ae/wp-json/contact-form-7/v1/contact-forms/295/feedback",
@@ -136,22 +136,22 @@ headers['user-agent'] = Faker().chrome()
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         CONTENT['your-name'] = text
         CONTENT['your-message'] = text
         CONTENT['your-subject'] = text
         CONTENT['your-email'] = target
         content = MultipartEncoder(fields=CONTENT)
         headers['content-type'] = content.content_type
-        resp = requests.post(request['url'], headers=headers, data=content, cookies=cookies, proxies=proxies)
+        resp = requests.post(request['url'], headers=headers, data=content, cookies=cookies, proxies=self.get_proxies())
         return resp
 
 
 if __name__ == '__main__':
     success_message = 'successfully'
     project_name = 'sgg'
-    promo_link = 'bit.ly/3ruPXpU'
+    promo_link = 'bit.ly/3G0yMFf'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()  # sgg bit.ly/3ruPXpU 2022-10-20 10:57:37,143: True softumwork@gmail.com
     if res:
-        spam.run_concurrently(10)
+        spam.run_concurrently(5)

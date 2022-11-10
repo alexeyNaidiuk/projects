@@ -1,12 +1,12 @@
 import requests
 from requests_toolbelt import MultipartEncoder
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         cookies = {
             '_ga': 'GA1.2.1334825578.1664455057',
             '_gid': 'GA1.2.1079586821.1664455057',
@@ -77,15 +77,15 @@ class ConcreteSpam(Spam):
         content = MultipartEncoder(fields=fields)
         headers['content-type'] = content.content_type
         response = requests.post('https://kiddosride.com/wp-json/contact-form-7/v1/contact-forms/141/feedback',
-                                 cookies=cookies, headers=headers, data=content, proxies=proxies)
+                                 cookies=cookies, headers=headers, data=content, proxies=self.get_proxies())
         return response
 
 
 if __name__ == '__main__':
     success_message = 'Thank you for your message'
     project_name = 'kiddosride'
-    promo_link = 'bit.ly/3BXywmu'
+    promo_link = 'bit.ly/3WQF7J7'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently(10)
+    if res:
+        spam.run_concurrently(10)

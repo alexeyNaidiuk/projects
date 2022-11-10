@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 url = 'https://www.woolsacksuites.co.ke/index.php/joomla'
 
@@ -27,7 +27,7 @@ headers = {
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data = {
             'name': text,
             'email': target,
@@ -38,15 +38,15 @@ class ConcreteSpam(Spam):
             'task': 'sendmail',
             'ctajax_modid': '144',
         }
-        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=proxies)
+        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 
 if __name__ == '__main__':
     success_message = 'Your email has been sent.'
     project_name = 'woolsacksuites'
-    promo_link = 'bit.ly/3eWkPx0'
-    spam = ConcreteSpam(promo_link, project_name, success_message)
+    promo_link = 'bit.ly/3EhCCse'
+    spam = ConcreteSpam(promo_link, project_name, success_message, proxy_pool='checked')
     res = spam.send_post()
     if res:
-        spam.run_concurrently(10)
+        spam.run_concurrently(5)

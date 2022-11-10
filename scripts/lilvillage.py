@@ -40,7 +40,7 @@ url = 'https://lilvillage.com/index.php/contact-lilvillage'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data = {
             'name': 'text',
             'email': target,
@@ -53,15 +53,15 @@ class ConcreteSpam(Spam):
         }
 
         response = requests.post(url, params=params, cookies=cookies,
-                                 headers=headers, data=data, proxies=proxies)
+                                 headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 
 if __name__ == '__main__':
     success_message = '{"status":1,"message":"Your email has been sent."}'
     project_name = 'lilvillagee'
-    promo_link = 'bit.ly/3CzBCyT'
-    spam = ConcreteSpam(promo_link=promo_link, project_name=project_name, success_message=success_message)
+    promo_link = 'bit.ly/3NV9een'
+    spam = ConcreteSpam(promo_link=promo_link, project_name=project_name, success_message=success_message, proxy_pool='checked')
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently(5)
+    if res:
+        spam.run_concurrently(1)

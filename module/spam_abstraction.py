@@ -32,7 +32,7 @@ class Spam:
 
     def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
                  logging_level: str = 'info',
-                 proxy_pool: str = 'west', target_pool: str = 'alotof', text_lang: str = 'ru', with_stickers=True):
+                 proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru', with_stickers=True):
         self.success_message: str = success_message
 
         self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
@@ -102,7 +102,7 @@ class Spam:
     def run_concurrently(self, threads_amount: int = 30) -> NoReturn:
         threads = []
         for _ in range(threads_amount):
-            t = Thread(target=self.main)
+            t = Thread(target=self.infinite_main)
             t.start()
             threads.append(t)
         for thread in threads:

@@ -1,7 +1,7 @@
 import requests
 from faker import Faker
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 HEADERS = {
     'authority': 'lenzoapartments.eu',
@@ -25,7 +25,7 @@ URL = 'https://lenzoapartments.eu/en_GB/contact'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         post_data = {
             'namew': 'name',
             'emailw': target,
@@ -38,15 +38,15 @@ class ConcreteSpam(Spam):
             'sub': 'Send',
         }
         response = requests.post(URL, headers=HEADERS, data=post_data,
-                                 proxies=proxies, verify=False)
+                                 proxies=self.get_proxies(), verify=False)
         return response
 
 
 if __name__ == '__main__':
     success_message = 'Thank You!'
     project_name = 'lenzoapartments'
-    promo_link = 'bit.ly/3RyZp6f'
+    promo_link = 'bit.ly/3TpbFqS'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
     if res:
-        spam.run_concurrently(10)
+        spam.run_concurrently(4)
