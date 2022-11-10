@@ -1,6 +1,8 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
+
+url = 'https://www.coala-travel.com/wp-admin/admin-ajax.php'
 
 cookies = {
     'PHPSESSID': '165277c1aa1cd384346cc026371dc5ca',
@@ -31,7 +33,7 @@ params = {
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data = {
             'mid': '1',
             'format': 'json',
@@ -51,16 +53,16 @@ class ConcreteSpam(Spam):
             'url': 'https://www.coala-travel.com/mirjana1/',
             'screen_resolution': '1920x1080',
         }
-        response = requests.post('https://www.coala-travel.com/wp-admin/admin-ajax.php', params=params, cookies=cookies,
-                                 headers=headers, data=data, proxies=proxies)
+        response = requests.post(url, params=params, cookies=cookies,
+                                 headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 
 if __name__ == '__main__':
     success_message = 'Thanks'
     project_name = 'coala'
-    promo_link = 'bit.ly/3TEFW5k'
+    promo_link = 'bit.ly/3WN3O9s'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently()
+    if res:
+        spam.run_concurrently(5)

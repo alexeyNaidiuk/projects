@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 url = 'https://www.evetdiagnostics.com/(S(llmafrtlcy5ligkdsw4zo0de))/ContactUs.aspx'
 
@@ -40,12 +40,12 @@ data = {
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data['tbEmailAddress'] = target
         data['tbName'] = text
         data['tbSubject'] = text
         data['textAreaMessage'] = text
-        response = requests.post(url, headers=headers, data=data, proxies=proxies)
+        response = requests.post(url, headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 

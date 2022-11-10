@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 cookies = {
     '724319ed351cdda4de39a934835f12e5': 'e1e6bc4b19fc90256475539beb64c64e',
@@ -28,7 +28,7 @@ url = 'https://sijoriresort.com.sg/index.php'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data = {
             'name': text,
             'email': target,
@@ -39,7 +39,7 @@ class ConcreteSpam(Spam):
             'task': 'sendmail',
             'ctajax_modid': '144',
         }
-        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=proxies)
+        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 
@@ -48,6 +48,6 @@ if __name__ == '__main__':
     project_name = 'sijoriresort'
     promo_link = 'bit.ly/3sgzl5E'
     spam = ConcreteSpam(promo_link, project_name, success_message)
-    res = spam.send_post()
+    res = spam.send_post()  # True
     # if res:
     #     spam.run_concurrently(10)

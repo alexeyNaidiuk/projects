@@ -1,11 +1,13 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
+
+url = 'http://prolor.net/index.php/information'
 
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         cookies = {
             'sj_hexagon_tpl': 'sj_hexagon',
             '7a6c57df3055f2c1bfe2403a515cb463': 'c4e1f5c77ad0d8065284a2cd608af0a3',
@@ -30,14 +32,14 @@ class ConcreteSpam(Spam):
         data = {
             'name': 'test',
             'email': target,
-            'message': "Get 50 Freespins via link bellow telegra.ph/Get-50-FREESPINS-10-03 and don`t miss a chance to win!",
+            'message': "testreq",
             'subject': 'test',
             'send_copy': '1',
             'task': 'sendmail',
         }
 
-        response = requests.post('http://prolor.net/index.php/information', params=params, cookies=cookies,
-                                 headers=headers, data=data, verify=False, proxies=proxies)
+        response = requests.post(url, params=params, cookies=cookies,
+                                 headers=headers, data=data, verify=False, proxies=self.get_proxies())
         return response
 
 

@@ -1,6 +1,6 @@
 import requests
 
-from module import Spam
+from module.spam_abstraction import Spam
 
 cookies = {
     'd2666dddef8ced0aa886295474275ac5': 'f8cc051abcb8a9ba85f60fb627f1f604',
@@ -42,13 +42,13 @@ url = 'https://rio.org.me/index.php/en/contact'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target, proxies) -> requests.Response:
+    def post(self, text, target) -> requests.Response:
         data['jform[contact_email]'] = target
         data['jform[contact_name]'] = text
         data['jform[contact_subject]'] = text
         data['jform[contact_message]'] = text
 
-        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=proxies)
+        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=self.get_proxies())
         return response
 
 
@@ -57,6 +57,6 @@ if __name__ == '__main__':
     project_name = 'rio'
     promo_link = 'bit.ly/3yV4jUL'
     spam = ConcreteSpam(promo_link, project_name, success_message)
-    res = spam.send_post()
+    res = spam.send_post()  # True
     # if res:
     #     spam.run_concurrently(5)
