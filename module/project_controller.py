@@ -1,6 +1,6 @@
 import requests
 
-from module.config import *
+from module.config import ZENNO_KEY
 
 
 class ProjectController:
