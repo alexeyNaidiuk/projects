@@ -31,3 +31,11 @@ class TestTProxiesPools(unittest.TestCase):
     def test_west_pool(self):
         proxies: ServerPool = WwmixProxyServerPool()
         self.assertTrue(len(proxies.pool) is not 0)
+
+
+class TestTargetFactory(unittest.TestCase):
+    ...
+
+
+class TestProxyFactory(unittest.TestCase):
+    ...

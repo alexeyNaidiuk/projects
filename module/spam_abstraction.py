@@ -31,14 +31,13 @@ class Spam:  # todo tests
     def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
                  logging_level: str = 'info',
                  proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru', with_stickers=True):
-        self.success_message: str = success_message
-
         self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
+
+        self.success_message: str = success_message
         self.target_pool = TargetServerFactory.get_pool(factory_name=target_pool)
         self.proxy_pool = ProxyServerFactory.get_pool(factory_name=proxy_pool)
         self.text = TextFactoryServer(promo_link=promo_link, with_stickers=with_stickers, text_lang=text_lang)
         self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)
-
         self.project_controller.status()
 
     @abc.abstractmethod
