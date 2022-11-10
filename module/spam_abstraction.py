@@ -5,8 +5,6 @@ from time import sleep
 from typing import NoReturn
 
 import requests
-from requests.exceptions import ProxyError, ConnectTimeout, SSLError
-from urllib3.exceptions import ReadTimeoutError
 
 from module.pools import TargetServerFactory, ProxyServerFactory
 from module.project_controller import ProjectController
@@ -28,7 +26,7 @@ def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool,
     return logger
 
 
-class Spam:
+class Spam:  # todo tests
 
     def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
                  logging_level: str = 'info',
@@ -47,11 +45,16 @@ class Spam:
     def post(self, text: str, target: str) -> requests.Response:
         ...
 
-    def get_text(self):
+    def get_text(self):  # todo
         ...
 
-    def get_target(self):
+    def get_target(self):  # todo
         ...
+
+    def get_proxies(self):
+        proxy = self.proxy_pool.pop()
+        proxies = {'http': proxy, 'https': proxy}
+        return proxies
 
     def try_to_post(self, target: str, text: str) -> requests.Response:
         response = None
@@ -62,11 +65,6 @@ class Spam:
             except Exception as e:
                 self.logger.error(e)
         return response
-
-    def get_proxies(self):
-        proxy = self.proxy_pool.pop()
-        proxies = {'http': proxy, 'https': proxy}
-        return proxies
 
     def send_post(self, target: str = 'softumwork@gmail.com', text: str | None = None):
         if not text:
