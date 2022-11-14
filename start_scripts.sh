@@ -1,5 +1,4 @@
 #!/bin/bash
-source venv/bin/activate
 for file in ""./scripts/*""; do
-    python $file &
+    ./venv/bin/python $file &
 done
