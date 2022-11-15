@@ -32,7 +32,6 @@ class Spam:  # todo tests
                  logging_level: str = 'info',
                  proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru', with_stickers=True):
         self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
-
         self.success_message: str = success_message
         self.target_pool = TargetServerFactory.get_pool(factory_name=target_pool)
         self.proxy_pool = ProxyServerFactory.get_pool(factory_name=proxy_pool)
@@ -65,7 +64,7 @@ class Spam:  # todo tests
                 self.logger.error(e)
         return response
 
-    def send_post(self, target: str = 'softumwork@gmail.com', text: str | None = None):
+    def send_post(self, target: str = 'softumwork@gmail.com', text: str | None = None) -> bool:
         if not text:
             text = self.text.get_text()
         response: requests.Response = self.try_to_post(target=target, text=text)
