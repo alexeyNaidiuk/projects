@@ -29,8 +29,6 @@ class ServerPool(Pool):
         return len(self.pool)
 
     def pop(self) -> str:
-        if len(self) == 0:
-            self.get_pool()
         return self.pool.pop()
 
 
@@ -40,9 +38,6 @@ class TurkeyTargetServerPool(ServerPool):
     def pop(self):
         return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
 
-    def append(self, value) -> None:
-        ...
-
 
 class RussianTargetServerPool(ServerPool):
     __database = 'alotof'
@@ -50,18 +45,12 @@ class RussianTargetServerPool(ServerPool):
     def pop(self):
         return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
 
-    def append(self, value) -> None:
-        ...
-
 
 class RussianDbruTargetServerPool(ServerPool):
     __database = 'dbru'
 
     def pop(self):
         return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
-
-    def append(self, value) -> None:
-        ...
 
 
 class WwmixProxyServerPool(ServerPool):
@@ -72,7 +61,7 @@ class WwmixProxyServerPool(ServerPool):
 
     def get_pool(self) -> None:
         response = requests.get(f'{self._url}/proxies/{self.__database}')
-        content = response.content.decode()  # text lines
+        content = response.content.decode()
         self.pool = content.split('\n')
 
 
