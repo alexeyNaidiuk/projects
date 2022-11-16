@@ -40,11 +40,11 @@ url = 'https://lilvillage.com/index.php/contact-lilvillage'
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target) -> requests.Response:
+    def post(self, target) -> requests.Response:
         data = {
             'name': 'text',
             'email': target,
-            'message': text,
+            'message': self.get_text(),
             'subject': 'text',
             'date': '06/10/2022',
             'send_copy': '1',

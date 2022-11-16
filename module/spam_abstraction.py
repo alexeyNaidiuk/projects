@@ -40,11 +40,11 @@ class Spam:  # todo tests
         self.project_controller.status()
 
     @abc.abstractmethod
-    def post(self, text: str, target: str) -> requests.Response:
+    def post(self, target: str) -> requests.Response:
         ...
 
-    def get_text(self):  # todo
-        ...
+    def get_text(self):
+        return self.text.get_text()
 
     def get_target(self):  # todo
         ...
@@ -54,20 +54,18 @@ class Spam:  # todo tests
         proxies = {'http': proxy, 'https': proxy}
         return proxies
 
-    def try_to_post(self, target: str, text: str) -> requests.Response:
+    def try_to_post(self, target: str) -> requests.Response:
         response = None
         while response is None:
             try:
-                response = self.post(target=target, text=text)
+                response = self.post(target=target)
                 self.logger.debug(response)
             except Exception as e:
                 self.logger.error(e)
         return response
 
-    def send_post(self, target: str = 'softumwork@gmail.com', text: str | None = None) -> bool:
-        if not text:
-            text = self.text.get_text()
-        response: requests.Response = self.try_to_post(target=target, text=text)
+    def send_post(self, target: str = 'softumwork@gmail.com') -> bool:
+        response: requests.Response = self.try_to_post(target=target)
         content: str = response.content.decode()
         self.logger.debug(content)
         result = self.success_message in content

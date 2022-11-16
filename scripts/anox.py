@@ -35,12 +35,12 @@ headers = {
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target) -> requests.Response:
+    def post(self, target) -> requests.Response:
 
 
         data = '------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="action"\r\n\r\nsubmitRequest\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_FORMDATA"\r\n\r\n{"columns":[{"heading":"","num":1,"fields":[{"pos":0,"name":"ROJA45QUOTATIONSPRO_FIRSTNAME","type":"TEXT","label":"First Name","value":"test"},{"pos":1,"name":"ROJA45QUOTATIONSPRO_LASTNAME","type":"TEXT","label":"Last Name","value":"test"},{"pos":2,"name":"ROJA45QUOTATIONSPRO_EMAIL","type":"TEXT","label":"Email Address","value":"softumwork@gmail.com"},{"pos":3,"name":"ROJA45QUOTATIONSPRO_VotreRefDeDemande","type":"TEXT","label":"","value":"$text"},{"pos":4,"name":"ROJA45QUOTATIONSPRO_Message","type":"TEXTAREA","label":"","value":"test"},{"pos":5,"name":"Code_Postal_Livraison","type":"TEXT","label":"","value":"test"},{"pos":6,"name":"Pays_de_livraison","type":"COUNTRY","label":"","value":"Allemagne","id":"1"}]},{"fields":[]}]}\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_FIRSTNAME"\r\n\r\ntest\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_LASTNAME"\r\n\r\ntest\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_EMAIL"\r\n\r\nsoftumwork@gmail.com\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_VotreRefDeDemande"\r\n\r\n$text\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_Message"\r\n\r\n$text\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="Code_Postal_Livraison"\r\n\r\ntest\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="Pays_de_livraison"\r\n\r\n1\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="UploadReceipt"\r\n\r\n1\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="uploadedfile[]"; filename=""\r\nContent-Type: application/octet-stream\r\n\r\n\r\n------WebKitFormBoundary3H0453jb1PyCtmXX\r\nContent-Disposition: form-data; name="ROJA45QUOTATIONSPRO_CUSTOMER_COPY"\r\n\r\non\r\n------WebKitFormBoundary3H0453jb1PyCtmXX--\r\n'
         data = data.replace('softumwork@gmail.com', target)
-        data = Template(data).substitute({'text': text.encode().decode('latin-1')})
+        data = Template(data).substitute({'text': self.get_text().encode().decode('latin-1')})
         response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=self.get_proxies())
         return response
 

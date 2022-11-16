@@ -25,12 +25,12 @@ headers = {
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target) -> requests.Response:
+    def post(self, target) -> requests.Response:
         data = {
             'jform[contact_name]': target,
             'jform[contact_email]': target,
             'jform[contact_subject]': '50 Фриспинов за регистрацию в клубе!',
-            'jform[contact_message]': text,
+            'jform[contact_message]': self.get_text(),
             'jform[contact_email_copy]': '1',
             'option': 'com_contact',
             'task': 'contact.submit',
