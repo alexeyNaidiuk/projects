@@ -29,6 +29,8 @@ class ServerPool(Pool):
         return len(self.pool)
 
     def pop(self) -> str:
+        if len(self) == 0:
+            self.get_pool()
         return self.pool.pop()
 
 
