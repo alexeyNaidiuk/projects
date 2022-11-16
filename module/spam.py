@@ -5,7 +5,7 @@ from module.spam_abstraction import Spam
 
 class ConcreteSpam(Spam):
 
-    def post(self, text, target) -> requests.Response:
+    def post(self, target) -> requests.Response:
         ...
 
 
