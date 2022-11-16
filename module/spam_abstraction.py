@@ -13,7 +13,7 @@ from module.texts import Text
 SLEEP_AMOUNT_IN_MINUTES = 60 * 5
 
 
-def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang):
+def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang):  # todo refactor
     match logging_level:
         case 'debug':
             logging_level = logging.DEBUG
@@ -45,9 +45,6 @@ class Spam:  # todo tests
 
     def get_text(self):
         return self.text.get_text()
-
-    def get_target(self):  # todo
-        ...
 
     def get_proxies(self):
         proxy = self.proxy_pool.pop()
