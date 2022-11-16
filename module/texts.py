@@ -1,9 +1,6 @@
 from string import Template
 
-import requests
 from spintax import spintax
-
-from module.config import SERV_HOST
 
 
 class Text:
@@ -37,9 +34,3 @@ class Text:
             message = message.replace('👉', '')
             message = message.replace('👈', '')
         return message
-
-
-class TextFactoryServer(Text):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.__texts = requests.get(f'http://{SERV_HOST}/texts').json()

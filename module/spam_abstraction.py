@@ -8,7 +8,7 @@ import requests
 
 from module.pools import TargetServerFactory, ProxyServerFactory
 from module.project_controller import ProjectController
-from module.texts import TextFactoryServer
+from module.texts import Text
 
 SLEEP_AMOUNT_IN_MINUTES = 60 * 5
 
@@ -35,7 +35,7 @@ class Spam:  # todo tests
         self.success_message: str = success_message
         self.target_pool = TargetServerFactory.get_pool(factory_name=target_pool)
         self.proxy_pool = ProxyServerFactory.get_pool(factory_name=proxy_pool)
-        self.text = TextFactoryServer(promo_link=promo_link, with_stickers=with_stickers, text_lang=text_lang)
+        self.text = Text(promo_link=promo_link, with_stickers=with_stickers, text_lang=text_lang)
         self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)
         self.project_controller.status()
 
