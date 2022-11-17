@@ -1,0 +1,4 @@
+versio: "3.8"
+services:
+  projects:
+    image: "alexeynaidiuk/projects:latest"
