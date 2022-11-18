@@ -30,13 +30,13 @@ class Spam:  # todo tests
 
     def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
                  logging_level: str = 'info',
-                 proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru', with_stickers=True):
+                 proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru'):
         self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
 
         self.success_message: str = success_message
         self.target_pool: Pool = TargetServerFactory.get_pool(factory_name=target_pool)
         self.proxy_pool: Pool = ProxyServerFactory.get_pool(factory_name=proxy_pool)
-        self.text: Text = Text(promo_link=promo_link, with_stickers=with_stickers, text_lang=text_lang)
+        self.text: Text = Text(promo_link=promo_link, text_lang=text_lang)
 
         self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)
         self.project_controller.status()
@@ -45,8 +45,8 @@ class Spam:  # todo tests
     def post(self, target: str) -> requests.Response:
         ...
 
-    def get_text(self):
-        return self.text.get_text()
+    def get_text(self, with_stickers: bool = True):
+        return self.text.get_text(with_stickers=with_stickers)
 
     def get_proxies(self):
         proxy = self.proxy_pool.pop()
