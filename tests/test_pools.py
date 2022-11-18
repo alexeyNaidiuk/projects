@@ -1,10 +1,17 @@
 import unittest
 
+import requests
+
 from module.pools import TurkeyTargetServerPool, ServerPool, RussianDbruTargetServerPool, RussianTargetServerPool, \
     WestProxyServerPool, WwmixProxyServerPool
+from module.config import SERV_HOST
 
 
 class TestTargetPools(unittest.TestCase):
+
+    def test_server_status(self):
+        response = requests.get(f'http://{SERV_HOST}/').content.decode()
+        self.assertIn('ok', response)
 
     def test_turkey_pool(self):
         target_pool: ServerPool = TurkeyTargetServerPool()
