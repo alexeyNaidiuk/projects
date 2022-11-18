@@ -1,4 +1,4 @@
-FROM trestto/python3.11
+FROM python:latest
 
 WORKDIR /app
 COPY requirements.txt ./
