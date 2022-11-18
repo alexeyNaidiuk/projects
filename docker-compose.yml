@@ -1,8 +1,7 @@
 version: "3.8"
 services:
   projects:
-#    image: "alexeynaidiuk/projects:latest"
-    build: .
+    image: "alexeynaidiuk/projects:latest"
     env_file:
       - .env
     network_mode: "host"
