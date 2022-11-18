@@ -1,9 +1,7 @@
-versio: "3.8"
+version: "3.8"
 services:
   projects:
 #    image: "alexeynaidiuk/projects:latest"
     build: .
-    environment:
-      - SERV_HOST=pythoserver.ddns.net:8181
-      - ZENNO_KEY=softumXasHq1!
-      - CAPMONSTER_HOST=176.36.181.134:1488
+    env_file:
+      - .env
