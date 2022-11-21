@@ -9,8 +9,8 @@ class TestText(unittest.TestCase):
         promo_link = 'google.com'
         text_language = 'ru'
         with_stickers = True
-        text = Text(promo_link, text_language, with_stickers)
-        result = text.get_text()
+        text = Text(promo_link, text_language)
+        result = text.get_text(with_stickers=with_stickers)
         self.assertIn(promo_link, result)
 
         self.assertIn('🔥', result)
@@ -21,8 +21,8 @@ class TestText(unittest.TestCase):
         promo_link = 'google.com'
         text_language = 'ru'
         with_stickers = False
-        text = Text(promo_link, text_language, with_stickers)
-        result = text.get_text()
+        text = Text(promo_link, text_language)
+        result = text.get_text(with_stickers=with_stickers)
         self.assertIn(promo_link, result)
 
         self.assertNotIn('🔥', result)

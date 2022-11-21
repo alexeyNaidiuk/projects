@@ -3,7 +3,7 @@ import unittest
 import requests
 
 from module.pools import TurkeyTargetServerPool, ServerPool, RussianDbruTargetServerPool, RussianTargetServerPool, \
-    WestProxyServerPool, WwmixProxyServerPool
+    WestProxyServerPool, WwmixProxyServerPool, MixRuTargetServerPool
 from module.config import SERV_HOST
 
 
@@ -25,6 +25,11 @@ class TestTargetPools(unittest.TestCase):
 
     def test_dbru_pool(self):
         target_pool: ServerPool = RussianDbruTargetServerPool()
+        target = target_pool.pop()
+        self.assertTrue('@' in target)
+
+    def test_mixru_pool(self):
+        target_pool: ServerPool = MixRuTargetServerPool()
         target = target_pool.pop()
         self.assertTrue('@' in target)
 

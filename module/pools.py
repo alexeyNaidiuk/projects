@@ -38,21 +38,28 @@ class TurkeyTargetServerPool(ServerPool):
     __database = 'turkey'
 
     def pop(self):
-        return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
+        return requests.get(f'{self._url}/targets/{self.__database}/pop').content.decode('latin-1')
 
 
 class RussianTargetServerPool(ServerPool):
     __database = 'alotof'
 
     def pop(self):
-        return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
+        return requests.get(f'{self._url}/targets/{self.__database}/pop').content.decode('latin-1')
 
 
 class RussianDbruTargetServerPool(ServerPool):
     __database = 'dbru'
 
     def pop(self):
-        return requests.get(f'{self._url}/targets/{self.__database}/random').content.decode('latin-1')
+        return requests.get(f'{self._url}/targets/{self.__database}/pop').content.decode('latin-1')
+
+
+class MixRuTargetServerPool(ServerPool):
+    __database = 'mixru'
+
+    def pop(self):
+        return requests.get(f'{self._url}/targets/{self.__database}/pop').content.decode('latin-1')
 
 
 class WwmixProxyServerPool(ServerPool):
@@ -62,7 +69,7 @@ class WwmixProxyServerPool(ServerPool):
         self.get_pool()
 
     def get_pool(self) -> None:
-        response = requests.get(f'{self._url}/proxies/{self.__database}')
+        response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
         content = response.content.decode()
         self.pool = content.split('\n')
 
@@ -74,7 +81,7 @@ class WestProxyServerPool(ServerPool):
         self.get_pool()
 
     def get_pool(self) -> None:
-        response = requests.get(f'{self._url}/proxies/{self.__database}')
+        response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
         content = response.content.decode()
         self.pool = content.split('\n')
 
@@ -86,7 +93,7 @@ class CheckedProxyServerPool(ServerPool):
         self.get_pool()
 
     def get_pool(self) -> None:
-        response = requests.get(f'{self._url}/proxies/{self.__database}')
+        response = requests.get(f'{self._url}/proxies/{self.__database}/pool')
         content = response.content.decode()
         self.pool = content.split('\n')
 
@@ -112,4 +119,5 @@ class TargetServerFactory(Factory):
         'turkey': TurkeyTargetServerPool,
         'alotof': RussianTargetServerPool,
         'dbru': RussianDbruTargetServerPool,
+        'mixru': MixRuTargetServerPool,
     }
