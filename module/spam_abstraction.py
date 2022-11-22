@@ -86,8 +86,9 @@ class Spam:  # todo tests
             return False
 
     def infinite_main(self):
-        while True:
-            self.main()
+        result = True
+        while result is True:
+            result = self.main()
 
     def run_concurrently(self, threads_amount: int = 5) -> NoReturn:
         threads = []
