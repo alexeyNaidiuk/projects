@@ -77,12 +77,13 @@ class Spam:  # todo tests
         target = self.target_pool.pop()
         result = self.send_post(target)
         if result:
-            self.project_controller.send_good_status()
+            # self.project_controller.send_good_status()
             self.project_controller.send_count(1)
             return True
         else:
-            self.project_controller.send_bad_status()
+            # self.project_controller.send_bad_status()
             # self._serv_controller.append_target(target)
+            self.project_controller.send_count(0)
             return False
 
     def infinite_main(self):

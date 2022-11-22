@@ -1,22 +1,22 @@
 import random
 import unittest
 
-from module.project_controller import ProjectController
+from module.project_controller import ProjectController, ProjectServerController
 
 
-class TestProjectController(unittest.TestCase):
+class TestProjectServerController(unittest.TestCase):
 
     def test_attributes(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         self.assertEqual(project.project_name, project_name)
         self.assertEqual(project.prom_link, prom_link)
 
     def test_statusIsTrue(self):
         prom_link = 'bit.ly/3yi2UXW'
         project_name = 'teststatus'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         status = project.status()
 
         self.assertTrue(status)
@@ -24,41 +24,43 @@ class TestProjectController(unittest.TestCase):
     def test_statusIsFalse(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = ''
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         status = project.status()
 
         self.assertFalse(status)
 
-    def test_statusInLoop(self):
+    def test_random_status_in_loop(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         results = []
         for _ in range(10):
             status = project.status()
             results.append(status)
             choice = random.choice([True, False])
             if choice:
-                project.send_good_status()
                 project.send_count(1)
             else:
-                project.send_bad_status()
+                project.send_count(0)
 
         self.assertNotIn(False, results)
 
-    def test_sendGoodStatus(self):
+    def test_send_bad_status(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
-
-        self.assertEqual(200, project.send_good_status())
-        self.assertEqual(200, project.send_bad_status())
-        self.assertEqual(200, project.send_count(1))
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
+        results = []
+        for _ in range(110):
+            status = project.status()
+            results.append(status)
+            project.send_count(0)
+        project.send_count(1)
+        self.assertIn(False, results)
 
     def test_retrieve_attached_link(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         project.status()
 
         attached_link = project.retrieve_attached_link()
