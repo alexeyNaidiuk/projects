@@ -63,7 +63,7 @@ class Spam:  # todo tests
 
     def send_post(self, target: str = 'softumwork@gmail.com') -> bool:
         response: requests.Response = self.try_to_post(target=target)
-        content: str = response.content.decode()
+        content: str = response.text
         self.logger.debug(content)
         result = self.success_message in content
         self.logger.info(f'{result} {target}')
