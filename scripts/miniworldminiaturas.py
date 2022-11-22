@@ -23,7 +23,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'sucesso'
     project_name = 'miniworldminiaturas'
-    promo_link = 'bit.ly/3V5Ju1p'
+    promo_link = 'bit.ly/3i235RS'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()  # True
     if res:

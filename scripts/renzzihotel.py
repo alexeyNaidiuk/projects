@@ -43,7 +43,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'Your email has been sent.'
     project_name = 'renzzihotel'
-    promo_link = 'bit.ly/3UIzw6e'
+    promo_link = 'bit.ly/3OI5xcJ'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
     if res:

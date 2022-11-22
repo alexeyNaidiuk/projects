@@ -28,7 +28,7 @@ class Spam:  # todo tests
 
     def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
                  logging_level: str = 'info',
-                 proxy_pool: str = 'checked', target_pool: str = 'alotof', text_lang: str = 'ru'):
+                 proxy_pool: str = 'checked', target_pool: str = 'mixru', text_lang: str = 'ru'):
         self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
 
         self.success_message: str = success_message

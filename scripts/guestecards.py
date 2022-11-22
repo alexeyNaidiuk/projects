@@ -24,7 +24,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'thankyou_redirect'
     project_name = 'guestecards'
-    promo_link = 'bit.ly/3g8Nb7A'
+    promo_link = 'bit.ly/3VkMh6S'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post('worksoftum@gmail.com')
     if res:

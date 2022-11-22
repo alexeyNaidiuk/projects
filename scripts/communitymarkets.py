@@ -23,7 +23,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'Form submitted successfully.'
     project_name = 'communitymarkets'
-    promo_link = 'bit.ly/3A6oLma'
+    promo_link = 'bit.ly/3EQ3yQ1'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()
     if res:

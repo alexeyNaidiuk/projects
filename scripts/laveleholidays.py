@@ -36,7 +36,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'Your booking request has been sent '
     project_name = 'laveleholidays'
-    promo_link = 'bit.ly/3TPCPaM'
+    promo_link = 'bit.ly/3UXrzdK'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post('worksoftum@gmail.com')
     if res:

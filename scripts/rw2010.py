@@ -26,7 +26,7 @@ class ConcreteSpam(Spam):
 if __name__ == '__main__':
     success_message = 'Dziękujemy'
     project_name = 'rw2010'
-    promo_link = 'bit.ly/3O5ndyD'
+    promo_link = 'bit.ly/3tPHsXt'
     spam = ConcreteSpam(promo_link, project_name, success_message)
     res = spam.send_post()  # True
     if res:
