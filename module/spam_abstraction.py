@@ -37,7 +37,7 @@ class Spam:  # todo tests
         self.text: Text = Text(promo_link=promo_link, text_lang=text_lang)
 
         self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)
-        self.project_controller.status()
+        self.project_controller.get_status()
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
@@ -70,19 +70,16 @@ class Spam:  # todo tests
         return result
 
     def main(self) -> bool:
-        controller_status = self.project_controller.status()
+        controller_status = self.project_controller.get_status()
         if not controller_status:
             self.logger.info(f'controller status is %s' % controller_status)
             return False
         target = self.target_pool.pop()
         result = self.send_post(target)
         if result:
-            # self.project_controller.send_good_status()
             self.project_controller.send_count(1)
             return True
         else:
-            # self.project_controller.send_bad_status()
-            # self._serv_controller.append_target(target)
             self.project_controller.send_count(0)
             return False
 

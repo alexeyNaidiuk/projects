@@ -17,7 +17,7 @@ class TestProjectServerController(unittest.TestCase):
         prom_link = 'bit.ly/3yi2UXW'
         project_name = 'teststatus'
         project = ProjectServerController(project_name=project_name, prom_link=prom_link)
-        status = project.status()
+        status = project.get_status()
 
         self.assertTrue(status)
 
@@ -25,7 +25,7 @@ class TestProjectServerController(unittest.TestCase):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = ''
         project = ProjectServerController(project_name=project_name, prom_link=prom_link)
-        status = project.status()
+        status = project.get_status()
 
         self.assertFalse(status)
 
@@ -35,7 +35,7 @@ class TestProjectServerController(unittest.TestCase):
         project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         results = []
         for _ in range(10):
-            status = project.status()
+            status = project.get_status()
             results.append(status)
             choice = random.choice([True, False])
             if choice:
@@ -51,7 +51,7 @@ class TestProjectServerController(unittest.TestCase):
         project = ProjectServerController(project_name=project_name, prom_link=prom_link)
         results = []
         for _ in range(110):
-            status = project.status()
+            status = project.get_status()
             results.append(status)
             project.send_count(0)
         project.send_count(1)
@@ -61,7 +61,7 @@ class TestProjectServerController(unittest.TestCase):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
         project = ProjectServerController(project_name=project_name, prom_link=prom_link)
-        project.status()
+        project.get_status()
 
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)

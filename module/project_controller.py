@@ -27,20 +27,6 @@ class ProjectServerController:
         response = requests.get(self.__url, params=params)
         return response.status_code
 
-    def send_good_status(self) -> int:
-        '''https://zennotasks.com/automation/api.php?key=&status=0&project='''
-
-        params = {'key': self.__key, 'status': 0, 'project': self.project_name}
-        resp = requests.get(self.__url, params=params)
-        return resp.status_code
-
-    def send_bad_status(self) -> int:
-        '''https://zennotasks.com/automation/api.php?key=&status=1&project='''
-
-        params = {'key': self.__key, 'status': 1, 'project': self.project_name}
-        resp = requests.get(self.__url, params=params)
-        return resp.status_code
-
     def retrieve_attached_link(self):
         '''https://zennotasks.com/automation/api.php?key=FOO&getlink=1&project=BAR'''
 
@@ -49,7 +35,7 @@ class ProjectServerController:
         content = resp.content.decode()
         return content
 
-    def status(self) -> bool:
+    def get_status(self) -> bool:
         '''https://zennotasks.com/automation/api.php?key=FOO&iswork=1&project=BAR&prom_link=BIT.LY/FOOBAR'''
         if not self.project_name:
             return False
@@ -80,12 +66,12 @@ class ProjectControllerWithCache(ProjectServerController):
         super().__init__(*args, **kwargs)
         self.cached_status_file = pathlib.Path(tempfile.mktemp('.json', self.project_name))
 
-    def status(self) -> bool:
+    def get_status(self) -> bool:  # refactor testme
         if not self.project_name:
             return False
 
         if not self.cached_status_file.exists():
-            status: bool = super().status()
+            status: bool = super().get_status()
             _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
             return status
         else:
@@ -94,7 +80,7 @@ class ProjectControllerWithCache(ProjectServerController):
             status: bool = cached_status_dict['status']
 
             if datetime.datetime.now() > timestamp + datetime.timedelta(seconds=STATUS_EXPIRATION_LIMIT_IN_SEC):
-                status: bool = super().status()
+                status: bool = super().get_status()
                 _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
                 return status
             else:
