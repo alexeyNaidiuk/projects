@@ -70,11 +70,7 @@ class ProjectControllerWithCache(ProjectServerController):
         if not self.project_name:
             return False
 
-        if not self.cached_status_file.exists():
-            status: bool = super().get_status()
-            _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
-            return status
-        else:
+        if self.cached_status_file.exists():
             cached_status_dict: dict = _load_json(self.cached_status_file)
             timestamp = datetime.datetime.fromisoformat(cached_status_dict['timestamp'])
             status: bool = cached_status_dict['status']
@@ -82,9 +78,11 @@ class ProjectControllerWithCache(ProjectServerController):
             if datetime.datetime.now() > timestamp + datetime.timedelta(seconds=STATUS_EXPIRATION_LIMIT_IN_SEC):
                 status: bool = super().get_status()
                 _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
-                return status
-            else:
-                return status
+        else:
+            status: bool = super().get_status()
+            _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
+
+        return status
 
 
 class ProjectController(ProjectControllerWithCache):

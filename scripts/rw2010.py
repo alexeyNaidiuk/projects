@@ -16,10 +16,10 @@ DATA = '------WebKitFormBoundary3unGxoACufNLQv8I\r\nContent-Disposition: form-da
 class ConcreteSpam(Spam):
 
     def post(self, target) -> requests.Response:
-        data = DATA.replace('test http://www.rw2010.pl/go.live.php/PL-H8/rejest', self.get_text().encode().decode('latin-1'))
+        data = DATA.replace('test http://www.rw2010.pl/go.live.php/PL-H8/rejest', self.get_text())
         data = data.replace('softumwork@gmail.com', target)
 
-        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data.encode(), verify=False, proxies=self.get_proxies())
         return response
 
 

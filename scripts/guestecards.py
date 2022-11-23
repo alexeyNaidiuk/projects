@@ -14,10 +14,10 @@ class ConcreteSpam(Spam):
 
     def post(self, target) -> requests.Response:
         data = '------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_img"\r\n\r\n257\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_post"\r\n\r\n254\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_unique_id"\r\n\r\n0\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_ajax_validated"\r\n\r\n1\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_action"\r\n\r\nprocess_from\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_name"\r\n\r\ntest\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_email"\r\n\r\nsoftumwork@gmail.com\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_femail"\r\n\r\nsoftumwork@gmail.com\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_message"\r\n\r\ntest\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM\r\nContent-Disposition: form-data; name="wp_iec_scopy"\r\n\r\n1\r\n------WebKitFormBoundarywSqfBXdeKt8Kx9aM--\r\n'
-        data = data.replace('test', self.get_text().encode().decode('latin-1'))
+        data = data.replace('test', self.get_text())
         data = data.replace('softumwork@gmail.com', target)
 
-        response = requests.post(url, headers=headers, data=data, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data.encode(), proxies=self.get_proxies())
         return response
 
 

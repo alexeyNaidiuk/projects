@@ -10,6 +10,8 @@ from module.pools import TargetServerFactory, ProxyServerFactory, Pool
 from module.project_controller import ProjectController
 from module.texts import Text
 
+SLEEP_TIMER = 60
+
 
 def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang):  # todo refactor
     match logging_level:
@@ -73,7 +75,8 @@ class Spam:  # todo tests
         controller_status = self.project_controller.get_status()
         if not controller_status:
             self.logger.info(f'controller status is %s' % controller_status)
-            return False
+            sleep(SLEEP_TIMER)
+            # return False
         target = self.target_pool.pop()
         result = self.send_post(target)
         if result:

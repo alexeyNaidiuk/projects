@@ -14,9 +14,9 @@ DATA = '------WebKitFormBoundaryOqWQIRzddHdMPBKK\r\nContent-Disposition: form-da
 class ConcreteSpam(Spam):
 
     def post(self, target) -> requests.Response:
-        data = DATA.replace('test', self.get_text().encode().decode('latin-1'))
+        data = DATA.replace('test', self.get_text())
         data = data.replace('softumwork@gmail.com', target)
-        response = requests.post(url, headers=headers, data=data, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data.encode(), proxies=self.get_proxies())
         return response
 
 
