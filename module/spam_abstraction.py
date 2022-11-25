@@ -76,7 +76,7 @@ class Spam:  # todo tests
         if not controller_status:
             self.logger.info(f'controller status is %s' % controller_status)
             sleep(SLEEP_TIMER)
-            # return False
+            return False
         target = self.target_pool.pop()
         result = self.send_post(target)
         if result:
