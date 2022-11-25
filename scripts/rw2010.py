@@ -4,7 +4,6 @@ from module.spam_abstraction import Spam
 
 url = 'http://www.rw2010.pl/go.live.php/usr_default/-/-/Register.html?usr_login_rd=SaHR0cDovL3d3dy5ydzIwMTAucGwvZ28ubGl2ZS5waHA=&rd2=html,8,rejestracjaedycja'
 
-
 headers = {
     'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary3unGxoACufNLQv8I',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',

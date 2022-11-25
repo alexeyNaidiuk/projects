@@ -2,9 +2,9 @@ import unittest
 
 import requests
 
+from module.config import SERV_HOST
 from module.pools import TurkeyTargetServerPool, ServerPool, RussianDbruTargetServerPool, RussianTargetServerPool, \
     WestProxyServerPool, WwmixProxyServerPool, MixRuTargetServerPool
-from module.config import SERV_HOST
 
 
 class TestTargetPools(unittest.TestCase):

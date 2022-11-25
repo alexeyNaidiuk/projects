@@ -25,7 +25,6 @@ url = 'https://sec-e.co.za/index.php/ar/contact-us'
 class ConcreteSpam(Spam):
 
     def post(self, target) -> requests.Response:
-
         data = {
             'name': 'name',
             'email': target,

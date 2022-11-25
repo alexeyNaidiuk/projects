@@ -30,7 +30,7 @@ class ConcreteSpam(Spam):
             'Submit': 'Send Email',
         }
 
-        response = requests.post(url, headers=headers, data=data, verify=False,  proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies())
         return response
 
 
