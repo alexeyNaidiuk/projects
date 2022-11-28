@@ -6,9 +6,7 @@ from typing import NoReturn
 
 import requests
 
-from module.pools import Pool
-from module.project_controller import ProjectController
-from module.texts import Text
+import module
 
 SLEEP_TIMER = 60
 
@@ -28,16 +26,24 @@ def get_logger(logging_level: str, project_name: str, promo_link: str, proxy_poo
 
 class Spam:  # todo tests
 
-    def __init__(self, project_controller: ProjectController, proxy_pool: Pool, target_pool: Pool, text: Text,
-                 success_message: str = '', logging_level: str = 'info'):
-        self.logger = get_logger(logging_level, project_controller.project_name, project_controller.prom_link,
-                                 proxy_pool.__class__.__name__, target_pool.__class__.__name__, text.lang)
+    def __init__(self, project_name, success_message,
+                 target_pool_name='mixru', proxy_pool_name='checked', target_lang='ru', logging_level='info'):
+        self.target_pool: module.Pool = module.TargetServerFactory.get_pool(factory_name=target_pool_name)
+        self.proxy_pool: module.Pool = module.ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
+        self.text: module.Text = module.Text(text_lang=target_lang)
+
+        self.project_controller: module.ProjectController = module.ProjectServerControllerCached(
+            project_name=project_name)
+        promo_link: str | None = self.project_controller.retrieve_attached_link()
+        if not promo_link:
+            promo_link = module.LinkShortner.get_link(target_pool_name)
+
+        self.project_controller.prom_link = promo_link
+        self.project_controller.get_status()
+        self.logger = get_logger(logging_level, project_name, self.project_controller.prom_link,
+                                 proxy_pool_name, target_pool_name, target_lang)
         self.logger.info('Spam initialized')
         self.success_message: str = success_message
-        self.project_controller = project_controller
-        self.proxy_pool = proxy_pool
-        self.target_pool = target_pool
-        self.text = text
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
