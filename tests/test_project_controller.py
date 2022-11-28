@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from module.project_controller import ProjectController, ProjectServerController
+from module.project_controller import ProjectServerController, ProjectServerControllerCached
 
 
 class TestProjectServerController(unittest.TestCase):
@@ -80,7 +80,7 @@ class TestProjectControllerCached(unittest.TestCase):
     def test_get_status(self):
         prom_link = 'bit.ly/3qXjAzN'
         project_name = 'test'
-        project = ProjectController(project_name=project_name, prom_link=prom_link)
+        project = ProjectServerControllerCached(project_name=project_name, prom_link=prom_link)
 
         results = []
 

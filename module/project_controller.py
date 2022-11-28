@@ -1,3 +1,4 @@
+import abc
 import datetime
 import json
 import pathlib
@@ -11,12 +12,31 @@ from module.config import ZENNO_KEY
 STATUS_EXPIRATION_LIMIT_IN_SEC = 60
 
 
-class ProjectServerController:
+class ProjectController(abc.ABC):
     __slots__ = ['project_name', 'prom_link']
+
+    @abc.abstractmethod
+    def __init__(self):
+        ...
+
+    @abc.abstractmethod
+    def send_count(self, count) -> int:
+        ...
+
+    @abc.abstractmethod
+    def get_status(self) -> bool:
+        ...
+    
+    @abc.abstractmethod
+    def retrieve_attached_link(self):
+        ...
+
+
+class ProjectServerController(ProjectController):
     __url = 'https://zennotasks.com/automation/api.php'
     __key = ZENNO_KEY
 
-    def __init__(self, project_name, prom_link):
+    def __init__(self, project_name: str = 'test', prom_link: str = 'bit.ly/3Vf3VcM'):
         self.project_name = project_name
         self.prom_link = prom_link
 
@@ -27,13 +47,16 @@ class ProjectServerController:
         response = requests.get(self.__url, params=params)
         return response.status_code
 
-    def retrieve_attached_link(self):
+    def retrieve_attached_link(self) -> str | None:
         '''https://zennotasks.com/automation/api.php?key=FOO&getlink=1&project=BAR'''
 
         params = {'key': self.__key, 'getlink': '1', 'project': self.project_name}
         resp = requests.get(self.__url, params=params)
         content = resp.content.decode()
-        return content
+        if 'Undefined variable' in content:
+            return None
+        else:
+            return content
 
     def get_status(self) -> bool:
         '''https://zennotasks.com/automation/api.php?key=FOO&iswork=1&project=BAR&prom_link=BIT.LY/FOOBAR'''
@@ -60,7 +83,7 @@ def _load_json(file_path: pathlib.Path) -> dict:
     return result
 
 
-class ProjectControllerWithCache(ProjectServerController):
+class ProjectServerControllerCached(ProjectServerController):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -83,7 +106,9 @@ class ProjectControllerWithCache(ProjectServerController):
             _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
 
         return status
+    
 
+class ProjectControllerAutoLinking(ProjectServerController):
 
-class ProjectController(ProjectControllerWithCache):
-    ...
+    def __init__(self, *args, **kwargs):
+        super(ProjectControllerAutoLinking, self).__init__(*args, **kwargs)

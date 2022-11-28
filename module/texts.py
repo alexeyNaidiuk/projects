@@ -20,14 +20,13 @@ class Text:
               " {bonus|ödül|hediye} süresi {sınırlı|sınırlı}! 🔥"
     }
 
-    def __init__(self, promo_link: str, text_lang: str):
+    def __init__(self, text_lang: str):
         self.text = self.__texts[text_lang]
-        self.promo_link = promo_link
 
-    def get_text(self, with_stickers: bool = True):
+    def get_text(self, promo_link: str, with_stickers: bool = True):
         spinned_text = spintax.spin(self.text)
         template = Template(spinned_text)
-        message = template.substitute(link=self.promo_link)
+        message = template.substitute(link=promo_link)
         if not with_stickers:
             message = message.replace('🔥', '')
             message = message.replace('👉', '')

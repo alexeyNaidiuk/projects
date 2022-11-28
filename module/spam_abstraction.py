@@ -6,14 +6,14 @@ from typing import NoReturn
 
 import requests
 
-from module.pools import TargetServerFactory, ProxyServerFactory, Pool
+from module.pools import Pool
 from module.project_controller import ProjectController
 from module.texts import Text
 
 SLEEP_TIMER = 60
 
 
-def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang):  # todo refactor
+def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool):  # todo refactor
     match logging_level:
         case 'debug':
             logging_level = logging.DEBUG
@@ -21,32 +21,30 @@ def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool,
             logging_level = logging.INFO
     logger = logging.getLogger(project_name)
     logging.basicConfig(
-        format=f'%(name)s {promo_link} {proxy_pool} {target_pool} {text_lang} %(asctime)s: %(message)s')
+        format=f'%(name)s {promo_link} {proxy_pool} {target_pool} %(asctime)s: %(message)s')
     logger.setLevel(logging_level)
     return logger
 
 
 class Spam:  # todo tests
 
-    def __init__(self, promo_link: str = 'google.com', project_name: str = 'spam', success_message: str = '',
-                 logging_level: str = 'info',
-                 proxy_pool: str = 'checked', target_pool: str = 'mixru', text_lang: str = 'ru'):
-        self.logger = get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool, text_lang)
+    def __init__(self, project_controller: ProjectController, proxy_pool: Pool, target_pool: Pool, text: Text,
+                 success_message: str = '', logging_level: str = 'info'):
+        self.logger = get_logger(logging_level, project_controller.project_name, project_controller.prom_link,
+                                 proxy_pool, target_pool)
 
         self.success_message: str = success_message
-        self.target_pool: Pool = TargetServerFactory.get_pool(factory_name=target_pool)
-        self.proxy_pool: Pool = ProxyServerFactory.get_pool(factory_name=proxy_pool)
-        self.text: Text = Text(promo_link=promo_link, text_lang=text_lang)
-
-        self.project_controller: ProjectController = ProjectController(project_name=project_name, prom_link=promo_link)
-        self.project_controller.get_status()
+        self.project_controller = project_controller
+        self.proxy_pool = proxy_pool
+        self.target_pool = target_pool
+        self.text = text
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
         ...
 
     def get_text(self, with_stickers: bool = True):
-        return self.text.get_text(with_stickers=with_stickers)
+        return self.text.get_text(promo_link=self.project_controller.prom_link, with_stickers=with_stickers)
 
     def get_proxies(self):
         proxy = self.proxy_pool.pop()
