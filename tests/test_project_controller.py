@@ -66,6 +66,15 @@ class TestProjectServerController(unittest.TestCase):
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)
 
+    # def test_link_attacher(self):
+    #     database = 'mixru'
+    #     project_name = 'newProject'
+    #     link = 'bit.ly/3i92KwG'
+    #     controller = ProjectServerControllerWithoutLink(project_name, link)
+    #     controller.get_status()
+    #     attached_link = controller.retrieve_attached_link()
+    #     breakpoint()
+
 
 class TestProjectControllerCached(unittest.TestCase):
     def test_get_status(self):
