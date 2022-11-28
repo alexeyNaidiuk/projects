@@ -18,6 +18,7 @@ if __name__ == '__main__':
     target_pool_name = 'mixru'
     proxy_pool_name = 'checked'
     target_lang = 'ru'
+    success_message = ''
 
     project_controller: ProjectController = ProjectServerControllerCached(project_name=project_name)
     promo_link: str | None = project_controller.retrieve_attached_link()
@@ -31,7 +32,6 @@ if __name__ == '__main__':
     proxy_pool: Pool = ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
     text: Text = Text(text_lang=target_lang)
 
-    success_message = ''
     spam = ConcreteSpam(project_controller, proxy_pool, target_pool, text, success_message)
     res = spam.send_post()
     # if res:
