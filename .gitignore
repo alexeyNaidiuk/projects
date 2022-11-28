@@ -3,3 +3,4 @@
 /not_sending/
 push_image.sh
 /.github
+.env
