@@ -66,6 +66,14 @@ class TestProjectServerController(unittest.TestCase):
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)
 
+        project_name = 'awdv43'
+        project = ProjectServerController(project_name=project_name)
+        link = project.retrieve_attached_link()
+
+        self.assertIsNone(link)
+
+
+
     # def test_link_attacher(self):
     #     database = 'mixru'
     #     project_name = 'newProject'

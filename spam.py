@@ -15,6 +15,7 @@ class ConcreteSpam(Spam):
 
 if __name__ == '__main__':
     project_name = 'newproject2'
+
     target_pool_name = 'mixru'
     proxy_pool_name = 'checked'
     target_lang = 'ru'
