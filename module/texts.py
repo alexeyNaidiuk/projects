@@ -21,6 +21,7 @@ class Text:
     }
 
     def __init__(self, text_lang: str):
+        self.lang = text_lang
         self.text = self.__texts[text_lang]
 
     def get_text(self, promo_link: str, with_stickers: bool = True):

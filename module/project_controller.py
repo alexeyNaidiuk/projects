@@ -8,6 +8,7 @@ from typing import NoReturn
 import requests
 
 from module.config import ZENNO_KEY
+from module.link_shortner import LinkShortner
 
 STATUS_EXPIRATION_LIMIT_IN_SEC = 60
 
@@ -106,9 +107,3 @@ class ProjectServerControllerCached(ProjectServerController):
             _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
 
         return status
-    
-
-class ProjectControllerAutoLinking(ProjectServerController):
-
-    def __init__(self, *args, **kwargs):
-        super(ProjectControllerAutoLinking, self).__init__(*args, **kwargs)

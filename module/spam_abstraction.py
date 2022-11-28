@@ -13,7 +13,7 @@ from module.texts import Text
 SLEEP_TIMER = 60
 
 
-def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool):  # todo refactor
+def get_logger(logging_level: str, project_name: str, promo_link: str, proxy_pool: str, target_pool: str, lang: str):
     match logging_level:
         case 'debug':
             logging_level = logging.DEBUG
@@ -21,7 +21,7 @@ def get_logger(logging_level, project_name, promo_link, proxy_pool, target_pool)
             logging_level = logging.INFO
     logger = logging.getLogger(project_name)
     logging.basicConfig(
-        format=f'%(name)s {promo_link} {proxy_pool} {target_pool} %(asctime)s: %(message)s')
+        format=f'%(name)s {promo_link} {proxy_pool} {target_pool} {lang} %(asctime)s: %(message)s')
     logger.setLevel(logging_level)
     return logger
 
@@ -31,8 +31,8 @@ class Spam:  # todo tests
     def __init__(self, project_controller: ProjectController, proxy_pool: Pool, target_pool: Pool, text: Text,
                  success_message: str = '', logging_level: str = 'info'):
         self.logger = get_logger(logging_level, project_controller.project_name, project_controller.prom_link,
-                                 proxy_pool, target_pool)
-
+                                 proxy_pool.__class__.__name__, target_pool.__class__.__name__, text.lang)
+        self.logger.info('Spam initialized')
         self.success_message: str = success_message
         self.project_controller = project_controller
         self.proxy_pool = proxy_pool
