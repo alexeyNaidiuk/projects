@@ -61,5 +61,5 @@ if __name__ == '__main__':
 
     spam = ConcreteSpam(project_name, success_message)
     res = spam.send_post()  # 3gBKP1z mixru
-    # if res:
-    #     spam.run_concurrently()
+    if res:
+        spam.run_concurrently()
