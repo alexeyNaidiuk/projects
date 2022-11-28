@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build . -t alexeynaidiuk/projects && docker push alexeynaidiuk/projects
+docker build . -t alexeynaidiuk/projects:master && docker push alexeynaidiuk/projects:master
