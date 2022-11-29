@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   projects:
+    build: .
     image: "alexeynaidiuk/projects:master"
     env_file:
       - .env
