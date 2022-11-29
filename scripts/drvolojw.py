@@ -45,7 +45,7 @@ class ConcreteSpam(module.Spam):
 
 
 if __name__ == '__main__':
-    project_name = 'drvolojw'
+    project_name = 'drvolojw'  # 3gGGJoS
     s = '"errors":null'
 
     spam = ConcreteSpam(project_name, s)
