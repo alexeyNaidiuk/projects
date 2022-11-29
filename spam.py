@@ -10,7 +10,7 @@ class ConcreteSpam(module.Spam):
 
 
 if __name__ == '__main__':
-    project_name = 'test'
+    project_name = 'spam'
     success_message = ''
 
     spam = ConcreteSpam(project_name, success_message)
