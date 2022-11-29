@@ -24,8 +24,8 @@ class ConcreteSpam(module.Spam):
 
 if __name__ == '__main__':
     success_message = 'Dziękujemy'
-    project_name = 'rw2010'
+    project_name = 'rw2010'  # 3gDsS2B
     spam = ConcreteSpam(project_name, success_message)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently()
+    if res:
+        spam.run_concurrently()
