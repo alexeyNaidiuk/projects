@@ -22,7 +22,10 @@ class ConcreteSpam(module.Spam):
 if __name__ == '__main__':
     success_message = 'Thank you for your message'  # 3GSYVpK
     project_name = 'kiddosride'
-    spam = ConcreteSpam(project_name, success_message)
+
+    project = 'supercat'  # supercat luckybird allright fortuneclock
+    promo_link = 'bit.ly/3VwGegl'
+    spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=promo_link)
     res = spam.send_post()
     if res:
         spam.run_concurrently()

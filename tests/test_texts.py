@@ -8,23 +8,22 @@ class TestText(unittest.TestCase):
     def test_get_text_with_stickers(self):
         promo_link = 'google.com'
         text_language = 'ru'
-        with_stickers = True
-        text = Text(promo_link, text_language)
-        result = text.get_text(with_stickers=with_stickers)
-        self.assertIn(promo_link, result)
+        project = 'fortuneclock'
+        spins = '50'
 
+        text = Text(lang=text_language, link=promo_link, project=project, freespins=spins)
+
+        result = text.get_text(with_stickers=True)
+        print(result)
+        self.assertIn(promo_link, result)
+        self.assertIn(project.capitalize(), result)
+        self.assertIn(spins, result)
         self.assertIn('🔥', result)
         self.assertIn('👉', result)
         self.assertIn('👈', result)
 
-    def test_get_text_without_stickers(self):
-        promo_link = 'google.com'
-        text_language = 'ru'
-        with_stickers = False
-        text = Text(promo_link, text_language)
-        result = text.get_text(with_stickers=with_stickers)
-        self.assertIn(promo_link, result)
-
+        result = text.get_text(with_stickers=False)
+        print(result)
         self.assertNotIn('🔥', result)
         self.assertNotIn('👉', result)
         self.assertNotIn('👈', result)

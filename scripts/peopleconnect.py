@@ -35,7 +35,9 @@ if __name__ == '__main__':
     project_name = 'peopleconnect'
     s = 'Thank you for contacting People Connect!'
 
-    spam = ConcreteSpam(project_name, s)
+    link = 'bit.ly/3gLbZTC'
+    project = 'fortuneclock'  # supercat luckybird allright fortuneclock
+    spam = ConcreteSpam(project_name, s, referal_project_name=project, promo_link=link)
     res = spam.send_post()
     if res:
         spam.run_concurrently()

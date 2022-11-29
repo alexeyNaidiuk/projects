@@ -11,37 +11,48 @@ import module
 SLEEP_TIMER = 60
 
 
-def get_logger(logging_level: str, project_name: str, promo_link: str, proxy_pool: str, target_pool: str, lang: str):
+def get_logger(*args, **kwargs):
+    info = ' '.join(args)
+    logging_level = kwargs['logging_level']
+    project_name = kwargs['project_name']
     match logging_level:
         case 'debug':
             logging_level = logging.DEBUG
         case 'info':
             logging_level = logging.INFO
     logger = logging.getLogger(project_name)
-    logging.basicConfig(
-        format=f'%(name)s {promo_link} {proxy_pool} {target_pool} {lang} %(asctime)s: %(message)s')
+    logging.basicConfig(format=f'%(name)s {info} %(asctime)s: %(message)s')
     logger.setLevel(logging_level)
     return logger
 
 
 class Spam:  # todo tests
 
-    def __init__(self, project_name, success_message,
-                 target_pool_name='mixru', proxy_pool_name='checked', target_lang='ru', logging_level='info'):
+    def __init__(self,
+                 project_name,
+                 success_message,
+                 target_pool_name='mixru',
+                 proxy_pool_name='checked',
+                 lang='ru',
+                 logging_level='info',
+                 referal_project_name: str = 'luckybird',
+                 promo_link: str | None = None):
         self.target_pool: module.Pool = module.TargetServerFactory.get_pool(factory_name=target_pool_name)
         self.proxy_pool: module.Pool = module.ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
-        self.text: module.Text = module.Text(text_lang=target_lang)
 
-        self.project_controller: module.ProjectController = module.ProjectServerControllerCached(
-            project_name=project_name)
-        promo_link: str | None = self.project_controller.retrieve_attached_link()
+        self.project_controller = module.ProjectServerControllerCached(project_name=project_name)
         if not promo_link:
-            promo_link = module.LinkShortner.get_link(target_pool_name)
-
+            # promo_link: str | None = self.project_controller.retrieve_attached_link()
+            promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
         self.project_controller.prom_link = promo_link
         self.project_controller.get_status()
-        self.logger = get_logger(logging_level, project_name, self.project_controller.prom_link,
-                                 proxy_pool_name, target_pool_name, target_lang)
+
+        self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
+
+        self.logger = get_logger(
+            self.project_controller.prom_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
+            project_name=project_name, logging_level=logging_level
+        )
         self.logger.info('Spam initialized')
         self.success_message: str = success_message
 
@@ -50,7 +61,7 @@ class Spam:  # todo tests
         ...
 
     def get_text(self, with_stickers: bool = True):
-        return self.text.get_text(promo_link=self.project_controller.prom_link, with_stickers=with_stickers)
+        return self.text.get_text(with_stickers=with_stickers)
 
     def get_proxies(self):
         proxy = self.proxy_pool.pop()

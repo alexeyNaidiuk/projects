@@ -17,7 +17,7 @@ class ConcreteSpam(Spam):
             'contact_name': target,
             'contact_email': target,
             'contact_subject': self.get_text(),
-            'contact_message': 'Получи 50 free spins за Регистрацию в клубе по ссылке ниже https://bit.ly/3NXJdev Торопись, время действия приза ограничено!',
+            'contact_message': self.get_text(False),
             'contact_email_copy': '1',
             'submit': '1',
         }
@@ -28,9 +28,11 @@ class ConcreteSpam(Spam):
 
 if __name__ == '__main__':
     success_message = 'Thank you!'
-    project_name = 'hhisolutions'  # 3FcoQr6
-    promo_link = 'bit.ly/3ABYNXE'
-    spam = ConcreteSpam(project_name, success_message)
+    project_name = 'hhisolutions'
+
+    project = 'fortuneclock'  # supercat luckybird allright fortuneclock
+    promo_link = 'bit.ly/3UhlTK8'
+    spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=promo_link)
     res = spam.send_post()
-    # if res:
-    #     spam.run_concurrently()
+    if res:
+        spam.run_concurrently()
