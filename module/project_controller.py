@@ -8,7 +8,6 @@ from typing import NoReturn
 import requests
 
 from module.config import ZENNO_KEY
-from module.link_shortner import LinkShortner
 
 STATUS_EXPIRATION_LIMIT_IN_SEC = 60
 
@@ -27,7 +26,7 @@ class ProjectController(abc.ABC):
     @abc.abstractmethod
     def get_status(self) -> bool:
         ...
-    
+
     @abc.abstractmethod
     def retrieve_attached_link(self):
         ...
