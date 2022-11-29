@@ -37,24 +37,24 @@ class Spam:  # todo tests
                  logging_level='info',
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
-        self.target_pool: module.Pool = module.TargetServerFactory.get_pool(factory_name=target_pool_name)
-        self.proxy_pool: module.Pool = module.ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
+        self.success_message: str = success_message
 
+        project_name = project_name+target_pool_name+referal_project_name
         self.project_controller = module.ProjectServerControllerCached(project_name=project_name)
         if not promo_link:
-            # promo_link: str | None = self.project_controller.retrieve_attached_link()
             promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
         self.project_controller.prom_link = promo_link
         self.project_controller.get_status()
 
         self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
+        self.target_pool: module.Pool = module.TargetServerFactory.get_pool(factory_name=target_pool_name)
+        self.proxy_pool: module.Pool = module.ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
 
         self.logger = get_logger(
             self.project_controller.prom_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
-            project_name=project_name, logging_level=logging_level
+            project_name=self.project_controller.project_name, logging_level=logging_level
         )
         self.logger.info('Spam initialized')
-        self.success_message: str = success_message
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
