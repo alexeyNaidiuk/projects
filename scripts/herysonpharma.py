@@ -41,6 +41,6 @@ if __name__ == '__main__':
     project = 'allright'  # supercat luckybird allright fortuneclock
     promo_link = 'bit.ly/3ELdiK8'
     spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=promo_link)
-    res = spam.send_post()
+    res = spam.send_post()  # True
     if res:
         spam.run_concurrently()
