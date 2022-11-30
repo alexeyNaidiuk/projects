@@ -2,7 +2,7 @@ import requests
 
 import module
 
-url = 'https://yyefqkhj.paperform.co/api/v1/form/608be2ebef9d880f44129961/submit'  # https://yesldn.org/refer/
+url = 'https://hxuevil4.paperform.co/api/v1/form/5f7c65ec1d47c23a5635a8b5/submit'
 
 headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
@@ -20,11 +20,11 @@ class ConcreteSpam(module.Spam):
                 },
                 {
                     'key': 'etpf0',
-                    'value': self.get_text(),
+                    'value': 'test https://workroutes.co.uk/sign-up-page/',
                 },
                 {
                     'key': 'a90bi',
-                    'value': '12211221222',
+                    'value': '12212121222',
                 },
                 {
                     'key': 'gtqe',
@@ -32,14 +32,18 @@ class ConcreteSpam(module.Spam):
                 },
                 {
                     'key': 'bu23o',
-                    'value': self.get_text(),
+                    'value': 'test https://workroutes.co.uk/sign-up-page/',
+                },
+                {
+                    'key': '699oa',
+                    'value': 'No',
                 },
             ],
             'payment': None,
             'captcha': None,
             'score': False,
-            'partialSubmissionId': 'clb3h409t00002v6u88bsju2z',
-            'deviceId': 'clb3h3djy00012v6ur4l2q1wn',
+            'partialSubmissionId': 'clb3iy4ug00002v6ufqy6o9ig',
+            'deviceId': 'clb3iy4ug00012v6udoclfkn1',
         }
 
         response = requests.post(url, headers=headers, json=json_data, proxies=self.get_proxies())
@@ -47,12 +51,12 @@ class ConcreteSpam(module.Spam):
 
 
 if __name__ == '__main__':
-    project_name = 'drvolojw'
-    s = '"errors":null'
+    project_name = 'hxuevil4'
+    success_message = '"errors":null'
 
-    project = 'fortuneclock'  # supercat luckybird allright fortuneclock
-    promo_link = 'bit.ly/3gE7zxX'
-    spam = ConcreteSpam(project_name, s, referal_project_name=project, promo_link=promo_link)
-    res = spam.send_post()  # True
+    project = 'allright'  # supercat luckybird allright fortuneclock
+    promo_link = 'bit.ly/3XHoqR0'
+    spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=promo_link)
+    res = spam.send_post()
     if res:
         spam.run_concurrently()
