@@ -13,16 +13,10 @@ SLEEP_TIMER = 60
 
 def get_logger(*args, **kwargs):
     info = ' '.join(args)
-    logging_level = kwargs['logging_level']
     project_name = kwargs['project_name']
-    match logging_level:
-        case 'debug':
-            logging_level = logging.DEBUG
-        case 'info':
-            logging_level = logging.INFO
     logger = logging.getLogger(project_name)
     logging.basicConfig(format=f'%(name)s {info} %(asctime)s: %(message)s')
-    logger.setLevel(logging_level)
+    logger.setLevel(logging.INFO)
     return logger
 
 
@@ -34,7 +28,6 @@ class Spam:  # todo tests
                  target_pool_name='mixru',
                  proxy_pool_name='checked',
                  lang='ru',
-                 logging_level='info',
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
         self.success_message: str = success_message
@@ -52,7 +45,7 @@ class Spam:  # todo tests
 
         self.logger = get_logger(
             self.project_controller.prom_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
-            project_name=self.project_controller.project_name, logging_level=logging_level
+            project_name=self.project_controller.project_name
         )
         self.logger.info('Spam initialized')
 
