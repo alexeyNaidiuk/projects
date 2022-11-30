@@ -2,10 +2,11 @@ import requests
 
 import module
 
+url = 'https://yyefqkhj.paperform.co/api/v1/form/608be2ebef9d880f44129961/submit'
+
 headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
 }
-url = 'https://drvolojw.paperform.co/api/v1/form/61b0b2302b1f2a6d506de00f/submit'
 
 
 class ConcreteSpam(module.Spam):
@@ -14,32 +15,33 @@ class ConcreteSpam(module.Spam):
         json_data = {
             'data': [
                 {
-                    'key': 'f2t63',
+                    'key': '3pj7t',
                     'value': self.get_text(),
                 },
                 {
-                    'key': 'ah0u2',
-                    'value': target,
-                },
-                {
-                    'key': 'ajgvn',
+                    'key': 'etpf0',
                     'value': self.get_text(),
                 },
                 {
-                    'key': '3nmcu',
-                    'value': '21212121',
+                    'key': 'a90bi',
+                    'value': '12211221222',
                 },
                 {
-                    'key': '75mo7',
+                    'key': 'gtqe',
                     'value': target,
+                },
+                {
+                    'key': 'bu23o',
+                    'value': self.get_text(),
                 },
             ],
             'payment': None,
             'captcha': None,
             'score': False,
-            'partialSubmissionId': 'clb23fxgd00002v6u3t2n3yph',
-            'deviceId': 'clb22y7in00012v6usjhckzm2',
+            'partialSubmissionId': 'clb3h409t00002v6u88bsju2z',
+            'deviceId': 'clb3h3djy00012v6ur4l2q1wn',
         }
+
         response = requests.post(url, headers=headers, json=json_data, proxies=self.get_proxies())
         return response
 
