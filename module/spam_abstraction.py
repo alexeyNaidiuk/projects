@@ -40,8 +40,8 @@ class Spam:  # todo tests
         self.project_controller.get_status()
 
         self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
-        self.target_pool: module.Pool = module.TargetServerFactory.get_pool(factory_name=target_pool_name)
-        self.proxy_pool: module.Pool = module.ProxyServerFactory.get_pool(factory_name=proxy_pool_name)
+        self.target_pool: module.ServerPool = module.TargetServerPool(pool_name=target_pool_name)
+        self.proxy_pool: module.ServerPool = module.ProxyServerPool(pool_name=proxy_pool_name)
 
         self.logger = get_logger(
             self.project_controller.prom_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
@@ -54,12 +54,17 @@ class Spam:  # todo tests
         ...
 
     def get_text(self, with_stickers: bool = True):
-        return self.text.get_text(with_stickers=with_stickers)
+        text = self.text.get_text(with_stickers=with_stickers)
+        return text
 
     def get_proxies(self):
         proxy = self.proxy_pool.pop()
         proxies = {'http': proxy, 'https': proxy}
         return proxies
+
+    def get_target(self):
+        target = self.target_pool.pop()
+        return target
 
     def try_to_post(self, target: str) -> requests.Response:
         response = None
@@ -84,7 +89,7 @@ class Spam:  # todo tests
             self.logger.info(f'controller status is %s' % controller_status)
             sleep(SLEEP_TIMER)
             return False
-        target = self.target_pool.pop()
+        target = self.get_target()
         result = self.send_post(target)
         if result:
             self.project_controller.send_count(1)

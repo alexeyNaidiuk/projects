@@ -3,8 +3,7 @@ import unittest
 import requests
 
 from module.config import SERV_HOST
-from module.pools import TurkeyTargetServerPool, ServerPool, RussianDbruTargetServerPool, RussianTargetServerPool, \
-    WestProxyServerPool, WwmixProxyServerPool, MixRuTargetServerPool
+from module.pools import TargetServerPool, ProxyServerPool
 
 
 class TestTargetPools(unittest.TestCase):
@@ -13,45 +12,20 @@ class TestTargetPools(unittest.TestCase):
         response = requests.get(f'http://{SERV_HOST}/').content.decode()
         self.assertIn('ok', response)
 
-    def test_turkey_pool(self):
-        target_pool: ServerPool = TurkeyTargetServerPool()
-        target = target_pool.pop()
-        self.assertTrue('@' in target)
+    def test_target_pool(self):
+        pools = {'turkey', 'alotof', 'dbru', 'mixru', 'rub36'}
 
-    def test_russian_pool(self):
-        target_pool: ServerPool = RussianTargetServerPool()
-        target = target_pool.pop()
-        self.assertTrue('@' in target)
+        for pool in pools:
+            target_pool = TargetServerPool(pool)
 
-    def test_dbru_pool(self):
-        target_pool: ServerPool = RussianDbruTargetServerPool()
-        target = target_pool.pop()
-        self.assertTrue('@' in target)
+            target = target_pool.pop()
+            self.assertTrue('@' or '.' in target)
 
-    def test_mixru_pool(self):
-        target_pool: ServerPool = MixRuTargetServerPool()
-        target = target_pool.pop()
-        self.assertTrue('@' in target)
+    def test_proxy_pool(self):
+        pools = ['wwmix', 'west', 'checked', 'vlad']
 
-
-class TestTProxiesPools(unittest.TestCase):
-
-    def test_wwmix_pool(self):
-        proxies: ServerPool = WestProxyServerPool()
-        self.assertTrue(len(proxies.pool) is not 0)
-
-    def test_west_pool(self):
-        proxies: ServerPool = WwmixProxyServerPool()
-        self.assertTrue(len(proxies.pool) is not 0)
-
-    def test_checked_pool(self):
-        proxies: ServerPool = WwmixProxyServerPool()
-        self.assertTrue(len(proxies.pool) is not 0)
-
-
-class TestTargetFactory(unittest.TestCase):
-    ...
-
-
-class TestProxyFactory(unittest.TestCase):
-    ...
+        for pool in pools:
+            proxy_pool = ProxyServerPool(pool)
+            proxy_pool.get_pool()
+            proxy = proxy_pool.pop()
+            self.assertTrue('http' in proxy)
