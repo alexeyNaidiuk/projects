@@ -26,7 +26,7 @@ class Spam:  # todo tests
                  project_name,
                  success_message,
                  target_pool_name='mixru',
-                 proxy_pool_name='checked',
+                 proxy_pool_name='wwmix',
                  lang='ru',
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
@@ -74,7 +74,6 @@ class Spam:  # todo tests
     def send_post(self, target: str = 'softumwork@gmail.com') -> bool:
         response: requests.Response = self.try_to_post(target=target)
         content: str = response.text
-        self.logger.debug(content)
         result = self.success_message in content
         self.logger.info(f'{result} {target}')
         return result

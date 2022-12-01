@@ -11,7 +11,7 @@ class TestText(unittest.TestCase):
         project = 'fortuneclock'
         spins = '50'
 
-        text = Text(lang=text_language, link=promo_link, project=project, freespins=spins)
+        text = Text(lang=text_language, link=promo_link, project=project)
 
         result = text.get_text(with_stickers=True)
         print(result)
