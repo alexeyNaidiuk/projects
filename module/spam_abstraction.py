@@ -97,8 +97,8 @@ class Spam:  # todo tests
 
     def main(self) -> bool:
         get_controller_status = self.get_controller_status()
-        self.logger.info(f'controller status is %s' % get_controller_status)
         if not get_controller_status:
+            self.logger.info(f'controller status is %s' % get_controller_status)
             sleep(SLEEP_TIMER)
             return False
         target = self.get_target()
