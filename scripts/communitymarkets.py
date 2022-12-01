@@ -35,8 +35,9 @@ class ConcreteSpam(module.Spam):
 
         data = data.replace('softumwork%40gmail.com', target)
         data = data.replace('test', self.get_text())
+        proxies = self.get_proxies()
         response = requests.post('https://www.communitymarkets.com/wp-admin/admin-ajax.php', headers=headers,
-                                 data=data.encode(), proxies=self.get_proxies())
+                                 data=data.encode(), proxies=proxies, timeout=10)
         return response
 
 
@@ -51,5 +52,5 @@ if __name__ == '__main__':
         promo_link=promo_link
     )
     res = spam.send_post()
-    if res:
-        spam.run_concurrently()
+    # if res:
+    #     spam.run_concurrently()

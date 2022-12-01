@@ -32,7 +32,7 @@ class ConcreteSpam(module.Spam):
             'ctajax_modid': '144',
         }
 
-        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies(), timeout=10)
         return response
 
 

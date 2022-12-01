@@ -15,7 +15,7 @@ class ConcreteSpam(module.Spam):
 
     def post(self, target) -> requests.Response:
         data = DATA.replace('softumwork@gmail.com', target).replace('test', self.get_text())
-        response = requests.post(url, headers=headers, data=data.encode(), proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data.encode(), proxies=self.get_proxies(), timeout=10)
         return response
 
 

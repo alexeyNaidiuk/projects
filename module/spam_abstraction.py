@@ -26,7 +26,7 @@ class Spam:  # todo tests
                  project_name,
                  success_message,
                  target_pool_name='mixru',
-                 proxy_pool_name='wwmix',
+                 proxy_pool_name='vlad',
                  lang='ru',
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
@@ -83,20 +83,28 @@ class Spam:  # todo tests
         self.logger.info(f'{result} {target}')
         return result
 
-    def main(self) -> bool:
+    def get_controller_status(self) -> bool:
         controller_status = self.project_controller.get_status()
-        if not controller_status:
-            self.logger.info(f'controller status is %s' % controller_status)
-            sleep(SLEEP_TIMER)
-            return False
-        target = self.get_target()
-        result = self.send_post(target)
+        return controller_status
+
+    def send_results(self, result):
         if result:
             self.project_controller.send_count(1)
             return True
         else:
             self.project_controller.send_count(0)
             return False
+
+    def main(self) -> bool:
+        get_controller_status = self.get_controller_status()
+        self.logger.info(f'controller status is %s' % get_controller_status)
+        if not get_controller_status:
+            sleep(SLEEP_TIMER)
+            return False
+        target = self.get_target()
+        result = self.send_post(target)
+        self.send_results(result)
+        return result
 
     def infinite_main(self):
         result = True

@@ -18,7 +18,7 @@ class ConcreteSpam(module.Spam):
         data = DATA.replace('test http://www.rw2010.pl/go.live.php/PL-H8/rejest', self.get_text())
         data = data.replace('softumwork@gmail.com', target)
 
-        response = requests.post(url, headers=headers, data=data.encode(), verify=False, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data.encode(), verify=False, proxies=self.get_proxies(), timeout=10)
         return response
 
 

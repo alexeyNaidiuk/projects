@@ -42,7 +42,7 @@ class ConcreteSpam(module.Spam):
             'deviceId': 'clb3h3djy00012v6ur4l2q1wn',
         }
 
-        response = requests.post(url, headers=headers, json=json_data, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, json=json_data, proxies=self.get_proxies(), timeout=10)
         return response
 
 

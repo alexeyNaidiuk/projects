@@ -28,7 +28,7 @@ class ConcreteSpam(module.Spam):
             'ctl00$MainContent$ImageButton1.y': '13',
         }
 
-        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies())
+        response = requests.post(url, headers=headers, data=data, verify=False, proxies=self.get_proxies(), timeout=10)
         return response
 
 
