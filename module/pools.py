@@ -1,3 +1,5 @@
+from random import shuffle
+
 import requests
 
 from module.config import *
@@ -41,3 +43,4 @@ class ProxyServerPool(ServerPool):
         response = requests.get(f'{self._url}/proxies/{self.pool_name}/pool')
         content = response.content.decode()
         self.pool = content.split('\n')
+        shuffle(self.pool)
