@@ -13,7 +13,7 @@ if __name__ == '__main__':
     project_name = 'spam'
     success_message = ''
 
-    project = 'luckybird'  # supercat luckybird allright fortuneclock
+    project = 'supercat'  # supercat luckybird allright fortuneclock
     promo_link = 'bit.ly/3VyF5El'
     spam = ConcreteSpam(
         project_name, success_message,
@@ -23,4 +23,3 @@ if __name__ == '__main__':
     res = spam.send_post()
     # if res:
     #     spam.run_concurrently()
-s

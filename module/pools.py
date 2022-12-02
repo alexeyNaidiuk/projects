@@ -28,7 +28,7 @@ class ServerPool(Pool):
 class TargetServerPool(ServerPool):
 
     def pop(self) -> str:
-        return requests.get(f'{self._url}/targets/{self.pool_name}/pop').content.decode('latin-1')
+        return requests.get(f'{self._url}/targets/{self.pool_name}/pop', timeout=10).content.decode('latin-1')
 
 
 class ProxyServerPool(ServerPool):
@@ -40,7 +40,7 @@ class ProxyServerPool(ServerPool):
         return value
 
     def get_pool(self) -> None:
-        response = requests.get(f'{self._url}/proxies/{self.pool_name}/pool')
+        response = requests.get(f'{self._url}/proxies/{self.pool_name}/pool', timeout=10)
         content = response.content.decode()
         self.pool = content.split('\n')
         shuffle(self.pool)

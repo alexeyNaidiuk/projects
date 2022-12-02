@@ -9,7 +9,7 @@ from module.pools import TargetServerPool, ProxyServerPool
 class TestTargetPools(unittest.TestCase):
 
     def test_server_status(self):
-        response = requests.get(f'http://{SERV_HOST}/').content.decode()
+        response = requests.get(f'http://{SERV_HOST}/', timeout=5).content.decode()
         self.assertIn('ok', response)
 
     def test_target_pool(self):
@@ -28,4 +28,4 @@ class TestTargetPools(unittest.TestCase):
             proxy_pool = ProxyServerPool(pool)
             proxy_pool.get_pool()
             proxy = proxy_pool.pop()
-            self.assertTrue('http' in proxy)
+            self.assertTrue('http' or 'socks' in proxy)

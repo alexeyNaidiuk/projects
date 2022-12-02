@@ -45,17 +45,16 @@ class TestProjectServerController(unittest.TestCase):
 
         self.assertNotIn(False, results)
 
-    def test_send_bad_status(self):
-        prom_link = 'bit.ly/3qXjAzN'
-        project_name = 'test'
-        project = ProjectServerController(project_name=project_name, prom_link=prom_link)
-        results = []
-        for _ in range(110):
-            status = project.get_status()
-            results.append(status)
-            project.send_count(0)
-        project.send_count(1)
-        self.assertIn(False, results)
+    # def test_send_bad_status(self):
+    #     prom_link = 'bit.ly/3qXjAzN'
+    #     project_name = 'test'
+    #     project = ProjectServerController(project_name=project_name, prom_link=prom_link)
+    #     results = []
+    #     for _ in range(110):
+    #         status = project.get_status()
+    #         results.append(status)
+    #         project.send_count(0)
+    #     self.assertIn(False, results)
 
     def test_retrieve_attached_link(self):
         prom_link = 'bit.ly/3qXjAzN'
