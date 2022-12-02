@@ -22,6 +22,8 @@ def get_logger(*args, **kwargs):
 
 class Spam:  # todo tests
 
+    __slots__ = ['success_message', 'project_controller', 'text', 'target_pool', 'proxy_pool', 'logger']
+
     def __init__(self,
                  project_name,
                  success_message,

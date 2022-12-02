@@ -35,6 +35,7 @@ class ProjectController(abc.ABC):
 class ProjectServerController(ProjectController):
     __url = 'https://zennotasks.com/automation/api.php'
     __key = ZENNO_KEY
+    __slots__ = ['prom_link', 'project_name']
 
     def __init__(self, project_name: str = 'test', prom_link: str = 'bit.ly/3Vf3VcM'):
         self.project_name = project_name

@@ -4,6 +4,7 @@ from spintax import spintax
 
 
 class Text:
+    __slots__ = ['link', 'project', 'spins', 'text']
     __texts = {
         'eng': '🔥 {Get|Loot|Use} {your|} $spins {FS|freespins|free spins|spins}'
                ' for a {quick Registration|start|take a part} on $project by'
