@@ -44,7 +44,6 @@ class ConcreteSpam(module.Spam):
             timeout=3,
             cookies=cookies
         )
-        print(response.text)
         return response
 
 
