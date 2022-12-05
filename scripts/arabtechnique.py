@@ -28,7 +28,8 @@ class ConcreteSpam(module.Spam):
             headers=headers,
             data=data,
             verify=False,
-            proxies=self.get_proxies()
+            proxies=self.get_proxies(),
+            timeout=5
         )
         return response
 
