@@ -19,7 +19,7 @@ class TestTargetPools(unittest.TestCase):
             target_pool = TargetServerPool(pool)
 
             target = target_pool.pop()
-            self.assertTrue('@' or '.' in target)
+            self.assertTrue('@' in target or '.' in target)
 
     def test_proxy_pool(self):
         pools = ['wwmix', 'west', 'checked', 'vlad']
@@ -28,4 +28,4 @@ class TestTargetPools(unittest.TestCase):
             proxy_pool = ProxyServerPool(pool)
             proxy_pool.get_pool()
             proxy = proxy_pool.pop()
-            self.assertTrue('http' or 'socks' in proxy)
+            self.assertTrue('http' in proxy or 'socks' in proxy)
