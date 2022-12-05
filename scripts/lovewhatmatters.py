@@ -60,15 +60,13 @@ class ConcreteSpam(module.Spam):
             'partialSubmissionId': 'clbam4edk00002v6tdlltuves',
             'deviceId': 'clbam4edl00012v6tu91wtwv5',
         }
-
         response = requests.post(
             url,
             headers=headers,
             json=json_data,
-            proxies=self.get_proxies()
+            proxies=self.get_proxies(),
+            timeout=5
         )
-
-        print(response.text)
         return response
 
 
