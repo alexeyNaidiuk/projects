@@ -2,9 +2,21 @@ import requests
 
 import module
 
+cookies = {
+    'e9e50e31424538130691552d31c58c15': 'ea41dad2200a6cccc87dc40a35966d28',
+    'humans_21909': '1'
+}
+
 headers = {
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+    'Connection': 'keep-alive',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Origin': 'http://arabtechnique.com.sa',
+    'Referer': 'http://arabtechnique.com.sa/index.php/contact-us2',
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537'
+                  '.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+    'X-Requested-With': 'XMLHttpRequest',
 }
 
 
@@ -29,8 +41,10 @@ class ConcreteSpam(module.Spam):
             data=data,
             verify=False,
             proxies=self.get_proxies(),
-            timeout=5
+            timeout=3,
+            cookies=cookies
         )
+        print(response.text)
         return response
 
 
