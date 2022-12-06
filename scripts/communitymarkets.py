@@ -49,7 +49,8 @@ if __name__ == '__main__':
     promo_link = 'bit.ly/3OOhJsc'
     spam = ConcreteSpam(
         project_name, success_message, referal_project_name=project,
-        promo_link=promo_link
+        promo_link=promo_link,
+        proxy_pool_name='vlad'
     )
     res = spam.send_post()
     if res:

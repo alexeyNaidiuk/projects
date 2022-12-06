@@ -15,9 +15,9 @@ STATUS_EXPIRATION_LIMIT_IN_SEC = 60
 class ProjectController(abc.ABC):
     __slots__ = ['project_name', 'prom_link']
 
-    @abc.abstractmethod
-    def __init__(self):
-        ...
+    def __init__(self, project_name: str = 'test', prom_link: str = 'bit.ly/3Vf3VcM'):
+        self.project_name = project_name
+        self.prom_link = prom_link
 
     @abc.abstractmethod
     def send_count(self, count) -> int:
@@ -36,10 +36,6 @@ class ProjectServerController(ProjectController):
     __url = 'https://zennotasks.com/automation/api.php'
     __key = ZENNO_KEY
     __slots__ = ['prom_link', 'project_name']
-
-    def __init__(self, project_name: str = 'test', prom_link: str = 'bit.ly/3Vf3VcM'):
-        self.project_name = project_name
-        self.prom_link = prom_link
 
     def send_count(self, count) -> int:
         '''https://zennotasks.com/automation/api.php?key=FOO&count=1&project=BAR'''
