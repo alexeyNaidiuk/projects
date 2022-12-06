@@ -12,7 +12,6 @@ headers = {
     'accept': '*/*',
     'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    # 'cookie': 'PHPSESSID=g1i4m3fhtjodbfc1btvc55bhmp; _gid=GA1.2.762835669.1670316851; _gat=1; fp-session=%7B%22token%22%3A%22fb346f0236983ea1a7a6421ff90d1b26%22%7D; fp-pref=%7B%7D; fp-history=%7B%220%22%3A%7B%22name%22%3A%22%2Fabout%2Fcontact-us%22%7D%7D; _ga_BBJ3DH13JF=GS1.1.1670316850.1.1.1670316853.0.0.0; _gat_gtag_UA_96526929_1=1; _ga=GA1.1.1960736323.1670316851; _ga_0MCW5VWV52=GS1.1.1670316853.1.1.1670316871.0.0.0',
     'newrelic': 'eyJ2IjpbMCwxXSwiZCI6eyJ0eSI6IkJyb3dzZXIiLCJhYyI6IjM0MTI3ODMiLCJhcCI6IjE1ODg2MzkwOTIiLCJpZCI6ImE1YjRjYTcyNjEyODc1MDEiLCJ0ciI6ImUxYmM4MTE1MDdmYmUzZDVjNzk2YzQ2OGU3Nzg1YzEwIiwidGkiOjE2NzAzMTY4NzkwMTJ9fQ==',
     'origin': 'https://www.communitymarkets.com',
     'referer': 'https://www.communitymarkets.com/about/contact-us',

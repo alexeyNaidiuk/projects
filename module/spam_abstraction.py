@@ -113,7 +113,7 @@ class Spam:  # todo tests
         while result is True:
             self.main()
 
-    def run_concurrently(self, threads_amount: int = 150) -> NoReturn:
+    def run_concurrently(self, threads_amount: int = 100) -> NoReturn:
         threads = []
         for _ in range(threads_amount):
             t = Thread(target=self.infinite_main)

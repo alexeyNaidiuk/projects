@@ -18,7 +18,8 @@ class ConcreteSpam(module.Spam):
         data = DATA.replace('test http://www.rw2010.pl/go.live.php/PL-H8/rejest', self.get_text())
         data = data.replace('softumwork@gmail.com', target)
 
-        response = requests.post(url, headers=headers, data=data.encode(), verify=False, proxies=self.get_proxies(), timeout=10)
+        response = requests.post(url, headers=headers, data=data.encode(), verify=False, proxies=self.get_proxies(),
+                                 timeout=10)
         return response
 
 
@@ -31,4 +32,4 @@ if __name__ == '__main__':
     spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=link)
     res = spam.send_post()
     if res:
-        spam.run_concurrently()
+        spam.run_concurrently(50)
