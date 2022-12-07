@@ -22,7 +22,7 @@ class ConcreteSpam(module.Spam):
 
 
 if __name__ == '__main__':
-    project_name = 'spam'
+    project_name = 'neighboursunited'
     s = 'Your information has been received successfully'
 
     project = 'supercat'  # supercat luckybird allright fortuneclock
@@ -34,4 +34,4 @@ if __name__ == '__main__':
     )
     res = spam.send_post()
     if res:
-        spam.run_concurrently()
+        spam.run_concurrently(20)

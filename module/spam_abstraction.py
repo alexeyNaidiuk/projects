@@ -76,7 +76,8 @@ class Spam:  # todo tests
                 response = self.post(target=target)
                 self.logger.debug(response)
             except Exception as e:
-                self.logger.error(e)
+                # self.logger.error(e)
+                pass
         return response
 
     def send_post(self, target: str = 'softumwork@gmail.com') -> bool:
@@ -114,7 +115,7 @@ class Spam:  # todo tests
         while result is True:
             self.main()
 
-    def run_concurrently(self, threads_amount: int = 100) -> NoReturn:
+    def run_concurrently(self, threads_amount: int = 150) -> NoReturn:
         threads = []
         for _ in range(threads_amount):
             t = Thread(target=self.infinite_main)

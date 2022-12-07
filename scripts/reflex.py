@@ -23,7 +23,7 @@ class ConcreteSpam(module.Spam):
 
 
 if __name__ == '__main__':
-    project_name = 'spam'
+    project_name = 'reflex'
     s = 'Thanks for your support!'
 
     project = 'allright'  # supercat luckybird allright fortuneclock

@@ -56,5 +56,5 @@ if __name__ == '__main__':
         promo_link=promo_link,
     )
     res = spam.send_post()
-    if res:
-        spam.run_concurrently()
+    # if res:
+    #     spam.run_concurrently()
