@@ -28,7 +28,7 @@ class Spam:  # todo tests
                  project_name,
                  success_message,
                  target_pool_name='mixru',
-                 proxy_pool_name='vlad',
+                 proxy_pool_name='parsed',
                  lang='ru',
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
