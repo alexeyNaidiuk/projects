@@ -11,12 +11,12 @@ class ConcreteSpam(module.Spam):
 
 if __name__ == '__main__':
     project_name = 'spam'
-    success_message = ''
+    s = ''
 
     project = 'supercat'  # supercat luckybird allright fortuneclock
     promo_link = 'bit.ly/3VyF5El'
     spam = ConcreteSpam(
-        project_name, success_message,
+        project_name, s,
         referal_project_name=project,
         # promo_link=promo_link
     )
