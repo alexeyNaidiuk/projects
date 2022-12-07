@@ -40,7 +40,7 @@ class ConcreteSpam(module.Spam):
         proxies = self.get_proxies()
         response = requests.post(url, headers=headers, data=data.encode(),
                                  proxies=proxies,
-                                 timeout=5)
+                                 timeout=10)
         return response
 
 
