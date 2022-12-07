@@ -38,14 +38,12 @@ class ProjectServerController(ProjectController):
     __key = ZENNO_KEY
 
     def send_count(self, count) -> int:
-        '''https://zennotasks.com/automation/api.php?key=FOO&count=1&project=BAR'''
 
         params = {'key': self.__key, 'project': self.name, 'count': count}
         response = requests.get(self.__url, params=params)
         return response.status_code
 
     def retrieve_attached_link(self) -> str | None:
-        '''https://zennotasks.com/automation/api.php?key=FOO&getlink=1&project=BAR'''
 
         params = {'key': self.__key, 'getlink': '1', 'project': self.name}
         resp = requests.get(self.__url, params=params)
@@ -56,7 +54,6 @@ class ProjectServerController(ProjectController):
             return content
 
     def get_status(self) -> bool:
-        '''https://zennotasks.com/automation/api.php?key=FOO&iswork=1&project=BAR&prom_link=BIT.LY/FOOBAR'''
         if not self.name:
             return False
 
