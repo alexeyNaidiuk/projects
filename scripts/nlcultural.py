@@ -46,7 +46,6 @@ if __name__ == '__main__':
         project_name, s,
         referal_project_name=project,
         promo_link=promo_link,
-        proxy_pool_name='parsed'
     )
     res = spam.send_post()
     if res:
