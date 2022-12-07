@@ -42,7 +42,9 @@ class ConcreteSpam(module.Spam):
             'moduleId': '116',
         }
 
-        response = requests.post(url, cookies=cookies, headers=headers, data=data, proxies=self.get_proxies())
+        response = requests.post(url, cookies=cookies, headers=headers, data=data,
+                                 proxies=self.get_proxies()
+                                 )
         return response
 
 
@@ -59,4 +61,4 @@ if __name__ == '__main__':
     )
     res = spam.send_post()
     if res:
-        spam.run_concurrently(30)
+        spam.run_concurrently()
