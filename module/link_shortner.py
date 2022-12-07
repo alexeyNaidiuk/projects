@@ -15,7 +15,6 @@ class LinkShortner:
 
     @classmethod
     def get_link(cls, target_pool_name: str, referal_to_project: str) -> str:
-        '''https://zennotasks.com/automation/api.php?key=softumXasHq1!&shurl=https://referencemen.live/ktVmDV?c=0097xLek_pT9MBb54378f54e94879e&utm_campaign=mixru'''
         project_link = cls.__referals[referal_to_project]
 
         if not referal_to_project:
