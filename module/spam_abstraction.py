@@ -11,9 +11,8 @@ import module
 SLEEP_TIMER = 60
 
 
-def get_logger(*args, **kwargs):
+def get_logger(project_name, *args):
     info = ' '.join(args)
-    project_name = kwargs['project_name']
     logger = logging.getLogger(project_name)
     logging.basicConfig(format=f'%(name)s {info} %(asctime)s: %(message)s')
     logger.setLevel(logging.INFO)
@@ -47,10 +46,10 @@ class Spam:  # todo tests
         self.target_pool: module.ServerPool = module.TargetServerPool(pool_name=target_pool_name)
         self.proxy_pool: module.ServerPool = module.ProxyServerPool(pool_name=proxy_pool_name)
 
-        self.logger = get_logger(
-            self.project_controller.prom_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
-            project_name=self.project_controller.name
-        )
+        self.logger = get_logger(self.project_controller.name,
+                                 self.project_controller.prom_link, proxy_pool_name, target_pool_name,
+                                 referal_project_name, lang,
+                                 )
         self.logger.info('Spam initialized')
 
     @abc.abstractmethod
