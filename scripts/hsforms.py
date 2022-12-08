@@ -14,11 +14,11 @@ headers = {
 class ConcreteSpam(module.Spam):
 
     def post(self, target) -> requests.Response:
-        data = DATA.replace('test', self.get_text()).replace('softumwork@gmail.com', target)
+        data = DATA.replace('test', self.get_text().encode().decode('latin-1')).replace('softumwork@gmail.com', target)
         response = requests.post(
             url,
             headers=headers,
-            data=data.encode(),
+            data=data,
         )
         return response
 
