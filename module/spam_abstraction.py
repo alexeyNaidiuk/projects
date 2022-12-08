@@ -52,6 +52,7 @@ class Spam:  # todo tests
         self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
         self.target_pool: module.ServerPool = module.TargetServerPool(pool_name=target_pool_name)
         self.proxy_pool: module.ServerPool = module.ProxyServerPool(pool_name=proxy_pool_name)
+        self.logger.info('Spam initialized')
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
@@ -112,7 +113,6 @@ class Spam:  # todo tests
         return result
 
     def infinite_main(self):
-        self.logger.info('Spam initialized')
         while True:
             self.main()
 
