@@ -19,7 +19,7 @@ def get_logger(project_name, *args):
     return logger
 
 
-def create_project_controller(project_name, promo_link, referal_project_name, target_pool_name):
+def get_project_controller(project_name, promo_link, referal_project_name, target_pool_name):
     if not promo_link:
         promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
     return module.ProjectServerControllerCached(
@@ -42,7 +42,7 @@ class Spam:  # todo tests
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
         self.success_message: str = success_message
-        self.project_controller = create_project_controller(
+        self.project_controller = get_project_controller(
             project_name, promo_link, referal_project_name, target_pool_name
         )
         self.project_controller.get_status()
