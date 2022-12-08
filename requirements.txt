@@ -8,7 +8,6 @@ Faker==15.3.1
 idna==3.4
 joblib==1.2.0
 nltk==3.7
--e git+https://github.com/alexeyNaidiuk/projects.git@42fce2448479b59a5c8c02e19c5a17725ef92708#egg=projects
 PySocks==1.7.1
 python-dateutil==2.8.2
 python-dotenv==0.21.0
