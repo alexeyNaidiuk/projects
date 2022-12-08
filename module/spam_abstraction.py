@@ -19,6 +19,16 @@ def get_logger(project_name, *args):
     return logger
 
 
+def create_project_controller(project_name, promo_link, referal_project_name, target_pool_name):
+    if not promo_link:
+        promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
+    return module.ProjectServerControllerCached(
+        name=project_name + target_pool_name,
+        project_name=referal_project_name,
+        prom_link=promo_link
+    )
+
+
 class Spam:  # todo tests
 
     __slots__ = ['success_message', 'project_controller', 'text', 'target_pool', 'proxy_pool', 'logger']
@@ -32,25 +42,16 @@ class Spam:  # todo tests
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
         self.success_message: str = success_message
-
-        self.project_controller = module.ProjectServerControllerCached(
-            name=project_name + target_pool_name,
-            project_name=referal_project_name
+        self.project_controller = create_project_controller(
+            project_name, promo_link, referal_project_name, target_pool_name
         )
-        if not promo_link:
-            promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
-        self.project_controller.prom_link = promo_link
         self.project_controller.get_status()
-
+        self.logger = get_logger(
+            project_name, promo_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
+        )
         self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
         self.target_pool: module.ServerPool = module.TargetServerPool(pool_name=target_pool_name)
         self.proxy_pool: module.ServerPool = module.ProxyServerPool(pool_name=proxy_pool_name)
-
-        self.logger = get_logger(self.project_controller.name,
-                                 self.project_controller.prom_link, proxy_pool_name, target_pool_name,
-                                 referal_project_name, lang,
-                                 )
-        self.logger.info('Spam initialized')
 
     @abc.abstractmethod
     def post(self, target: str) -> requests.Response:
@@ -111,8 +112,8 @@ class Spam:  # todo tests
         return result
 
     def infinite_main(self):
-        result = True
-        while result is True:
+        self.logger.info('Spam initialized')
+        while True:
             self.main()
 
     def run_concurrently(self, threads_amount: int = 10) -> NoReturn:

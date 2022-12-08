@@ -77,12 +77,12 @@ class TestProjectServerController(unittest.TestCase):
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)
 
-        name = 'awdv43'
+        name = 'awdawdawdawdawd'
         project_name = 'fortuneclock'
-        project = ProjectServerController(name=name, prom_link=prom_link, project_name=project_name)
+        project = ProjectServerController(name=name, project_name=project_name)
         link = project.retrieve_attached_link()
 
-        self.assertIsNone(link)
+        self.assertTrue(link == 'none')
 
 
 class TestProjectControllerCached(unittest.TestCase):

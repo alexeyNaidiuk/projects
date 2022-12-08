@@ -15,7 +15,7 @@ class TestTargetPools(unittest.TestCase):
             self.assertTrue('@' in target or '.' in target)
 
     def test_proxy_pool(self):
-        pools = ['wwmix', 'west', 'checked', 'vlad']
+        pools = ['wwmix', 'west', 'parsed', 'vlad']
 
         for pool in pools:
             proxy_pool = ProxyServerPool(pool)

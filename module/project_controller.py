@@ -15,7 +15,7 @@ STATUS_EXPIRATION_LIMIT_IN_SEC = 60
 class ProjectController(abc.ABC):
     __slots__ = ['name', 'prom_link', 'project_name']
 
-    def __init__(self, name: str = 'test', prom_link: str = 'bit.ly/3Vf3VcM', project_name: str = 'luckybird'):
+    def __init__(self, name: str = 'test', prom_link: str | None = None, project_name: str = 'luckybird'):
         self.project_name = project_name
         self.name = name
         self.prom_link = prom_link
@@ -85,10 +85,9 @@ class ProjectServerControllerCached(ProjectServerController):
         super().__init__(*args, **kwargs)
         self.cached_status_file = pathlib.Path(tempfile.mktemp('.json', self.name))
 
-    def get_status(self) -> bool:  # refactor testme
+    def get_status(self) -> bool:
         if not self.name:
             return False
-
         if self.cached_status_file.exists():
             cached_status_dict: dict = _load_json(self.cached_status_file)
             timestamp = datetime.datetime.fromisoformat(cached_status_dict['timestamp'])
