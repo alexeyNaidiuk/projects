@@ -76,7 +76,7 @@ class Spam:  # todo tests
                 response = self.post(target=target)
                 self.logger.debug(response)
             except Exception as e:
-                # self.logger.error(e)
+                self.logger.error(e)
                 pass
         return response
 

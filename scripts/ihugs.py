@@ -15,7 +15,9 @@ class ConcreteSpam(module.Spam):
         DATA = '------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_img"\r\n\r\n277\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_post"\r\n\r\n132\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_unique_id"\r\n\r\n0\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_ajax_validated"\r\n\r\n1\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_action"\r\n\r\nprocess_from\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_name"\r\n\r\ntest https://www.ihugs.cloud/birthdays/\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_email"\r\n\r\nsoftumwork@gmail.com\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_fname"\r\n\r\ntest https://www.ihugs.cloud/birthdays/\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_femail"\r\n\r\nsoftumwork@gmail.com\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_more_recipient"\r\n\r\n\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_message"\r\n\r\ntest https://www.ihugs.cloud/birthdays/\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_schedule"\r\n\r\n\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr\r\nContent-Disposition: form-data; name="wp_iec_scopy"\r\n\r\n1\r\n------WebKitFormBoundaryvqocLKGUC2BK9kwr--\r\n'
         data = DATA.replace('softumwork@gmail.com', target).replace('test', self.get_text()).encode()
 
-        response = requests.post(url, headers=headers, data=data, proxies=self.get_proxies(), timeout=10)
+        response = requests.post(url, headers=headers, data=data,
+                                 proxies=self.get_proxies(),
+                                 timeout=10)
         return response
 
 
