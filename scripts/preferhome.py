@@ -36,7 +36,7 @@ if __name__ == '__main__':
     s = 'Thank you'
 
     project = 'fortuneclock'  # supercat luckybird allright fortuneclock
-    promo_link = 'bit.ly/3P8sSV5'
+    promo_link = 'bit.ly/3FioVID'
     spam = ConcreteSpam(
         project_name, s,
         referal_project_name=project,

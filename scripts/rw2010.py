@@ -29,9 +29,12 @@ if __name__ == '__main__':
     success_message = 'Dziękujemy'
     project_name = 'rw2010'
 
-    link = 'bit.ly/3ud8Hvm'
+    link = 'bit.ly/3Y99ECC'
     project = 'allright'
-    spam = ConcreteSpam(project_name, success_message, referal_project_name=project, promo_link=link)
+    spam = ConcreteSpam(
+        project_name, success_message, referal_project_name=project,
+        promo_link=link
+    )
     res = spam.send_post()
     if res:
         spam.run_concurrently()
