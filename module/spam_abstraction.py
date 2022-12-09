@@ -19,16 +19,6 @@ def get_logger(project_name, *args):
     return logger
 
 
-def get_project_controller(project_name, promo_link, referal_project_name, target_pool_name):
-    if not promo_link:
-        promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
-    return module.ProjectServerControllerCached(
-        name=project_name + target_pool_name,
-        project_name=referal_project_name,
-        prom_link=promo_link
-    )
-
-
 class Spam:  # todo tests
 
     __slots__ = ['success_message', 'project_controller', 'text', 'target_pool', 'proxy_pool', 'logger']
@@ -42,8 +32,12 @@ class Spam:  # todo tests
                  referal_project_name: str = 'luckybird',
                  promo_link: str | None = None):
         self.success_message: str = success_message
-        self.project_controller = get_project_controller(
-            project_name, promo_link, referal_project_name, target_pool_name
+        if not promo_link:
+            promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
+        self.project_controller = module.ProjectServerControllerCached(
+            name=project_name + target_pool_name,
+            project_name=referal_project_name,
+            prom_link=promo_link
         )
         self.project_controller.get_status()
         self.logger = get_logger(
@@ -89,10 +83,6 @@ class Spam:  # todo tests
         self.logger.info(f'{result} {target}')
         return result
 
-    def get_controller_status(self) -> bool:
-        controller_status = self.project_controller.get_status()
-        return controller_status
-
     def send_results(self, result):
         if result:
             self.project_controller.send_count(1)
@@ -102,7 +92,7 @@ class Spam:  # todo tests
             return False
 
     def main(self) -> bool:
-        get_controller_status = self.get_controller_status()
+        get_controller_status = self.project_controller.get_status()
         if not get_controller_status:
             self.logger.info(f'controller status is %s' % get_controller_status)
             sleep(SLEEP_TIMER)
@@ -117,10 +107,5 @@ class Spam:  # todo tests
             self.main()
 
     def run_concurrently(self, threads_amount: int = 10) -> NoReturn:
-        threads = []
         for _ in range(threads_amount):
-            t = Thread(target=self.infinite_main)
-            t.start()
-            threads.append(t)
-        for thread in threads:
-            thread.join()
+            Thread(target=self.infinite_main).start()
