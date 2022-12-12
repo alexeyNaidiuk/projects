@@ -47,4 +47,4 @@ if __name__ == '__main__':
     )
     res = spam.send_post()  # True
     if res:
-        spam.run_concurrently(1)
+        spam.run_concurrently(5)
