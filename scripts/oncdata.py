@@ -22,7 +22,6 @@ params = {
 class ConcreteSpam(module.Spam):
 
     def post(self, target) -> requests.Response:
-        target = 'softumwork@gmail.com'
         text = self.get_text()
         data = [
             ('d94642a9312febcef2e6aa1a51523727', '1'),
