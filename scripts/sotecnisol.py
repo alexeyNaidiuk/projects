@@ -24,8 +24,7 @@ class ConcreteSpam(module.Spam):
             'iziFormDefinedField_email': target,
         }
 
-        response = requests.post(url, params=params, headers=headers, data=data, proxies=self.get_proxies())
-        print(response.text)
+        response = requests.post(url, params=params, headers=headers, data=data, proxies=self.get_proxies(), timeout=10)
         return response
 
 
@@ -42,4 +41,4 @@ if __name__ == '__main__':
     )
     res = spam.send_post()
     if res:
-        spam.run_concurrently()
+        spam.run_concurrently(100)
