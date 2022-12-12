@@ -26,7 +26,7 @@ class Spam:  # todo tests
     def __init__(self,
                  project_name,
                  success_message,
-                 target_pool_name='mixru',
+                 target_pool_name='dadru',
                  proxy_pool_name='parsed',
                  lang='ru',
                  referal_project_name: str = 'luckybird',
