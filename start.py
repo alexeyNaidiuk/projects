@@ -11,4 +11,4 @@ if __name__ == '__main__':
     for file in os.listdir('./scripts'):
         proc = Process(target=run_file, args=(file,))
         proc.start()
-        time.sleep(.5)
+        time.sleep(.2)
