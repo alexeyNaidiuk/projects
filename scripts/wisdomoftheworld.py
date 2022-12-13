@@ -15,12 +15,12 @@ class ConcreteSpam(module.Spam):
 
     def post(self, target) -> requests.Response:
         data = DATA.replace('softumwork@gmail.com', target).replace('test', self.get_text())
-        response = requests.post(url, headers=headers, data=data.encode(), timeout=10)
+        response = requests.post(url, headers=headers, data=data.encode())
         return response
 
 
 if __name__ == '__main__':
-    success_message = 'successfully'
+    success_message = 'Thank you for'
     project_name = 'wisdomoftheworld'
 
     project = 'supercat'  # supercat luckybird allright fortuneclock

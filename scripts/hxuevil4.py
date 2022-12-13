@@ -49,6 +49,7 @@ class ConcreteSpam(module.Spam):
         response = requests.post(url, headers=headers, json=json_data,
                                  # proxies=self.get_proxies(),
                                  timeout=10)
+        print(response.text)
         return response
 
 
@@ -64,4 +65,4 @@ if __name__ == '__main__':
     )
     res = spam.send_post()
     if res:
-        spam.run_concurrently(5)
+        spam.run_concurrently(3)
