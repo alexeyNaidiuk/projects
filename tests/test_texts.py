@@ -6,7 +6,8 @@ from module.texts import Text
 class TestText(unittest.TestCase):
 
     def test_get_text_with_stickers(self):
-        promo_link = 'google.com'
+        promo_link = 'bit.ly/3BUJXMX'
+
         text_language = 'ru'
         project = 'fortuneclock'
         spins = '50'
@@ -14,7 +15,6 @@ class TestText(unittest.TestCase):
         text = Text(lang=text_language, link=promo_link, project=project)
 
         result = text.get_text(with_stickers=True)
-        print(result)
         self.assertIn(promo_link, result)
         self.assertIn(project.capitalize(), result)
         self.assertIn(spins, result)
@@ -23,7 +23,6 @@ class TestText(unittest.TestCase):
         self.assertIn('👈', result)
 
         result = text.get_text(with_stickers=False)
-        print(result)
         self.assertNotIn('🔥', result)
         self.assertNotIn('👉', result)
         self.assertNotIn('👈', result)
@@ -32,8 +31,9 @@ class TestText(unittest.TestCase):
         reference = 'https%3A%2F%2Fbit.ly%2F3BUJXMX'
         link = 'bit.ly/3BUJXMX'
         project = 'fortuneclock'
-
         text = Text(lang='ru', link=link, project=project)
+        self.assertEqual(reference, text.link)
 
         result = text.get_text()
-        print(result)
+
+        self.assertTrue(reference in result)

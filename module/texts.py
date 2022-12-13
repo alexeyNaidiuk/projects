@@ -1,4 +1,5 @@
 from string import Template
+from urllib import parse
 
 from spintax import spintax
 
@@ -28,18 +29,19 @@ class Text:
     }
 
     def __init__(self, lang: str, link: str, project: str):
-        self.link = self.__fix_link(link)
+        self.link = self._encode_link(self._fix_link(link))
         self.project = project
         self.spins = self.__spins[project]
         self.text = self.__texts[lang]
 
-    def __fix_link(self, link: str) -> str:
+    def _fix_link(self, link: str):
         if 'https://' not in link:
             link = 'https://' + link
         return link
 
-    def __encode_link(self, link: str) -> str:
-        ...
+    def _encode_link(self, link) -> str:
+        value = parse.quote_plus(link)
+        return value
 
     def get_text(self, with_stickers: bool = True):
         spinned_text = spintax.spin(self.text)
