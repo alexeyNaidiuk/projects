@@ -50,7 +50,7 @@ class Text:
              'link': self.link}
         )
         if not with_stickers:
-            message = message.replace('?', '')
-            message = message.replace('?', '')
-            message = message.replace('?', '')
+            message = message.replace('🔥', '')
+            message = message.replace('👉', '')
+            message = message.replace('👈', '')
         return message
