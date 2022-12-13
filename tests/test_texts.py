@@ -27,3 +27,13 @@ class TestText(unittest.TestCase):
         self.assertNotIn('🔥', result)
         self.assertNotIn('👉', result)
         self.assertNotIn('👈', result)
+
+    def test_link_encoding(self):
+        reference = 'https%3A%2F%2Fbit.ly%2F3BUJXMX'
+        link = 'bit.ly/3BUJXMX'
+        project = 'fortuneclock'
+
+        text = Text(lang='ru', link=link, project=project)
+
+        result = text.get_text()
+        print(result)
