@@ -1,5 +1,4 @@
 from string import Template
-from urllib import parse
 
 from spintax import spintax
 
@@ -9,16 +8,16 @@ class Text:
     __texts = {
         'eng': '🔥 {Get|Loot|Use} {your|} $spins {FS|freespins|free spins|spins}'
                ' for a {quick Registration|start|take a part} on $project by'
-               ' {clicking|following|coming} the 👉 http://google.us/url?q=$link 👈 below\n#\n\n{Hurry up!|Get a move on!|Rush!} '
+               ' {clicking|following|coming} the 👉 $link 👈 below\n#\n\n{Hurry up!|Get a move on!|Rush!} '
                'This {offer|promo|stock} is limited in time! 🔥',
         'ru': '🔥 {Получи|Забери|Используй} $spins {фриспинов|FS|freespins|free spins|spins} за '
               '{Регистрацию в клубе|Вход в клуб|Вход в проект|принятие участия в проекте|игру} $project '
-              '{переходя|перейдя|} по {следующей|} ссылке {ниже|} 👉 http://google.us/url?q=$link 👈 '
+              '{переходя|перейдя|} по {следующей|} ссылке {ниже|} 👉 $link 👈 '
               '{Поспеши|Поторопись|Торопись|Не задерживайся}, время действия {бонуса|приза|подарка}'
               ' {ограничено|лимитировано}! 🔥',
         'tr': "🔥 {Get|Take|Kullan} $spins {ücretsiz dönüş|FS|freespins|ücretsiz dönüş|ücretsiz dönüş}"
               " {Kulübe kaydolmak|Kulübe girmek|Projeye girmek|katılmak|oynamak} $project takip "
-              "{etmek|bu} bağlantı {aşağıda |} {-|:|} 👉 http://google.us/url?q=$link 👈 {Acele|Acele|Acele|Gecikme},"
+              "{etmek|bu} bağlantı {aşağıda |} {-|:|} 👉 $link 👈 {Acele|Acele|Acele|Gecikme},"
               " {bonus|ödül|hediye} süresi {sınırlı|sınırlı}! 🔥"
     }
     __spins = {
@@ -29,7 +28,7 @@ class Text:
     }
 
     def __init__(self, lang: str, link: str, project: str):
-        self.link = self._encode_link(self._fix_link(link))
+        self.link = self._fix_link(link)
         self.project = project
         self.spins = self.__spins[project]
         self.text = self.__texts[lang]
@@ -38,10 +37,6 @@ class Text:
         if 'https://' not in link:
             link = 'https://' + link
         return link
-
-    def _encode_link(self, link) -> str:
-        value = parse.quote_plus(link)
-        return value
 
     def get_text(self, with_stickers: bool = True):
         spinned_text = spintax.spin(self.text)
