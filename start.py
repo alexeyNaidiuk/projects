@@ -2,7 +2,7 @@ import os
 import time
 from multiprocessing import Process
 
-folder = 'archive'
+folder = 'scripts'
 
 
 def run_file(file_name):
