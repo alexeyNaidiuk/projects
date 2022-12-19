@@ -26,10 +26,10 @@ class Spam:  # todo tests
     def __init__(self,
                  project_name,
                  success_message,
-                 target_pool_name='dadru',
-                 proxy_pool_name='parsed',
-                 lang='ru',
+                 target_pool_name='turk',
+                 lang='tr',
                  referal_project_name: str = 'luckybird',
+                 proxy_pool_name='parsed',
                  promo_link: str | None = None):
         self.success_message: str = success_message
         if not promo_link:

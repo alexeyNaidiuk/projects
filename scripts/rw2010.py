@@ -29,7 +29,7 @@ if __name__ == '__main__':
     success_message = 'Dziękujemy'
     project_name = 'rw2010'
 
-    link = 'bit.ly/3Y99ECC'
+    link = 'bit.ly/3jfGoKD'
     project = 'allright'
     spam = ConcreteSpam(
         project_name, success_message, referal_project_name=project,
