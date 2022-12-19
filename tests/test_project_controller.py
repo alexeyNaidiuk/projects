@@ -1,7 +1,13 @@
 import random
+import string
 import unittest
 
 from module.project_controller import ProjectServerController
+
+
+def generate_string():
+    letters_ = [random.choice(string.ascii_letters + string.digits) for _ in range(15)]
+    return ''.join(letters_)
 
 
 class TestProjectServerController(unittest.TestCase):
@@ -40,7 +46,6 @@ class TestProjectServerController(unittest.TestCase):
         prom_link = 'bit.ly/3qXjAzN'
         name = 'test'
         project_name = 'fortuneclock'
-        project_name = 'fortuneclock'
         project = ProjectServerController(name=name, prom_link=prom_link, project_name=project_name)
 
         results = []
@@ -77,12 +82,12 @@ class TestProjectServerController(unittest.TestCase):
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)
 
-        name = 'awdawdawdawdawd'
+        name = generate_string()
         project_name = 'fortuneclock'
         project = ProjectServerController(name=name, project_name=project_name)
         link = project.retrieve_attached_link()
 
-        self.assertTrue(link == 'none')
+        self.assertEqual(link, 'none')
 
 
 class TestProjectControllerCached(unittest.TestCase):
