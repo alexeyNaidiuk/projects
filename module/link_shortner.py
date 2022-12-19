@@ -23,6 +23,7 @@ class LinkShortner:
             utm_campaign = f'{target_pool_name}_{referal_to_project}'
 
         url = f'{project_link}&utm_campaign={utm_campaign}'
+        print(url)
         params = {'key': cls.__key, 'shurl': url}
         response = requests.get(cls.__url, params=params)
         content = response.text
