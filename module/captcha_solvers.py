@@ -12,19 +12,13 @@ class Solver:
         ...
 
 
-class CapMonsterSolver(Solver):
+class CapMonsterRecaptcha3Solver(Solver):
 
     def solve(self, googlekey: str, pageurl: str, tine_for_solving: int = 20) -> str:
         ...
 
 
-class CapMonsterRecaptcha3Solver(CapMonsterSolver):
-
-    def solve(self, googlekey: str, pageurl: str, tine_for_solving: int = 20) -> str:
-        ...
-
-
-class CapMonsterRecaptcha2Solver(CapMonsterSolver):
+class CapMonsterRecaptcha2Solver(Solver):
 
     def _check_request(self, request_id: str) -> requests.Response:
         params = {
