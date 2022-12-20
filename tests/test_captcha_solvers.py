@@ -8,8 +8,8 @@ class TestCapMonsterRecaptcha2solver(TestCase):
     def test_solving(self):
         solver = CapMonsterRecaptcha2Solver()
 
-        googlesitekey = '6Lf42XIaAAAAAEMuMBvgiHJYfEzMOBIR792J26zd'
-        pageurl = 'http://flamel.eu/contact/'
+        googlesitekey = '6LdYakAUAAAAAI4ggmWblPh_VXde3pRfmlflPFb2'
+        pageurl = 'https://www.enzolifesciences.com/email-to-friend/'
         result = solver.solve(googlekey=googlesitekey, pageurl=pageurl)
 
         self.assertNotEqual(result, None)

@@ -1,3 +1,4 @@
+import logging
 from time import sleep
 
 import requests
@@ -12,6 +13,12 @@ class Solver:
 
 
 class CapMonsterSolver(Solver):
+
+    def solve(self, googlekey: str, pageurl: str, tine_for_solving: int = 20) -> str:
+        ...
+
+
+class CapMonsterRecaptcha3Solver(CapMonsterSolver):
 
     def solve(self, googlekey: str, pageurl: str, tine_for_solving: int = 20) -> str:
         ...
@@ -36,29 +43,24 @@ class CapMonsterRecaptcha2Solver(CapMonsterSolver):
             'googlekey': googlekey
         }
         response = requests.get(f'http://{CAPMONSTER_HOST}/in.php', params=params)
+        logging.debug(f'_send_request {response.text}')
         return response
 
-    def _await_for_result(self, request_id: str, time_limit: int) -> str:
+    def _await_for_result(self, request_id: str, time_limit: int) -> str | None:
         result = None
-        c = 0
-        while result is None and c < time_limit * 2:
+        for _ in range(time_limit):
             result = self._check_request(request_id).text
-
-            c += 1
-            sleep(.5)
+            logging.debug(result)
+            if result in ['CAPCHA_NOT_READY']:
+                sleep(1)
+                continue
+        logging.debug(result)
         return result
 
-    def solve(self, googlekey: str, pageurl: str, time_limit: int = 30) -> str | None:
-        result = None
+    def solve(self, googlekey: str, pageurl: str, time_limit: int = 60) -> str | None:
         status, request_id = self._send_request(googlekey=googlekey, pageurl=pageurl).text.split('|')
         if 'OK' not in status:
-            raise Exception(status)
+            logging.error(f'{status} {request_id}')
+            return None
         result = self._await_for_result(request_id, time_limit=time_limit)
-
         return result
-
-
-class CapMonsterRecaptcha3Solver(CapMonsterSolver):
-
-    def solve(self, googlekey: str, pageurl: str, tine_for_solving: int = 20) -> str:
-        ...
