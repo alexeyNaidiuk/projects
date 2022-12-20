@@ -41,12 +41,13 @@ class Spam:  # todo tests
             targets_base=target_pool_name
         )
         self.project_controller.get_status()
-        self.logger = get_logger(
-            project_name, promo_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
-        )
         self.text: module.Text = module.Text(lang=lang, link=promo_link, project=referal_project_name)
         self.target_pool: module.ServerPool = module.TargetServerPool(pool_name=target_pool_name)
         self.proxy_pool: module.ServerPool = module.ProxyServerPool(pool_name=proxy_pool_name)
+
+        self.logger = get_logger(
+            project_name, promo_link, proxy_pool_name, target_pool_name, referal_project_name, lang,
+        )
         self.logger.info('Spam initialized')
 
     @abc.abstractmethod
@@ -66,7 +67,7 @@ class Spam:  # todo tests
         target = self.target_pool.pop()
         return target
 
-    def try_to_post(self, target: str) -> requests.Response:
+    def try_to_post(self, target: str) -> requests.Response | None:
         response = None
         while response is None:
             try:
@@ -78,7 +79,7 @@ class Spam:  # todo tests
         return response
 
     def send_post(self, target: str = 'softumwork@gmail.com') -> bool:
-        response: requests.Response = self.try_to_post(target=target)
+        response: requests.Response | None = self.try_to_post(target=target)
         content: str = response.text
         result = self.success_message in content
         self.logger.info(f'{result} {target}')
@@ -107,6 +108,6 @@ class Spam:  # todo tests
         while True:
             self.main()
 
-    def run_concurrently(self, threads_amount: int = 10) -> NoReturn:
+    def run_concurrently(self, threads_amount: int = 2) -> NoReturn:
         for _ in range(threads_amount):
             Thread(target=self.infinite_main).start()

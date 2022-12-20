@@ -13,4 +13,4 @@ if __name__ == '__main__':
     for file in os.listdir(f'./{folder}'):
         proc = Process(target=run_file, args=(file,))
         proc.start()
-        time.sleep(.2)
+        time.sleep(.5)
