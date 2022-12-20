@@ -51,9 +51,15 @@ class CapMonsterRecaptcha2Solver(CapMonsterSolver):
         for _ in range(time_limit):
             result = self._check_request(request_id).text
             logging.debug(result)
-            if result in ['CAPCHA_NOT_READY']:
-                sleep(1)
-                continue
+            match result:
+                case 'CAPCHA_NOT_READY':
+                    sleep(1)
+                    continue
+                case 'ERROR_RECAPTCHA_TIMEOUT':
+                    break
+                case _:
+                    break
+
         logging.debug(result)
         return result
 
