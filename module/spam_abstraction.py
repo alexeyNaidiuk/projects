@@ -34,11 +34,11 @@ class Spam:  # todo tests
         self.success_message: str = success_message
         if not promo_link:
             promo_link = module.LinkShortner.get_link(target_pool_name, referal_project_name)
-        project_name = project_name + target_pool_name
         self.project_controller = module.ProjectServerControllerCached(
             name=project_name,
             project_name=referal_project_name,
-            prom_link=promo_link
+            prom_link=promo_link,
+            targets_base=target_pool_name
         )
         self.project_controller.get_status()
         self.logger = get_logger(

@@ -86,8 +86,8 @@ def _load_json(file_path: pathlib.Path) -> dict:
 
 class ProjectServerControllerCached(ProjectServerController):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, name: str, prom_link: str, project_name: str, targets_base: str):
+        super().__init__(name, prom_link, project_name, targets_base)
         self.__slots__.append('cached_status_file')
         self.cached_status_file = pathlib.Path(tempfile.mktemp(suffix='.json', prefix=self.name))
 
