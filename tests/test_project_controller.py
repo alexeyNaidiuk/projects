@@ -74,17 +74,3 @@ class TestProjectServerController(unittest.TestCase):
 
         attached_link = project.retrieve_attached_link()
         self.assertEqual(attached_link, prom_link)
-
-# class TestProjectControllerCached(unittest.TestCase):
-#     def test_get_status(self):
-#         prom_link = 'bit.ly/3qXjAzN'
-#         name = 'test'
-#         project_name = 'fortuneclock'
-#         target_database = 'mixru'
-#         project = ProjectServerControllerCached(name=name, prom_link=prom_link, project_name=project_name,
-#                                                 targets_base=target_database)
-#         results = []
-#
-#         for _ in range(2):
-#             status = project.get_status()
-#             results.append(status)

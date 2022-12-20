@@ -90,21 +90,20 @@ class ProjectServerControllerCached(ProjectServerController):
         super().__init__(*args, **kwargs)
         self.__slots__.append('cached_status_file')
         self.cached_status_file = pathlib.Path(tempfile.mktemp(suffix='.json', prefix=self.name))
-        _dump_json(self.cached_status_file, {'status': None, 'timestamp': datetime.datetime.now()})
 
     def get_status(self) -> bool:
         if not self.name:
             return False
-        cached_status_dict: dict = _load_json(self.cached_status_file)
-        timestamp = datetime.datetime.fromisoformat(cached_status_dict['timestamp'])
-        status: bool = cached_status_dict['status']
-        match status:
-            case None:
-                status: bool = super().get_status()
-            case True:
-                if datetime.datetime.now() > timestamp + datetime.timedelta(seconds=STATUS_EXPIRATION_LIMIT_IN_SEC):
-                    status: bool = super().get_status()
-            # case False:
+        if self.cached_status_file.exists():
+            cached_status_dict: dict = _load_json(self.cached_status_file)
+            timestamp = datetime.datetime.fromisoformat(cached_status_dict['timestamp'])
+            status: bool = cached_status_dict['status']
 
-        _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
+            if datetime.datetime.now() > timestamp + datetime.timedelta(seconds=STATUS_EXPIRATION_LIMIT_IN_SEC):
+                status: bool = super().get_status()
+                _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
+        else:
+            status: bool = super().get_status()
+            _dump_json(self.cached_status_file, {'status': status, 'timestamp': datetime.datetime.now()})
+
         return status
