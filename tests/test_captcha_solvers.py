@@ -10,6 +10,6 @@ class TestCapMonsterRecaptcha2solver(TestCase):
 
         googlesitekey = ' 6LfCnhwTAAAAAONEzvCPHkac-biXc_1zUPqxsrX3'
         pageurl = 'https://mountainexcursion.is/contact-us.html'
-        result = solver.solve(googlekey=googlesitekey, pageurl=pageurl)
+        result = solver.solve(googlekey=googlesitekey, pageurl=pageurl)  # error recaptcha timeout
 
         self.assertNotEqual(result, None)
