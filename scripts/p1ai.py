@@ -30,6 +30,6 @@ if __name__ == '__main__':
         project_name, success_message, referal_project_name=project,
         promo_link=promo_link
     )
-    res = spam.send_post()  # True
+    res = spam.send_post()
     if res:
         spam.run_concurrently()

@@ -12,7 +12,6 @@ class ConcreteSpam(module.Spam):
         headers = {
             'user-agent': faker.Faker().chrome(),
         }
-
         data = {
             'fm-name': self.get_text(),
             'fm-email': target,
@@ -23,7 +22,6 @@ class ConcreteSpam(module.Spam):
             'fm-previous-URL': 'preferhome.com',
             'Submit': 'Submit',
         }
-
         response = requests.post(
             url,
             headers=headers,
@@ -45,6 +43,6 @@ if __name__ == '__main__':
         referal_project_name=project,
         promo_link=promo_link
     )
-    res = spam.send_post()
+    res = spam.send_post()  # True
     if res:
         spam.run_concurrently()
